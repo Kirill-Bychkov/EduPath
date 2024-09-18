@@ -1,2 +1,2 @@
-##EduPyth
+# EduPyth
 Hello wold!
