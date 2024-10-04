@@ -2,9 +2,13 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React from 'react'
 
 import { icons } from "../constants/icons.js";
+import { useTheme } from '../config/ThemeProvider';
+import { COLORS } from '../constants/colors.js';
+
 
 const TabBar = ({ state, descriptors, navigation }) => {
-    
+    const { colors } = useTheme();
+
     const icon = {
         index: icons.tasks,
         game: icons.game,
@@ -12,10 +16,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
         settings: icons.settings,
     }
     
-    const primaryColor = '#139cbd';
-    const greyColor = '#737373';
     return (
-        <View style={styles.tabbar}>
+        <View style={[styles.tabbar, { backgroundColor: colors.bar_background }]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =
@@ -62,7 +64,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
                     >
                         <Image
                             source={icon[route.name]}
-                            style={{ width: 36, height: 36, tintColor: isFocused ? primaryColor : greyColor }}
+                            style={{ width: 36, height: 36, tintColor: isFocused ? colors.primary : colors.not_active}}
                         />
                         
                     </TouchableOpacity>
