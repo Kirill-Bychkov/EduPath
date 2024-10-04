@@ -1,21 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+//import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native';
+import { useTheme } from '../config/ThemeProvider';
+
 
 export default function App() {
+    const { colors } = useTheme();
+
     return (
-        <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
-            <StatusBar style="auto" />
-            
-        </View>
+        <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+            <StatusBar backgroundColor={colors.background} />
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 });
