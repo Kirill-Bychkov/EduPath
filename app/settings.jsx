@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, {useState }from 'react'
 import { useTheme } from '../config/ThemeProvider'
 import { icons } from "../constants/icons.js";
 import { COLORS } from '../constants/colors.js';
@@ -8,7 +8,9 @@ const Settings = () => {
 
   const icon = {
     light_mode: icons.light_mode,
-    dark_mode: icons.dark_mode
+    dark_mode: icons.dark_mode,
+    volume_on: icons.volume_on,
+    volume_off: icons.volume_off,
   }
 
   const { dark, colors, setScheme } = useTheme();
@@ -17,11 +19,17 @@ const Settings = () => {
     setScheme(dark ? 'light' : 'dark');
   }
 
+  const [isSoundOn, setIsSoundOn] = useState(true);
+
+  const ToggleSound = () => {
+    setIsSoundOn(!isSoundOn);
+  }
+
   return (
     <View style={[styles.ViewStyle, { backgroundColor: colors.background }]}>
       <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Настройки</Text>
-
-      <View style={styles.themeContainer}>
+      {/* Переключение темы */}
+      <View style={styles.BlockContainer}>
         <Text style={[styles.RegularText, { color: colors.text }]}>Тема:</Text>
         <View style={styles.iconContainer}>
           <TouchableOpacity onPress={ToggleTheme}>
@@ -32,8 +40,18 @@ const Settings = () => {
           </TouchableOpacity>
         </View>
       </View>
-
-
+      {/* Переключение звука */}
+      <View style={styles.BlockContainer}>
+        <Text style={[styles.RegularText, { color: colors.text }]}>Звук:</Text>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={ToggleSound}>
+            <Image
+              source={icon[isSoundOn ? 'volume_on' : 'volume_off']}
+              style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   )
 }
@@ -47,13 +65,12 @@ const styles = StyleSheet.create({
   HeadersTextStyle: {
     fontFamily: 'Rubik-Bold',
     fontSize: 24,
-    //color: colors.text
     marginBottom: 25,
     marginTop: 4,
   },
-  themeContainer: {
+  BlockContainer: {
+    marginBottom: 25,
     flexDirection: 'row',
-    //justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
   },
