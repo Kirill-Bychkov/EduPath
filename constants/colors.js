@@ -6,6 +6,7 @@ export const COLORS = {
 
     light_background: "#ededed",
     dark_background: "#253454",
+    game_background: "#49A175",
 
     Header_light_text: "#3b3b3b",
     Header_dark_text: "#f2f2f2",

@@ -1,28 +1,34 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React from 'react'
-import { useTheme } from '../config/ThemeProvider';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
+import ImageButton from "../components/ImageButton.jsx";
+import { icons } from "../constants/icons.js";
+import { COLORS } from '../constants/colors.js';
+import { useRouter } from 'expo-router';
+import React from 'react';
 
-const Game = () => {
-  const { colors } = useTheme();
+export default function Game() {
+  const router = useRouter();
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Скоро будет доступна...</Text>
-    </View>
-  )
+    <SafeAreaView style={styles.container}>
+      <ImageButton
+        onPress={() => router.push("/")}
+        imageStyle={styles.image}
+        source={icons.backTraining}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: COLORS.game_background
   },
-  HeadersTextStyle: {
-    fontFamily: 'Rubik-Bold',
-    fontSize: 23,
-    marginBottom: 25,
-    marginTop: 4,
-  },
+  image: {
+    width: 73,
+    height: 62,
+    position: "absolute",
+    right: 0
+  }
 });
 
-export default Game

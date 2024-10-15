@@ -7,4 +7,5 @@ export const icons = {
   light_mode: require('../assets/icons/light_mode.png'),
   volume_on: require('../assets/icons/volume_on.png'),
   volume_off: require('../assets/icons/volume_off.png'),
+  backTraining: require('../assets/icons/backTraining.png')
 };
