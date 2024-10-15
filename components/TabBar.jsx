@@ -15,6 +15,11 @@ const TabBar = ({ state, descriptors, navigation }) => {
         progress: icons.progress,
         settings: icons.settings,
     }
+
+    // Скрываем TabBar для экрана 'game'
+    if (state.routes[state.index].name === 'game') {
+        return null; // Не рендерим TabBar, если текущий экран 'game'
+    }
     
     return (
         <View style={[styles.tabbar, { backgroundColor: colors.bar_background }]}>
@@ -79,14 +84,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0, 
         right: 0,
-        bottom: 15,
+        bottom: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
-        marginHorizontal: 20,
-        paddingVertical: 15,
-        borderRadius: 25,
+        //marginHorizontal: 5,
+        paddingVertical: 14,
+        //borderRadius: 10,
         borderCurve: 'continuous',
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 10 },
