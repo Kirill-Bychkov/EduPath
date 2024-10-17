@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React, {useState }from 'react'
+import React, { useState } from 'react'
 import { useTheme } from '../config/ThemeProvider'
 import { icons } from "../constants/icons.js";
 import { COLORS } from '../constants/colors.js';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 
 const Settings = () => {
 
@@ -26,33 +28,37 @@ const Settings = () => {
   }
 
   return (
-    <View style={[styles.ViewStyle, { backgroundColor: colors.background }]}>
-      <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Настройки</Text>
-      {/* Переключение темы */}
-      <View style={styles.BlockContainer}>
-        <Text style={[styles.RegularText, { color: colors.text }]}>Тема:</Text>
-        <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={ToggleTheme}>
-            <Image
-              source={icon[dark ? 'dark_mode' : 'light_mode']}
-              style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
-            />
-          </TouchableOpacity>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={[styles.ViewStyle, { backgroundColor: colors.background }]}>
+          <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Настройки</Text>
+          {/* Переключение темы */}
+          <View style={styles.BlockContainer}>
+            <Text style={[styles.RegularText, { color: colors.text }]}>Тема:</Text>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={ToggleTheme}>
+                <Image
+                  source={icon[dark ? 'dark_mode' : 'light_mode']}
+                  style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* Переключение звука */}
+          <View style={styles.BlockContainer}>
+            <Text style={[styles.RegularText, { color: colors.text }]}>Звук:</Text>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={ToggleSound}>
+                <Image
+                  source={icon[isSoundOn ? 'volume_on' : 'volume_off']}
+                  style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
-      {/* Переключение звука */}
-      <View style={styles.BlockContainer}>
-        <Text style={[styles.RegularText, { color: colors.text }]}>Звук:</Text>
-        <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={ToggleSound}>
-            <Image
-              source={icon[isSoundOn ? 'volume_on' : 'volume_off']}
-              style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 
