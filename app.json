@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "EduPyth_Learn_and_Have_Fun",
-    "scheme": "EduPyth_Learn_and_Have_Fun",
+    "scheme": ["edupyth-learn-and-have-fun"],
     "slug": "EduPyth_Learn_and_Have_Fun",
     "version": "1.0.0",
     "orientation": "portrait",

@@ -1,20 +1,36 @@
-import { StyleSheet, SafeAreaView, View } from 'react-native';
-import ImageButton from "../components/ImageButton.jsx";
-import { icons } from "../constants/icons.js";
-import { COLORS } from '../constants/colors.js';
-import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useRef, useEffect } from "react";
+import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import CustomImage from "../components/game/CustomImage.jsx";
+import GameButton from "../components/game/GameButton.jsx";
+import { COLORS } from "../constants/colors.js";
+import { getButtonsData, levelsData, imagesMenuData } from "../components/game/DataImage.jsx";
+import { useRouter } from "expo-router";
 
 export default function Game() {
+  const scrollViewRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: false });
+    }
+  }, []);
+
+  const buttonsData = getButtonsData(router);
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageButton
-        onPress={() => router.push("/")}
-        imageStyle={styles.image}
-        source={icons.backTraining}
-      />
+      <GameButton key={"backTraining"} item={buttonsData.backTraining} />
+
+      <ScrollView ref={scrollViewRef} style={styles.scrollContent}>
+        {imagesMenuData.map(image => (
+          <CustomImage key={image.id} image={image} />
+        ))}
+
+        {levelsData.map(level => (
+          <GameButton key={level.id} item={level} />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -24,11 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.game_background
   },
-  image: {
-    width: 73,
-    height: 62,
-    position: "absolute",
-    right: 0
+  scrollContent: {
+    flex: 1
   }
 });
-
