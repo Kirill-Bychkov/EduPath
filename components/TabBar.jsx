@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React from 'react'
 
 import { icons } from "../constants/icons.js";
@@ -16,9 +16,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
         settings: icons.settings,
     }
 
-    // Скрываем TabBar для экрана 'game'
     if (state.routes[state.index].name === 'game') {
-        return null; // Не рендерим TabBar, если текущий экран 'game'
+        return null;
     }
     
     return (
@@ -89,9 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
-        //marginHorizontal: 5,
         paddingVertical: 14,
-        //borderRadius: 10,
         borderCurve: 'continuous',
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 10 },

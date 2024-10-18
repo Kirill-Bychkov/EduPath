@@ -1,52 +1,63 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import React from 'react'
-
-import { icons } from "../constants/icons.js";
+import React from 'react';
+import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { useTheme } from '../config/ThemeProvider';
+import { icons } from "../constants/icons.js";
 import { COLORS } from '../constants/colors.js';
 
+
 const TitleBar = () => {
-    const { dark, colors } = useTheme();
 
-    const icon = {
-        help : icons.help,
-    }
+  const { dark, colors } = useTheme();
 
-    return (
-        <View style={[styles.container, {backgroundColor: colors.background}]}>
-            <Text style={[styles.title, { color: colors.header_text}]}>EduPyth</Text>
-            <TouchableOpacity style={styles.iconContainer}>
-                <Image
-                    source={icon.help}
-                    style={[styles.icon, {tintColor: dark ? COLORS.primary : COLORS.not_active}]}
-                />
-            </TouchableOpacity>
-        </View>
-    )
-}
+  const icon = {
+    help: icons.help,
+  }
+
+  return (
+    <View style={[styles.header, { backgroundColor: colors.bar_background }]}>
+
+      <View style={styles.iconContainer} />
+
+      <Text style={[styles.title, { color: colors.text }]}>EduPyth</Text>
+
+      <TouchableOpacity style={styles.iconContainer}>
+        <Image
+          source={icon.help}
+          style={[styles.icon, { tintColor: dark ? COLORS.primary : COLORS.not_active }]}
+        />
+      </TouchableOpacity>
+
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
-    title: {
-        fontFamily: 'Rubik-Bold',
-        fontSize: 24,
-        textAlign: 'center',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        //flex: 1,
-    },
-    iconContainer:{
-        paddingLeft: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    icon: {
-        width: 30,
-        height: 30,
-    }
-})
+  header: {
+    height: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 5,  // Тень для Android
+  },
+  title: {
+    fontSize: 22,
+    fontFamily: 'Rubik-Bold',
+    textAlign: 'center',
+    flex: 1,  // Центрирование текста
+  },
+  iconContainer: {
+    width: 40,  // Ширина для симметрии
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 36,
+    height: 36,
+  },
+});
 
 export default TitleBar;
