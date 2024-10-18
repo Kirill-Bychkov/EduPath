@@ -3,23 +3,13 @@ import { SplashScreen, Stack, Tabs } from 'expo-router';
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 import TabBar from '../components/TabBar';
-import TitleBar from '../components/TitleBar.jsx';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeProvider } from '../config/ThemeProvider';
 //import * as SplashScreen from 'expo-splash-screen';
 import { fonts } from '../constants/fonts';
-import { useTheme } from '../config/ThemeProvider';
-import { icons } from "../constants/icons.js";
-import { TouchableOpacity } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const { colors } = useTheme();
-
-  const icon = {
-    help: icons.help,
-  }
 
   const [loaded, error] = useFonts({
     "Rubik-Bold": fonts['Rubik-Bold'],
@@ -49,12 +39,7 @@ const RootLayout = () => {
               name="index"
               options={{
                 title: "",
-                headerTitle: (props) => <TitleBar {...props}/>,
-                headerShown: true,
-                headerTransparent: true,
-                //headerTitle: () => (
-                //  <Text>EduPyth</Text>
-                //),
+                headerShown: false,
               }}
             />
             <Tabs.Screen
@@ -82,19 +67,6 @@ const RootLayout = () => {
     </ThemeProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  HeaderImage:{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12
-  },
-  HeadersTextStyle: {
-    fontFamily: 'Rubik-Bold',
-    fontSize: 24,
-  },
-})
 
 export default RootLayout
 
