@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, View, Platform, NativeModules } from "react-native";
 import CustomImage from "../components/game/CustomImage.jsx";
 import GameButton from "../components/game/GameButton.jsx";
 import { COLORS } from "../constants/colors.js";
+import { WindowHeight } from "../components/game/Tools.jsx";
 import { getButtonsData, levelsData, imagesMenuData } from "../components/game/DataImage.jsx";
 import { useRouter } from "expo-router";
 
@@ -22,25 +23,37 @@ export default function Game() {
     <SafeAreaView style={styles.container}>
       <GameButton key={"backTraining"} item={buttonsData.backTraining} />
 
-      <ScrollView ref={scrollViewRef} style={styles.scrollContent}>
-        {imagesMenuData.map(image => (
-          <CustomImage key={image.id} image={image} />
-        ))}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        ref={scrollViewRef}
+        style={styles.scrollContent}
+      >
+        <View style={styles.viewContent}>
+          {imagesMenuData.map(image => (
+            <CustomImage key={image.id} image={image} />
+          ))}
 
-        {levelsData.map(level => (
-          <GameButton key={level.id} item={level} />
-        ))}
+          {levelsData.map(level => (
+            <GameButton key={level.id} item={level} />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
+const { StatusBarManager } = NativeModules;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.game_background
+    backgroundColor: COLORS.game_background,
+    paddingTop: Platform.OS === "android" ? StatusBarManager.HEIGHT : 0
   },
   scrollContent: {
     flex: 1
-  }
+  },
+  viewContent: {
+    height: WindowHeight()
+  },
 });

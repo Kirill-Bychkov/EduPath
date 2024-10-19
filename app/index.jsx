@@ -1,19 +1,67 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Animated } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../config/ThemeProvider';
+import { icons } from "../constants/icons.js";
+import TitleBar from "../components/TitleBar.jsx";
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { COLORS } from '../constants/colors.js';
+import { useNavigationState } from '@react-navigation/native';
+
 
 export default function App() {
-    const { colors } = useTheme();
+    const { dark, colors } = useTheme();
+
+    const currentRoute = useNavigationState(state => state.routes[state.index].name);
+
+    // Установка цвета для StatusBar в зависимости от страницы
+    const statusBarColor = currentRoute === 'index'
+        ? colors.bar_background
+        : currentRoute === 'game'
+            ? "black"
+            : colors.background;
+
+    const statusBarTextColor = currentRoute === "game"
+        ? "light-content"
+        : (currentRoute === 'index') && dark
+            ? "light-content"
+            : "dark-content";
+    
+
+    const DATA = [
+        { id: 'Переменные и типы данных' },
+        { id: 'Операторы' },
+        { id: 'Условные операторы' },
+        { id: 'Структуры данных: Списки' },
+        { id: 'Структуры данных: Кортежи' },
+        { id: 'Структуры данных: Словари' },
+        { id: 'Структуры данных: Множества' },
+        { id: 'Циклы' },
+
+    ]
 
     return (
-        <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
-            <StatusBar backgroundColor={colors.background} />
-            {/* Блоки для разных тем изучения Python */}
-            <View style={styles.blocksContainer}>
-                <TouchableOpacity style={[styles.block, { backgroundColor: colors.primary }]}>
-                    <Text style={[styles.blockText, { color: colors.text }]}>Типы данных</Text>
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
+        <SafeAreaProvider>
+            <SafeAreaView style={{ flex: 1 }}>
+                <StatusBar
+                    backgroundColor={statusBarColor}
+                    translucent={true}
+                    barStyle={statusBarTextColor}
+                />
+                <TitleBar />
+                <ScrollView
+                    style={[styles.container, { backgroundColor: colors.background }]}
+                    showsVerticalScrollIndicator={false}
+                    scrollEventThrottle={16}
+                    contentContainerStyle={styles.scrollViewContent}
+                >
+                    {DATA.map((item) => (
+                        <TouchableOpacity key={item.id} style={[styles.block, { backgroundColor: colors.primary }]}>
+                            <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }
 
@@ -21,13 +69,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    blocksContainer: {
-        padding: 20,
+    scrollViewContent: {
+        paddingTop: 10, // Высота TitleBar
+        paddingBottom: 70, // Высота TabBar
     },
     block: {
         borderRadius: 10,
         padding: 20,
-        marginBottom: 15,
+        marginBottom: 16,
+        marginHorizontal: 13,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',

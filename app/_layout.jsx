@@ -1,18 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { SplashScreen, Stack, Tabs } from 'expo-router';
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 import TabBar from '../components/TabBar';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeProvider } from '../config/ThemeProvider';
 //import * as SplashScreen from 'expo-splash-screen';
 import { fonts } from '../constants/fonts';
-import { useTheme } from '../config/ThemeProvider';
 
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const { colors } = useTheme();
 
   const [loaded, error] = useFonts({
     "Rubik-Bold": fonts['Rubik-Bold'],
@@ -35,23 +32,21 @@ const RootLayout = () => {
 
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
-        <SafeAreaView style={styles.SafeAreaStyle}>
           <Tabs
             tabBar={props => <TabBar {...props} />}
           >
             <Tabs.Screen
               name="index"
               options={{
-                headerShown: false,
                 title: "",
+                headerShown: false,
               }}
             />
             <Tabs.Screen
               name="game"
               options={{
                 headerShown: false,
-                title: ""
+                title: "",
               }}
             />
             <Tabs.Screen
@@ -69,18 +64,9 @@ const RootLayout = () => {
               }}
             />
           </Tabs>
-        </SafeAreaView>
-      </SafeAreaProvider>
     </ThemeProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  SafeAreaStyle: {
-    flex: 1,
-    //backgroundColor: "#4b5563",
-  }
-})
 
 export default RootLayout
 
