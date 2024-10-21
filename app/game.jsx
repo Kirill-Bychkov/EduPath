@@ -1,40 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, View, Platform, NativeModules, useWindowDimensions } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, View, Platform, NativeModules } from "react-native";
 import CustomImage from "../components/game/CustomImage.jsx";
 import GameButton from "../components/game/GameButton.jsx";
 import { COLORS } from "../constants/colors.js";
 import { WindowHeight } from "../components/game/Tools.jsx";
-import { getButtonsData, getLevelsData, getImagesMenuData } from "../components/game/DataImage.jsx";
-import { useRouter } from "expo-router";
+import { useEffectGame } from "../components/game/useEffectGame.jsx";
 
 export default function Game() {
-  const scrollViewRef = useRef(null);
-  const router = useRouter();
-  const { width, height } = useWindowDimensions();
-
-  const orientation = width > height ? "landscape" : "portrait";
-  
-  const [data, setData] = useState({
-    buttonsData: getButtonsData(router, width),
-    levelsData: getLevelsData(width),
-    imagesMenuData: getImagesMenuData(width)
-  });
-
-  useEffect(() => {
-    const newButtonsData = getButtonsData(router, width);
-    const newLevelsData = getLevelsData(width);
-    const newImagesMenuData = getImagesMenuData(width);
-
-    setData({
-      buttonsData: newButtonsData,
-      levelsData: newLevelsData,
-      imagesMenuData: newImagesMenuData,
-    });
-
-    if (scrollViewRef.current) {
-      scrollViewRef.current.scrollToEnd({ animated: false });
-    }
-  }, [orientation]);
+  const { data, scrollViewRef, windowWidth, handleScroll } = useEffectGame();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,8 +16,10 @@ export default function Game() {
         showsVerticalScrollIndicator={false}
         ref={scrollViewRef}
         style={styles.scrollContent}
+        scrollEventThrottle={16}
+        onScroll={handleScroll}
       >
-        <View style={{ height: WindowHeight(width) }}>
+        <View style={{ height: WindowHeight(windowWidth) }}>
           {data.imagesMenuData.map(([id, image]) => (
             <CustomImage key={id} image={image} />
           ))}

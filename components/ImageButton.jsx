@@ -6,7 +6,7 @@ export default function ImageButton({ onPress, source, imageStyle, animation }) 
             onPress={onPress}
             style={({ pressed }) => {
                 if (animation)
-                    return { opacity: pressed ? 0 : 1 }
+                    return { opacity: pressed ? 0.2 : 1 }
             }}
         >
             <Image style={imageStyle} source={source} />
