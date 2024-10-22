@@ -17,11 +17,12 @@ export default function App() {
     const statusBarColor = currentRoute === 'index'
         ? colors.bar_background
         : currentRoute === 'game'
-            ? '#568204'
+            ? "black"
             : colors.background;
 
-    const statusBarTextColor =
-        (currentRoute === 'index') && dark
+    const statusBarTextColor = currentRoute === "game"
+        ? "light-content"
+        : (currentRoute === 'index') && dark
             ? "light-content"
             : "dark-content";
     

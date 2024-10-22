@@ -1,28 +1,47 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React from 'react'
-import { useTheme } from '../config/ThemeProvider';
+import { StyleSheet, SafeAreaView, ScrollView, View, Platform, NativeModules } from "react-native";
+import CustomImage from "../components/game/CustomImage.jsx";
+import GameButton from "../components/game/GameButton.jsx";
+import { COLORS } from "../constants/colors.js";
+import { WindowHeight } from "../components/game/Tools.jsx";
+import { useEffectGame } from "../components/game/useEffectGame.jsx";
 
-const Game = () => {
-  const { colors } = useTheme();
+export default function Game() {
+  const { data, scrollViewRef, windowWidth, handleScroll } = useEffectGame();
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Скоро будет доступна...</Text>
-    </View>
-  )
+    <SafeAreaView style={styles.container}>
+      <GameButton key={"backTraining"} item={data.buttonsData.backTraining} />
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        ref={scrollViewRef}
+        style={styles.scrollContent}
+        scrollEventThrottle={16}
+        onScroll={handleScroll}
+      >
+        <View style={{ height: WindowHeight(windowWidth) }}>
+          {data.imagesMenuData.map(([id, image]) => (
+            <CustomImage key={id} image={image} />
+          ))}
+
+          {data.levelsData.map(([id, level]) => (
+            <GameButton key={id} item={level} />
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
+
+const { StatusBarManager } = NativeModules;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: COLORS.game_background,
+    paddingTop: Platform.OS === "android" ? StatusBarManager.HEIGHT : 0
   },
-  HeadersTextStyle: {
-    fontFamily: 'Rubik-Bold',
-    fontSize: 23,
-    marginBottom: 25,
-    marginTop: 4,
-  },
+  scrollContent: {
+    flex: 1
+  }
 });
-
-export default Game
