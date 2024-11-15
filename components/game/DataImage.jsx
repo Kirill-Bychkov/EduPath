@@ -1,7 +1,7 @@
 import { getResponsiveDimensions } from "./Tools.jsx";
 import { icons } from "../../constants/icons.js";
 
-export const getButtonsData = (router, windowWidth) => (
+export const getButtonsData = (handleAction, windowWidth) => (
   {
     "backTraining": {
       ...getResponsiveDimensions({
@@ -11,7 +11,7 @@ export const getButtonsData = (router, windowWidth) => (
         height: 62
       }, windowWidth),
       source: icons.backTraining,
-      action: () => router.push("/"),
+      action: handleAction,
       effect: true
     }
   }

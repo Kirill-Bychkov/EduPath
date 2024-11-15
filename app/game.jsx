@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, ScrollView, View, Platform, NativeModules } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, View, Platform, StatusBar } from "react-native";
 import CustomImage from "../components/game/CustomImage.jsx";
 import GameButton from "../components/game/GameButton.jsx";
 import { COLORS } from "../constants/colors.js";
@@ -33,13 +33,11 @@ export default function Game() {
   );
 }
 
-const { StatusBarManager } = NativeModules;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.game_background,
-    paddingTop: Platform.OS === "android" ? StatusBarManager.HEIGHT : 0
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0
   },
   scrollContent: {
     flex: 1
