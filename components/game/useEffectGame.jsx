@@ -34,7 +34,9 @@ export const useEffectGame = () => {
   }, []);
 
   const scrollToEnd = useCallback(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: false });
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: false });
+    }, 100);
   }, []);
 
   useEffect(() => {

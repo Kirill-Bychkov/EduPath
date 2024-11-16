@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.game_background,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0
+    paddingTop: Platform.OS === "android" ? StatusBar?.currentHeight || 20 : 0
   },
   scrollContent: {
     flex: 1
