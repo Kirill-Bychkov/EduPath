@@ -20,12 +20,12 @@ export default function App() {
             ? "black"
             : colors.background;
 
-    const statusBarTextColor = currentRoute === "game"
+    const statusBarTextColor = currentRoute === 'game'
         ? "light-content"
         : (currentRoute === 'index') && dark
             ? "light-content"
             : "dark-content";
-    
+
 
     const DATA = [
         { id: 'Переменные и типы данных' },

@@ -1,54 +1,49 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useMemo } from "react";
 import { getButtonsData, getLevelsData, getImagesMenuData } from "./DataImage.jsx";
 import { useRouter } from "expo-router";
 import { useWindowDimensions } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+import { useLoading } from "../../config/LoadingProvider";
 
 export const useEffectGame = () => {
   const scrollViewRef = useRef(null);
   const router = useRouter();
   const windowWidth = useWindowDimensions().width;
+  const { showLoading, hideLoading } = useLoading();
 
-  const [data, setData] = useState({
-    buttonsData: getButtonsData(router, windowWidth),
-    levelsData: getLevelsData(windowWidth),
-    imagesMenuData: getImagesMenuData(windowWidth),
-  });
+  const handleAction = () => {
+    showLoading();
 
-  const handleScroll = (event) => {
-    const scrollY = event.nativeEvent.contentOffset.y;
-
-    if (scrollY < 0) {
-      scrollViewRef.current.scrollTo({ y: 0, animated: false });
-    }
+    setTimeout(() => {
+      router.push("/");
+      hideLoading();
+    }, 3500);
   };
 
-  const scrollToEnd = useCallback(() => {
-    if (scrollViewRef.current) {
-      scrollViewRef.current.scrollToEnd({ animated: false });
+  const data = useMemo(() => ({
+    buttonsData: getButtonsData(handleAction, windowWidth),
+    levelsData: getLevelsData(windowWidth),
+    imagesMenuData: getImagesMenuData(windowWidth),
+  }), [handleAction, windowWidth]);
+
+  const handleScroll = useCallback((event) => {
+    const scrollY = event.nativeEvent.contentOffset.y;
+    if (scrollY < 0) {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }
   }, []);
 
+  const scrollToEnd = useCallback(() => {
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: false });
+    }, 100);
+  }, []);
+
   useEffect(() => {
-    const newButtonsData = getButtonsData(router, windowWidth);
-    const newLevelsData = getLevelsData(windowWidth);
-    const newImagesMenuData = getImagesMenuData(windowWidth);
-
-    setData({
-      buttonsData: newButtonsData,
-      levelsData: newLevelsData,
-      imagesMenuData: newImagesMenuData,
-    });
-
     scrollToEnd();
+  }, [windowWidth]);
 
-  }, [router, windowWidth]);
-
-  useFocusEffect(
-    useCallback(() => {
-      scrollToEnd();
-    }, [])
-  );
+  useFocusEffect(scrollToEnd);
 
   return { data, scrollViewRef, windowWidth, handleScroll };
 };

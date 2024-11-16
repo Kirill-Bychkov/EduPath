@@ -1,13 +1,14 @@
-import { View, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import React from 'react'
-
+import { View, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React from 'react';
 import { icons } from "../constants/icons.js";
 import { useTheme } from '../config/ThemeProvider';
+import { useLoading } from "../config/LoadingProvider";
 import { COLORS } from '../constants/colors.js';
 
 
 const TabBar = ({ state, descriptors, navigation }) => {
     const { colors } = useTheme();
+    const { showLoading, hideLoading } = useLoading();
 
     const icon = {
         index: icons.tasks,
@@ -19,7 +20,15 @@ const TabBar = ({ state, descriptors, navigation }) => {
     if (state.routes[state.index].name === 'game') {
         return null;
     }
-    
+
+    const ShowAndHideLoading = async (route) => {
+        showLoading();
+        await new Promise(resolve => setTimeout(resolve, 1750));
+        navigation.navigate(route.name, route.params);
+        await new Promise(resolve => setTimeout(resolve, 1750));
+        hideLoading();
+    };
+
     return (
         <View style={[styles.tabbar, { backgroundColor: colors.bar_background }]}>
             {state.routes.map((route, index) => {
@@ -31,20 +40,25 @@ const TabBar = ({ state, descriptors, navigation }) => {
                             ? options.title
                             : route.name;
 
-                if (['_sitemap', '+not-found'].includes(route.name))
+                if (['_sitemap', '+not-found', 'LoadingScreenGame'].includes(route.name))
                     return null
 
                 const isFocused = state.index === index;
 
-                const onPress = () => {
+                const onPress = async () => {
                     const event = navigation.emit({
                         type: 'tabPress',
                         target: route.key,
                         canPreventDefault: true,
                     });
 
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name, route.params);
+                    if (route.name === 'game') {
+                        await ShowAndHideLoading(route);
+                    }
+                    else {
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate(route.name, route.params);
+                        }
                     }
                 };
 
@@ -68,9 +82,9 @@ const TabBar = ({ state, descriptors, navigation }) => {
                     >
                         <Image
                             source={icon[route.name]}
-                            style={{ width: 36, height: 36, tintColor: isFocused ? colors.primary : colors.not_active}}
+                            style={{ width: 36, height: 36, tintColor: isFocused ? colors.primary : colors.not_active }}
                         />
-                        
+
                     </TouchableOpacity>
                 );
             })}
@@ -81,7 +95,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
 const styles = StyleSheet.create({
     tabbar: {
         position: 'absolute',
-        left: 0, 
+        left: 0,
         right: 0,
         bottom: 0,
         flexDirection: 'row',

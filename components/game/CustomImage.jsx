@@ -1,6 +1,7 @@
+import React, { memo } from 'react';
 import { StyleSheet, Image } from "react-native";
 
-export default function CustomImage({ image }) {
+const CustomImage = ({ image }) => {
     return (
         <Image
             source={image.source}
@@ -15,10 +16,12 @@ export default function CustomImage({ image }) {
                 image.styleProps]}
         />
     );
-}
+};
 
 const styles = StyleSheet.create({
     image: {
-      position: "absolute"
+        position: "absolute"
     }
-  });
+});
+
+export default memo(CustomImage);
