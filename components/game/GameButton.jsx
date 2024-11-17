@@ -1,7 +1,8 @@
+import React, { memo } from 'react';
 import { StyleSheet, View } from "react-native";
-import ImageButton from "../ImageButton.jsx";
+import ImageButton from "./ImageButton.jsx";
 
-export default function GameButton({ item }) {
+const GameButton = ({ item }) => {
     return (
         <View style={styles.wrapper}>
             <ImageButton
@@ -17,14 +18,15 @@ export default function GameButton({ item }) {
             />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     wrapper: {
-      zIndex: 1
+        zIndex: 1
     },
     image: {
-      position: "absolute"
+        position: "absolute"
     }
-  });
-  
+});
+
+export default memo(GameButton);

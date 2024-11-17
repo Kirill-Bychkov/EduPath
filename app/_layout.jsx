@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 import TabBar from '../components/TabBar';
 import { ThemeProvider } from '../config/ThemeProvider';
+import { LoadingProvider } from '../config/LoadingProvider';
 //import * as SplashScreen from 'expo-splash-screen';
 import { fonts } from '../constants/fonts';
 
@@ -32,41 +33,42 @@ const RootLayout = () => {
 
   return (
     <ThemeProvider>
-          <Tabs
-            tabBar={props => <TabBar {...props} />}
-          >
-            <Tabs.Screen
-              name="index"
-              options={{
-                title: "",
-                headerShown: false,
-              }}
-            />
-            <Tabs.Screen
-              name="game"
-              options={{
-                headerShown: false,
-                title: "",
-              }}
-            />
-            <Tabs.Screen
-              name="progress"
-              options={{
-                headerShown: false,
-                title: ""
-              }}
-            />
-            <Tabs.Screen
-              name="settings"
-              options={{
-                headerShown: false,
-                title: ""
-              }}
-            />
-          </Tabs>
+      <LoadingProvider>
+        <Tabs
+          tabBar={props => <TabBar {...props} />}
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: "",
+              headerShown: false,
+            }}
+          />
+          <Tabs.Screen
+            name="game"
+            options={{
+              headerShown: false,
+              title: "",
+            }}
+          />
+          <Tabs.Screen
+            name="progress"
+            options={{
+              headerShown: false,
+              title: ""
+            }}
+          />
+          <Tabs.Screen
+            name="settings"
+            options={{
+              headerShown: false,
+              title: ""
+            }}
+          />
+        </Tabs>
+      </LoadingProvider>
     </ThemeProvider>
   )
 }
 
-export default RootLayout
-
+export default RootLayout;

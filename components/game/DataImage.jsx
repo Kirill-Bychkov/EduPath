@@ -1,25 +1,18 @@
-import { Responsive } from "./Tools.jsx";
+import { getResponsiveDimensions } from "./Tools.jsx";
 import { icons } from "../../constants/icons.js";
 
-const getResponsiveDimensions = ({ top, left, width, height }, windowWidth) => ({
-  top: Responsive(top, windowWidth),
-  left: Responsive(left, windowWidth),
-  width: Responsive(width, windowWidth),
-  height: Responsive(height, windowWidth),
-});
-
-export const getButtonsData = (router, windowWidth) => (
+export const getButtonsData = (handleAction, windowWidth) => (
   {
     "backTraining": {
-    ...getResponsiveDimensions({
-      top: 0,
-      left: 340,
-      width: 73,
-      height: 62
-    }, windowWidth),
-    source: icons.backTraining,
-    action: () => router.push("/"),
-    effect: true
+      ...getResponsiveDimensions({
+        top: 0,
+        left: 340,
+        width: 73,
+        height: 62
+      }, windowWidth),
+      source: icons.backTraining,
+      action: handleAction,
+      effect: true
     }
   }
 );
@@ -29,7 +22,7 @@ export const getLevelsData = (windowWidth) => [
     ...getResponsiveDimensions({
       top: 208,
       left: 191,
-      width: 107,
+      width: 105,
       height: 106
     }, windowWidth),
     source: icons.level_5,
@@ -40,8 +33,8 @@ export const getLevelsData = (windowWidth) => [
     ...getResponsiveDimensions({
       top: 482,
       left: 101,
-      width: 109,
-      height: 103
+      width: 108,
+      height: 102
     }, windowWidth),
     source: icons.level_4,
     action: () => console.log("level 4"),
@@ -51,8 +44,8 @@ export const getLevelsData = (windowWidth) => [
     ...getResponsiveDimensions({
       top: 728,
       left: 258,
-      width: 111,
-      height: 96
+      width: 109,
+      height: 95
     }, windowWidth),
     source: icons.level_3,
     action: () => console.log("level 3"),
@@ -62,7 +55,7 @@ export const getLevelsData = (windowWidth) => [
     ...getResponsiveDimensions({
       top: 912.97,
       left: 72.2,
-      width: 102,
+      width: 101,
       height: 109
     }, windowWidth),
     source: icons.level_2,

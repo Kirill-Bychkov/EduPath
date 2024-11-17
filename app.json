@@ -12,6 +12,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "androidStatusBar": {
+      "backgroundColor": "#ffffff",
+      "barStyle": "dark-content"
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -28,7 +32,7 @@
     "plugins": [
       "expo-router",
       "expo-font"
-
-    ]
+    ],
+    "newArchEnabled": true
   }
 }

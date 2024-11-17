@@ -19,6 +19,7 @@ export default function App() {
             ? "black"
             : colors.background;
 
+
     const statusBarTextColor =
         ((currentRoute === 'index') && dark) || currentRoute === "game"
             ? "light-content"
