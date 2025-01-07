@@ -1,6 +1,6 @@
 import { Pressable, Image } from "react-native";
 
-const ImageButton = ({ onPress, source, imageStyle, animation }) => {
+const ImageButton = ({ onPress, source, imageStyle, animation = false }) => {
     return (
         <Pressable
             onPress={onPress}

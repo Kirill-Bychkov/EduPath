@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Animated } from "react-native";
-import { useLoadingEffect } from "../components/game/useLoadingEffect.jsx";
+import { useEffectLoading } from "../components/game/useEffectLoadingScreen.jsx";
 import { icons } from "../constants/icons.js";
 import { Image } from "expo-image";
 
 const LoadingScreenGame = ({ visible }) => {
-    const { opacity, isRendering, showGif } = useLoadingEffect(visible);
+    const { opacity, isRendering, showGif } = useEffectLoading(visible);
 
     if (!isRendering) return null;
 

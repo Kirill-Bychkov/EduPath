@@ -1,7 +1,7 @@
-import { getResponsiveDimensions } from "./Tools.jsx";
+import { Responsive, getResponsiveDimensions } from "./tools.jsx";
 import { icons } from "../../constants/icons.js";
 
-export const getButtonsData = (handleAction, windowWidth) => (
+export const getButtonsMenu = (windowWidth) => (
   {
     "backTraining": {
       ...getResponsiveDimensions({
@@ -11,13 +11,24 @@ export const getButtonsData = (handleAction, windowWidth) => (
         height: 62
       }, windowWidth),
       source: icons.backTraining,
-      action: handleAction,
+      effect: true
+    },
+    "b_close": {
+      width: Responsive(32, windowWidth),
+      height: Responsive(32, windowWidth),
+      source: icons.b_close,
+      effect: true
+    },
+    "b_start": {
+      width: Responsive(80, windowWidth),
+      height: Responsive(41.97, windowWidth),
+      source: icons.b_start,
       effect: true
     }
   }
 );
 
-export const getLevelsData = (windowWidth) => [
+export const getButtonsLevelsMenu = (windowWidth) => [
   ["5", {
     ...getResponsiveDimensions({
       top: 208,
@@ -25,9 +36,7 @@ export const getLevelsData = (windowWidth) => [
       width: 105,
       height: 106
     }, windowWidth),
-    source: icons.level_5,
-    action: () => console.log("level 5"),
-    effect: false
+    source: icons.level_5
   }],
   ["4", {
     ...getResponsiveDimensions({
@@ -36,9 +45,7 @@ export const getLevelsData = (windowWidth) => [
       width: 108,
       height: 102
     }, windowWidth),
-    source: icons.level_4,
-    action: () => console.log("level 4"),
-    effect: false
+    source: icons.level_4
   }],
   ["3", {
     ...getResponsiveDimensions({
@@ -47,9 +54,7 @@ export const getLevelsData = (windowWidth) => [
       width: 109,
       height: 95
     }, windowWidth),
-    source: icons.level_3,
-    action: () => console.log("level 3"),
-    effect: false
+    source: icons.level_3
   }],
   ["2", {
     ...getResponsiveDimensions({
@@ -58,9 +63,7 @@ export const getLevelsData = (windowWidth) => [
       width: 101,
       height: 109
     }, windowWidth),
-    source: icons.level_2,
-    action: () => console.log("level 2"),
-    effect: false
+    source: icons.level_2
   }],
   ["1", {
     ...getResponsiveDimensions({
@@ -69,13 +72,45 @@ export const getLevelsData = (windowWidth) => [
       width: 98,
       height: 110
     }, windowWidth),
-    source: icons.level_1,
-    action: () => console.log("level 1"),
-    effect: false
+    source: icons.level_1
   }]
 ];
 
-export const getImagesMenuData = (windowWidth) => [
+export const getTextLevels = [
+  {
+    title: `Уровень 1
+Обход препятствий`,
+    description: `Использование циклов и условий
+для обхода камней.`
+  },
+  {
+    title: `Уровень 2
+Тайные клетки`,
+    description: `Работа с неопределённостью,
+циклы и условия.`
+  },
+  {
+    title: `Уровень 3
+Портал спасения`,
+    description: `Использование портала
+хотя бы один раз
+для сбора яблок.`
+  },
+  {
+    title: `Уровень 4
+Секретный сбор`,
+    description: `Применение декораторов для автоматического сбора яблок
+при проверке клетки.`
+  },
+  {
+    title: `Уровень 5
+Лабиринт решений`,
+    description: `Рекурсия и поиск пути
+через сложный лабиринт.`
+  },
+];
+
+export const getImagesMenu = (windowWidth) => [
   ["1", {
     ...getResponsiveDimensions({
       top: 0,

@@ -29,5 +29,7 @@ export const icons = {
   level_4: require('../assets/icons/game/level_4/уровень4.png'),
   level_5: require('../assets/icons/game/level_5/уровень5.png'),
   flowers: require('../assets/icons/game/flowers/цветы.png'),
-  loadingHedgehog: require('../assets/icons/game/animations/аним_ёжик.gif')
+  loadingHedgehog: require('../assets/icons/game/animations/аним_ёжик.gif'),
+  b_close: require('../assets/icons/game/b_close/кн_закрыть.png'),
+  b_start: require('../assets/icons/game/b_start/кн_пуск.png')
 };

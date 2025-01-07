@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 import { fadeIn, fadeOut } from "./loadingAnimations.jsx";
 import { setStatusBarBackgroundColor, setStatusBarStyle } from "expo-status-bar";
 
-export const useLoadingEffect = (visible, duration = 500) => {
+export const useEffectLoading = (visible, duration = 500) => {
     const opacity = useRef(new Animated.Value(visible ? 1 : 0)).current;
     const [isRendering, setIsRendering] = useState(true);
     const [showGif, setShowGif] = useState(false);

@@ -2,7 +2,7 @@ const baseWidth = 412;
 const maxCoordY = 1344;
 const heightBottomObj = 84.21;
 
-const Responsive = (value, currentWidth) => {
+export const Responsive = (value, currentWidth) => {
     return currentWidth * value / baseWidth;
 };
 

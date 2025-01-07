@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import LoadingScreenGame from "../app/LoadingScreenGame.jsx"
+import LoadingScreenGame from "../app/loadingScreenGame.jsx"
 
 const LoadingContext = createContext();
 

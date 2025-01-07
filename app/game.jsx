@@ -1,16 +1,25 @@
 import { StyleSheet, SafeAreaView, ScrollView, View, Platform, StatusBar } from "react-native";
-import CustomImage from "../components/game/CustomImage.jsx";
-import GameButton from "../components/game/GameButton.jsx";
+import ImageCustom from "../components/game/imageCustom.jsx";
+import WrapperImageButton from "../components/game/wrapperImageButton.jsx";
+import { useBackToMainMenu, useWindowModal } from "../components/game/actionsMenuGame.jsx";
 import { COLORS } from "../constants/colors.js";
-import { WindowHeight } from "../components/game/Tools.jsx";
+import { WindowHeight } from "../components/game/tools.jsx";
 import { useEffectGame } from "../components/game/useEffectGame.jsx";
+import WindowModal from "../components/game/windowModal.jsx";
 
 export default function Game() {
   const { data, scrollViewRef, windowWidth, handleScroll } = useEffectGame();
+  const BackToMainMenu = useBackToMainMenu();
+  const { modalVisible, currentLevel, openWindowModal, closeWindowModal } = useWindowModal();
 
   return (
     <SafeAreaView style={styles.container}>
-      <GameButton key={"backTraining"} item={data.buttonsData.backTraining} />
+      <WrapperImageButton
+        key={"backTraining"}
+        item={data.buttonsMenu.backTraining}
+        action={BackToMainMenu}
+        absolute={true}
+      />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -20,15 +29,33 @@ export default function Game() {
         onScroll={handleScroll}
       >
         <View style={{ height: WindowHeight(windowWidth) }}>
-          {data.imagesMenuData.map(([id, image]) => (
-            <CustomImage key={id} image={image} />
+          {data.imagesMenu.map(([id, image]) => (
+            <ImageCustom key={id} image={image} />
           ))}
 
-          {data.levelsData.map(([id, level]) => (
-            <GameButton key={id} item={level} />
+          {data.buttonsLevelsMenu.map(([id, level]) => (
+            <WrapperImageButton
+              key={id}
+              item={level}
+              action={() => openWindowModal(id)}
+              absolute={true}
+            />
           ))}
         </View>
       </ScrollView>
+
+      <WindowModal
+        visible={modalVisible}
+        height={245}
+        title={currentLevel.title}
+        description={currentLevel.description}
+        lookClose={data.buttonsMenu.b_close}
+        onClose={closeWindowModal}
+        showStartButton={true}
+        lookStart={data.buttonsMenu.b_start}
+        onStart={() => console.log("Game Started!")}
+      />
+
     </SafeAreaView>
   );
 }

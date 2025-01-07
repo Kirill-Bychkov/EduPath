@@ -15,4 +15,7 @@ export const COLORS = {
     dark_text: "#e3e3e3",
     
     not_active: '#737373',
+
+    window_modal_game: "#EED755",
+    window_modal_game_text: "#000000"
 }
