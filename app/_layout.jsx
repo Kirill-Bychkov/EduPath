@@ -52,6 +52,13 @@ const RootLayout = () => {
             }}
           />
           <Tabs.Screen
+            name="levelGame"
+            options={{
+              headerShown: false,
+              title: "",
+            }}
+          />
+          <Tabs.Screen
             name="progress"
             options={{
               headerShown: false,

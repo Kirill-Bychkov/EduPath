@@ -17,7 +17,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
         settings: icons.settings,
     }
 
-    if (state.routes[state.index].name === 'game') {
+    if (["game", "levelGame"].includes(state.routes[state.index].name)) {
         return null;
     }
 
@@ -40,7 +40,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
                             ? options.title
                             : route.name;
 
-                if (['_sitemap', '+not-found', 'loadingScreenGame'].includes(route.name))
+                if (['_sitemap', '+not-found', 'loadingScreenGame', 'levelGame'].includes(route.name))
                     return null
 
                 const isFocused = state.index === index;

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
-import { getButtonsMenu, getButtonsLevelsMenu, getImagesMenu } from "./dataImageButtonText.jsx";
+import { useRef, useCallback, useMemo } from "react";
+import { getButtonsMenu, getButtonsLevelsMenu, getImagesMenu } from "./data.jsx";
 import { useWindowDimensions } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -25,10 +25,6 @@ export const useEffectGame = () => {
       scrollViewRef.current?.scrollToEnd({ animated: false });
     }, 100);
   }, []);
-
-  useEffect(() => {
-    scrollToEnd();
-  }, [windowWidth]);
 
   useFocusEffect(scrollToEnd);
 

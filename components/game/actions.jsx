@@ -1,22 +1,22 @@
 import { useRouter } from "expo-router";
 import { useLoading } from "../../config/loadingProvider.js";
 import { useState } from "react";
-import { getTextLevels } from "./dataImageButtonText.jsx";
+import { getTextLevels } from "./data.jsx";
 
-export const useBackToMainMenu = () => {
+export const useGoWindow = () => {
   const router = useRouter();
   const { showLoading, hideLoading } = useLoading();
 
-  const BackToMainMenu = () => {
+  const goWindow = (path) => {
     showLoading();
 
     setTimeout(() => {
-      router.push("/");
+      router.push(path);
       hideLoading();
     }, 3500);
   };
 
-  return BackToMainMenu;
+  return goWindow;
 };
 
 export const useWindowModal = () => {
@@ -31,4 +31,14 @@ export const useWindowModal = () => {
   const closeWindowModal = () => setModalVisible(false);
 
   return { modalVisible, currentLevel, openWindowModal, closeWindowModal };
+};
+
+export const withCloseModal = (goWindow, closeWindowModal) => {
+  return (path) => {
+    if (closeWindowModal) {
+      closeWindowModal();
+    }
+
+    goWindow(path);
+  };
 };

@@ -269,3 +269,42 @@ export const getImagesMenu = (windowWidth) => [
     source: icons.lawn
   }]
 ];
+
+export const getGif = (windowWidth) => (
+  {
+    "loadingHedgehog": {
+      width: Responsive(108, windowWidth),
+      height: Responsive(108, windowWidth),
+      source: icons.loadingHedgehog
+    }
+  }
+);
+
+export const getButtonsLevel = (windowWidth) => (
+  {
+    "b_exit": {
+      width: Responsive(104, windowWidth),
+      height: Responsive(42, windowWidth),
+      source: icons.b_exit,
+      effect: true
+    },
+    "b_task": {
+      width: Responsive(104, windowWidth),
+      height: Responsive(42, windowWidth),
+      source: icons.b_task,
+      effect: true
+    },
+    "b_task_mark": {
+      width: Responsive(112, windowWidth),
+      height: Responsive(48, windowWidth),
+      source: icons.b_task_mark,
+      effect: true
+    },
+    "b_run": {
+      width: Responsive(104, windowWidth),
+      height: Responsive(42, windowWidth),
+      source: icons.b_run,
+      effect: true
+    }
+  }
+);

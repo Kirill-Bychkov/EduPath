@@ -16,11 +16,11 @@ export default function App() {
     // Установка цвета для StatusBar в зависимости от страницы
     const statusBarColor = currentRoute === 'index'
         ? colors.bar_background
-        : currentRoute === 'game'
+        : ["game", "levelGame"].includes(currentRoute)
             ? "black"
             : colors.background;
 
-    const statusBarTextColor = currentRoute === 'game'
+    const statusBarTextColor = ["game", "levelGame"].includes(currentRoute)
         ? "light-content"
         : (currentRoute === 'index') && dark
             ? "light-content"

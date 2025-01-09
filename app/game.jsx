@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView, ScrollView, View, Platform, StatusBar } from "react-native";
 import ImageCustom from "../components/game/imageCustom.jsx";
 import WrapperImageButton from "../components/game/wrapperImageButton.jsx";
-import { useBackToMainMenu, useWindowModal } from "../components/game/actionsMenuGame.jsx";
+import { useGoWindow, useWindowModal, withCloseModal } from "../components/game/actions.jsx";
 import { COLORS } from "../constants/colors.js";
 import { WindowHeight } from "../components/game/tools.jsx";
 import { useEffectGame } from "../components/game/useEffectGame.jsx";
@@ -9,15 +9,17 @@ import WindowModal from "../components/game/windowModal.jsx";
 
 export default function Game() {
   const { data, scrollViewRef, windowWidth, handleScroll } = useEffectGame();
-  const BackToMainMenu = useBackToMainMenu();
+
+  const goWindow = useGoWindow();
   const { modalVisible, currentLevel, openWindowModal, closeWindowModal } = useWindowModal();
+  const goWindowWithClose = withCloseModal(goWindow, closeWindowModal);
 
   return (
     <SafeAreaView style={styles.container}>
       <WrapperImageButton
         key={"backTraining"}
         item={data.buttonsMenu.backTraining}
-        action={BackToMainMenu}
+        action={() => goWindow("/")}
         absolute={true}
       />
 
@@ -53,7 +55,7 @@ export default function Game() {
         onClose={closeWindowModal}
         showStartButton={true}
         lookStart={data.buttonsMenu.b_start}
-        onStart={() => console.log("Game Started!")}
+        onStart={() => goWindowWithClose("/levelGame")}
       />
 
     </SafeAreaView>
