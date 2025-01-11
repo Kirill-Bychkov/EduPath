@@ -1,30 +1,17 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
-import { getButtonsData, getLevelsData, getImagesMenuData } from "./DataImage.jsx";
-import { useRouter } from "expo-router";
+import { useRef, useCallback, useMemo } from "react";
+import { getButtonsMenu, getButtonsLevelsMenu, getImagesMenu } from "./data.jsx";
 import { useWindowDimensions } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import { useLoading } from "../../config/LoadingProvider";
 
 export const useEffectGame = () => {
   const scrollViewRef = useRef(null);
-  const router = useRouter();
   const windowWidth = useWindowDimensions().width;
-  const { showLoading, hideLoading } = useLoading();
-
-  const handleAction = () => {
-    showLoading();
-
-    setTimeout(() => {
-      router.push("/");
-      hideLoading();
-    }, 3500);
-  };
 
   const data = useMemo(() => ({
-    buttonsData: getButtonsData(handleAction, windowWidth),
-    levelsData: getLevelsData(windowWidth),
-    imagesMenuData: getImagesMenuData(windowWidth),
-  }), [handleAction, windowWidth]);
+    buttonsMenu: getButtonsMenu(windowWidth),
+    buttonsLevelsMenu: getButtonsLevelsMenu(windowWidth),
+    imagesMenu: getImagesMenu(windowWidth),
+  }), [windowWidth]);
 
   const handleScroll = useCallback((event) => {
     const scrollY = event.nativeEvent.contentOffset.y;
@@ -38,10 +25,6 @@ export const useEffectGame = () => {
       scrollViewRef.current?.scrollToEnd({ animated: false });
     }, 100);
   }, []);
-
-  useEffect(() => {
-    scrollToEnd();
-  }, [windowWidth]);
 
   useFocusEffect(scrollToEnd);
 

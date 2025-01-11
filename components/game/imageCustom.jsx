@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, Image } from "react-native";
 
-const CustomImage = ({ image }) => {
+const ImageCustom = ({ image }) => {
     return (
         <Image
             source={image.source}
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default memo(CustomImage);
+export default memo(ImageCustom);

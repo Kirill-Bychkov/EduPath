@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 import TabBar from '../components/TabBar';
 import { ThemeProvider } from '../config/ThemeProvider';
-import { LoadingProvider } from '../config/LoadingProvider';
+import { LoadingProvider } from '../config/loadingProvider.js';
 //import * as SplashScreen from 'expo-splash-screen';
 import { fonts } from '../constants/fonts';
 
@@ -46,6 +46,13 @@ const RootLayout = () => {
           />
           <Tabs.Screen
             name="game"
+            options={{
+              headerShown: false,
+              title: "",
+            }}
+          />
+          <Tabs.Screen
+            name="levelGame"
             options={{
               headerShown: false,
               title: "",

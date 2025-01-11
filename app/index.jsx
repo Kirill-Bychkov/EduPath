@@ -7,7 +7,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '../constants/colors.js';
 import { useNavigationState } from '@react-navigation/native';
 
-
 export default function App() {
     const { dark, colors } = useTheme();
 
@@ -15,13 +14,13 @@ export default function App() {
 
     const statusBarColor = currentRoute === 'index'
         ? colors.bar_background
-        : currentRoute === 'game'
+        : ["game", "levelGame"].includes(currentRoute)
             ? "black"
             : colors.background;
 
-
-    const statusBarTextColor =
-        ((currentRoute === 'index') && dark) || currentRoute === "game"
+    const statusBarTextColor = ["game", "levelGame"].includes(currentRoute)
+        ? "light-content"
+        : (currentRoute === 'index') && dark
             ? "light-content"
             : "dark-content";
 

@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, Animated } from "react-native";
-import { useLoadingEffect } from "../components/game/useLoadingEffect.jsx";
-import { icons } from "../constants/icons.js";
+import { useEffectLoading } from "../components/game/useEffectLoadingScreen.jsx";
 import { Image } from "expo-image";
 
 const LoadingScreenGame = ({ visible }) => {
-    const { opacity, isRendering, showGif } = useLoadingEffect(visible);
+    const { data, opacity, isRendering, showGif } = useEffectLoading(visible);
 
     if (!isRendering) return null;
 
@@ -13,8 +12,9 @@ const LoadingScreenGame = ({ visible }) => {
         <Animated.View style={[styles.animatedView, { opacity }]}>
             {showGif && (
                 <Image
-                    style={styles.animation}
-                    source={icons.loadingHedgehog}
+                    width={data.gif.loadingHedgehog.width}
+                    height={data.gif.loadingHedgehog.height}
+                    source={data.gif.loadingHedgehog.source}
                 />
             )}
         </Animated.View>
@@ -28,10 +28,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "black",
-    },
-    animation: {
-        width: 108,
-        height: 108
     }
 });
 

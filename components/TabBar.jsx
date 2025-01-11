@@ -2,7 +2,7 @@ import { View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React from 'react';
 import { icons } from "../constants/icons.js";
 import { useTheme } from '../config/ThemeProvider';
-import { useLoading } from "../config/LoadingProvider";
+import { useLoading } from "../config/loadingProvider.js";
 import { COLORS } from '../constants/colors.js';
 
 
@@ -17,7 +17,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
         settings: icons.settings,
     }
 
-    if (state.routes[state.index].name === 'game') {
+    if (["game", "levelGame"].includes(state.routes[state.index].name)) {
         return null;
     }
 
@@ -40,7 +40,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
                             ? options.title
                             : route.name;
 
-                if (['_sitemap', '+not-found', 'LoadingScreenGame'].includes(route.name))
+                if (['_sitemap', '+not-found', 'loadingScreenGame', 'levelGame'].includes(route.name))
                     return null
 
                 const isFocused = state.index === index;
