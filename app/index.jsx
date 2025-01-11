@@ -7,13 +7,11 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '../constants/colors.js';
 import { useNavigationState } from '@react-navigation/native';
 
-
 export default function App() {
     const { dark, colors } = useTheme();
 
     const currentRoute = useNavigationState(state => state.routes[state.index].name);
 
-    // Установка цвета для StatusBar в зависимости от страницы
     const statusBarColor = currentRoute === 'index'
         ? colors.bar_background
         : ["game", "levelGame"].includes(currentRoute)
@@ -28,13 +26,13 @@ export default function App() {
 
 
     const DATA = [
-        { id: 'Переменные и типы данных' },
-        { id: 'Операторы' },
-        { id: 'Условные операторы' },
-        { id: 'Структуры данных: Списки' },
-        { id: 'Структуры данных: Кортежи' },
-        { id: 'Структуры данных: Словари' },
-        { id: 'Структуры данных: Множества' },
+        { id: 'Переменные и типы данных', path: console.log('Переменные и типы данных') },
+        { id: 'Операторы', path: console.log('Операторы') },
+        { id: 'Условные операторы', path: console.log('Условные операторы') },
+        { id: 'Структуры данных: Списки', path: console.log('Структуры данных: Списки') },
+        { id: 'Структуры данных: Кортежи', path: console.log('Структуры данных: Кортежи') },
+        { id: 'Структуры данных: Словари', path: console.log('Структуры данных: Словари') },
+        { id: 'Структуры данных: Множества', path: console.log('Структуры данных: Множества') },
         { id: 'Циклы' },
 
     ]
@@ -55,7 +53,11 @@ export default function App() {
                     contentContainerStyle={styles.scrollViewContent}
                 >
                     {DATA.map((item) => (
-                        <TouchableOpacity key={item.id} style={[styles.block, { backgroundColor: colors.primary }]}>
+                        <TouchableOpacity
+                            key={item.id}
+                            style={[styles.block, { backgroundColor: colors.primary }]}
+                            onPress={item.path}
+                        >
                             <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
                         </TouchableOpacity>
                     ))}
