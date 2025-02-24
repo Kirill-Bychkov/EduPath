@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '../config/ThemeProvider';
-import { icons } from "../constants/icons.js";
 import TitleBar from "../components/TitleBar.jsx";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '../constants/colors.js';
 import { useNavigationState } from '@react-navigation/native';
 
+import VariablesAndConstants from '../lessons/Variables_and_constants.jsx';
+
 export default function App() {
     const { dark, colors } = useTheme();
+
+    const [currentScreen, setCurrentScreen] = useState('index');
 
     const currentRoute = useNavigationState(state => state.routes[state.index].name);
 
@@ -24,18 +27,35 @@ export default function App() {
             ? "light-content"
             : "dark-content";
 
-
     const DATA = [
-        { id: 'Переменные и типы данных', path: console.log('Переменные и типы данных') },
-        { id: 'Операторы', path: console.log('Операторы') },
-        { id: 'Условные операторы', path: console.log('Условные операторы') },
-        { id: 'Структуры данных: Списки', path: console.log('Структуры данных: Списки') },
-        { id: 'Структуры данных: Кортежи', path: console.log('Структуры данных: Кортежи') },
-        { id: 'Структуры данных: Словари', path: console.log('Структуры данных: Словари') },
-        { id: 'Структуры данных: Множества', path: console.log('Структуры данных: Множества') },
-        { id: 'Циклы' },
+        { id: 'Переменные и константы', path: 'variables_and_constants' },
+    ];
 
-    ]
+    const renderScreen = () => {
+        switch (currentScreen) {
+            case 'variables_and_constants':
+                return <VariablesAndConstants setCurrentScreen={setCurrentScreen} />;
+            default:
+                return (
+                    <ScrollView
+                        style={[styles.container, { backgroundColor: colors.background }]}
+                        showsVerticalScrollIndicator={false}
+                        scrollEventThrottle={16}
+                        contentContainerStyle={styles.scrollViewContent}
+                    >
+                        {DATA.map((item) => (
+                            <TouchableOpacity
+                                key={item.id}
+                                style={[styles.block, { backgroundColor: colors.primary }]}
+                                onPress={() => setCurrentScreen(item.path)}
+                            >
+                                <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                )
+        }
+    }
 
     return (
         <SafeAreaProvider>
@@ -45,23 +65,11 @@ export default function App() {
                     translucent={true}
                     barStyle={statusBarTextColor}
                 />
-                <TitleBar />
-                <ScrollView
-                    style={[styles.container, { backgroundColor: colors.background }]}
-                    showsVerticalScrollIndicator={false}
-                    scrollEventThrottle={16}
-                    contentContainerStyle={styles.scrollViewContent}
-                >
-                    {DATA.map((item) => (
-                        <TouchableOpacity
-                            key={item.id}
-                            style={[styles.block, { backgroundColor: colors.primary }]}
-                            onPress={item.path}
-                        >
-                            <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </ScrollView>
+                <TitleBar
+                    currentScreen={currentScreen}
+                    setCurrentScreen={setCurrentScreen}
+                />
+                {renderScreen()}
             </SafeAreaView>
         </SafeAreaProvider>
     );

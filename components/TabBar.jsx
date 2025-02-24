@@ -6,6 +6,7 @@ import { useLoading } from "../config/loadingProvider.js";
 import { COLORS } from '../constants/colors.js';
 
 
+
 const TabBar = ({ state, descriptors, navigation }) => {
     const { colors } = useTheme();
     const { showLoading, hideLoading } = useLoading();

@@ -5,20 +5,33 @@ import { icons } from "../constants/icons.js";
 import { COLORS } from '../constants/colors.js';
 
 
-const TitleBar = () => {
-
+export default function TitleBar({ currentScreen, setCurrentScreen }) {
   const { dark, colors } = useTheme();
 
   const icon = {
     help: icons.help,
+    back: icons.back,
   }
 
   return (
     <View style={[styles.header, { backgroundColor: colors.bar_background }]}>
 
-      <View style={styles.iconContainer} />
+      {currentScreen === 'index' ? (
+        <View style={styles.iconContainer} />
+      ) : (
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => setCurrentScreen('index')}
+        >
+          <Image
+            source={icon.back}
+            style={[styles.icon, { tintColor: dark ? COLORS.primary : COLORS.not_active }]}
+          />
+        </TouchableOpacity>
+      )}
 
       <Text style={[styles.title, { color: colors.text }]}>EduPyth</Text>
+
 
       <TouchableOpacity style={styles.iconContainer}>
         <Image
@@ -60,4 +73,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TitleBar;
