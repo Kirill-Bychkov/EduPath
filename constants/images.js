@@ -1,6 +1,9 @@
 import { HEIGHT_STATUS_BAR } from "./layout";
 
 const EDUCATION = {
+  theory: require('../assets/icons/theory.png'),
+  question: require('../assets/icons/question.png'),
+  back: require('../assets/icons/back.png'),
   tasks: require("../assets/icons/tasks.png"),
   game: require("../assets/icons/game.png"),
   progress: require("../assets/icons/progress.png"),

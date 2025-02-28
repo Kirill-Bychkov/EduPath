@@ -3,6 +3,7 @@ import React from "react";
 import { IMAGES } from "../constants";
 import { useTheme, useLoading } from "../contexts";
 
+
 const TabBar = ({ state, descriptors, navigation }) => {
     const { colors } = useTheme();
     const { showLoading, hideLoading } = useLoading();
