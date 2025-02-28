@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React from 'react'
-import { useTheme } from '../config/ThemeProvider';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { useTheme } from "../contexts";
 
 const Progress = () => {
   const { colors } = useTheme();
@@ -9,7 +9,7 @@ const Progress = () => {
       <Text style={[styles.HeadersTextStyle, { color: colors.header_text }]}>Скоро будут доступны...</Text>
     </View>
   )
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Progress
+export default Progress;

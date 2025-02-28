@@ -1,17 +1,11 @@
-import React from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
-import { useTheme } from '../config/ThemeProvider';
-import { icons } from "../constants/icons.js";
-import { COLORS } from '../constants/colors.js';
-
+import React from "react";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { useTheme } from "../contexts";
+import { IMAGES } from "../constants";
 
 const TitleBar = () => {
 
   const { dark, colors } = useTheme();
-
-  const icon = {
-    help: icons.help,
-  }
 
   return (
     <View style={[styles.header, { backgroundColor: colors.bar_background }]}>
@@ -22,8 +16,8 @@ const TitleBar = () => {
 
       <TouchableOpacity style={styles.iconContainer}>
         <Image
-          source={icon.help}
-          style={[styles.icon, { tintColor: dark ? COLORS.primary : COLORS.not_active }]}
+          source={IMAGES.EDUCATION.help}
+          style={[styles.icon, { tintColor: dark ? colors.primary : colors.not_active }]}
         />
       </TouchableOpacity>
 
@@ -41,16 +35,16 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    elevation: 5,  // Тень для Android
+    elevation: 5,
   },
   title: {
     fontSize: 22,
     fontFamily: 'Rubik-Bold',
     textAlign: 'center',
-    flex: 1,  // Центрирование текста
+    flex: 1,
   },
   iconContainer: {
-    width: 40,  // Ширина для симметрии
+    width: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },

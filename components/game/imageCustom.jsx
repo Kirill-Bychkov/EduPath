@@ -1,27 +1,19 @@
-import React, { memo } from 'react';
-import { StyleSheet, Image } from "react-native";
+import { View, Image } from "react-native";
 
-const ImageCustom = ({ image }) => {
+const ImageCustom = ({ item }) => {
+    const { source, ...rest } = item;
+
     return (
-        <Image
-            source={image.source}
-            style={[
-                styles.image, {
-                    left: image.left,
-                    top: image.top,
-                    width: image.width,
-                    height: image.height,
-                    zIndex: image.zIndex || 0
-                },
-                image.styleProps]}
-        />
+        <View style={rest}>
+            <Image
+                source={source}
+                style={{
+                    width: "100%",
+                    height: "100%"
+                }}
+            />
+        </View>
     );
 };
 
-const styles = StyleSheet.create({
-    image: {
-        position: "absolute"
-    }
-});
-
-export default memo(ImageCustom);
+export default ImageCustom;

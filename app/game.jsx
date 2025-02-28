@@ -1,28 +1,37 @@
-import { StyleSheet, SafeAreaView, ScrollView, View, Platform, StatusBar } from "react-native";
-import ImageCustom from "../components/game/imageCustom.jsx";
-import WrapperImageButton from "../components/game/wrapperImageButton.jsx";
-import { useGoWindow, useWindowModal, withCloseModal } from "../components/game/actions.jsx";
-import { COLORS } from "../constants/colors.js";
-import { WindowHeight } from "../components/game/tools.jsx";
-import { useEffectGame } from "../components/game/useEffectGame.jsx";
-import WindowModal from "../components/game/windowModal.jsx";
+import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import ButtonCustom from "../components/game/buttonCustom";
+import ImageCustom from "../components/game/imageCustom";
+import WindowModal from "../components/game/windowModal";
+import { useGame } from "../hooks/game/useGame";
+import { useGoWindow } from "../hooks/game/useGoWindow";
+import { useWindowModal } from "../hooks/game/useWindowModal";
+import { COLORS, HEIGHT_STATUS_BAR } from "../constants";
+import { WindowHeight } from "../utils/scaleTools";
+import { goWindowWithCloseModal } from "../utils/game/goWindowWithCloseModal";
+import { dmsGame, imgGame } from "../config";
 
-export default function Game() {
-  const { data, scrollViewRef, windowWidth, handleScroll } = useEffectGame();
+const Game = () => {
+  const { scrollViewRef, handleScroll } = useGame();
 
   const goWindow = useGoWindow();
-  const { modalVisible, currentLevel, openWindowModal, closeWindowModal } = useWindowModal();
-  const goWindowWithClose = withCloseModal(goWindow, closeWindowModal);
+  
+  const {
+    modalVisible,
+    currentLevel,
+    openWindowModal,
+    closeWindowModal
+  } = useWindowModal();
+  const goWindowWithClose = goWindowWithCloseModal(goWindow, closeWindowModal);
 
   return (
     <SafeAreaView style={styles.container}>
-      <WrapperImageButton
-        key={"backTraining"}
-        item={data.buttonsMenu.backTraining}
-        action={() => goWindow("/")}
-        absolute={true}
-      />
-
+      <View style={{ position: "relative" }}>
+        <ButtonCustom
+          item={imgGame.buttons.b_back_training}
+          action={() => goWindow("/")}
+        />
+      </View>
+      
       <ScrollView
         showsVerticalScrollIndicator={false}
         ref={scrollViewRef}
@@ -30,45 +39,44 @@ export default function Game() {
         scrollEventThrottle={16}
         onScroll={handleScroll}
       >
-        <View style={{ height: WindowHeight(windowWidth) }}>
-          {data.imagesMenu.map(([id, image]) => (
-            <ImageCustom key={id} image={image} />
+        <View style={{ height: WindowHeight() }}>
+          {Object.entries(imgGame.menu_images).map(([id, image]) => (
+            <ImageCustom key={id} item={image} />
           ))}
-
-          {data.buttonsLevelsMenu.map(([id, level]) => (
-            <WrapperImageButton
+            
+          {Object.entries(imgGame.level_buttons).map(([id, level]) => (
+            <ButtonCustom
               key={id}
               item={level}
               action={() => openWindowModal(id)}
-              absolute={true}
+              disableOpacity
             />
           ))}
         </View>
       </ScrollView>
-
+      
       <WindowModal
         visible={modalVisible}
-        height={245}
+        height={dmsGame.modal_level.maxHeight}
         title={currentLevel.title}
         description={currentLevel.description}
-        lookClose={data.buttonsMenu.b_close}
         onClose={closeWindowModal}
         showStartButton={true}
-        lookStart={data.buttonsMenu.b_start}
         onStart={() => goWindowWithClose("/levelGame")}
       />
-
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.game_background,
-    paddingTop: Platform.OS === "android" ? StatusBar?.currentHeight || 20 : 0
+    backgroundColor: COLORS.GAME.menu.background,
+    paddingTop: HEIGHT_STATUS_BAR
   },
   scrollContent: {
     flex: 1
   }
 });
+
+export default Game;

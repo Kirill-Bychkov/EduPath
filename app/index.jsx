@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Animated } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useTheme } from '../config/ThemeProvider';
-import { icons } from "../constants/icons.js";
-import TitleBar from "../components/TitleBar.jsx";
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS } from '../constants/colors.js';
-import { useNavigationState } from '@react-navigation/native';
+import { StyleSheet, Text, StatusBar, ScrollView, TouchableOpacity } from "react-native";
+import React from "react";
+import { useTheme } from "../contexts";
+import TitleBar from "../components/titleBar";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useNavigationState } from "@react-navigation/native";
+import { COLORS } from "../constants";
 
-export default function App() {
+const App = () => {
     const { dark, colors } = useTheme();
 
     const currentRoute = useNavigationState(state => state.routes[state.index].name);
@@ -58,14 +57,14 @@ export default function App() {
                             style={[styles.block, { backgroundColor: colors.primary }]}
                             onPress={item.path}
                         >
-                            <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
+                            <Text style={[styles.blockText, { color: COLORS.EDUCATION.dark_text }]}>{item.id}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -93,3 +92,5 @@ const styles = StyleSheet.create({
         fontFamily: 'Rubik-Bold',
     },
 });
+
+export default App;
