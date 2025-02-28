@@ -1,24 +1,21 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { SplashScreen, Stack, Tabs } from 'expo-router';
-import { useFonts } from 'expo-font'
-import { useEffect } from 'react';
-import TabBar from '../components/TabBar';
-import { ThemeProvider } from '../config/ThemeProvider';
-import { LoadingProvider } from '../config/loadingProvider.js';
-//import * as SplashScreen from 'expo-splash-screen';
-import { fonts } from '../constants/fonts';
+import { SplashScreen, Tabs } from "expo-router";
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+import TabBar from "../components/tabBar";
+import { ThemeProvider, LoadingProvider } from "../contexts";
+import { FONTS } from "../constants";
 
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
 
   const [loaded, error] = useFonts({
-    "Rubik-Bold": fonts['Rubik-Bold'],
-    "Rubik-BoldItalic": fonts['Rubik-BoldItalic'],
-    "Rubik-Italic": fonts['Rubik-Italic'],
-    "Rubik-Light": fonts['Rubik-Light'],
-    "Rubik-LightItalic": fonts['Rubik-LightItalic'],
-    "Rubik-Regular": fonts['Rubik-Regular'],
+    "Rubik-Bold": FONTS['Rubik-Bold'],
+    "Rubik-BoldItalic": FONTS['Rubik-BoldItalic'],
+    "Rubik-Italic": FONTS['Rubik-Italic'],
+    "Rubik-Light": FONTS['Rubik-Light'],
+    "Rubik-LightItalic": FONTS['Rubik-LightItalic'],
+    "Rubik-Regular": FONTS['Rubik-Regular'],
   });
 
   useEffect(() => {
@@ -76,6 +73,6 @@ const RootLayout = () => {
       </LoadingProvider>
     </ThemeProvider>
   )
-}
+};
 
 export default RootLayout;

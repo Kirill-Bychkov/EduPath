@@ -1,21 +1,21 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Animated } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useTheme } from '../config/ThemeProvider';
-import TitleBar from "../components/TitleBar.jsx";
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS } from '../constants/colors.js';
-import { useNavigationState } from '@react-navigation/native';
+import { StyleSheet, Text, StatusBar, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { useTheme } from "../contexts";
+import TitleBar from "../components/titleBar";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { COLORS } from "../constants";
+import { useNavigationState } from "@react-navigation/native";
 
-import VariablesAndConstants from '../lessons/Variables_and_constants.jsx';
+import VariablesAndConstants from "../lessons/Variables_and_constants.jsx";
 
-export default function App() {
+const App = () => {
     const { dark, colors } = useTheme();
 
-    const [currentScreen, setCurrentScreen] = useState('index');
+    const [currentScreen, setCurrentScreen] = useState("index");
 
     const currentRoute = useNavigationState(state => state.routes[state.index].name);
 
-    const statusBarColor = currentRoute === 'index'
+    const statusBarColor = currentRoute === "index"
         ? colors.bar_background
         : ["game", "levelGame"].includes(currentRoute)
             ? "black"
@@ -23,17 +23,17 @@ export default function App() {
 
     const statusBarTextColor = ["game", "levelGame"].includes(currentRoute)
         ? "light-content"
-        : (currentRoute === 'index') && dark
+        : (currentRoute === "index") && dark
             ? "light-content"
             : "dark-content";
 
     const DATA = [
-        { id: 'Переменные и константы', path: 'variables_and_constants' },
+        { id: "Переменные и константы", path: "variables_and_constants" },
     ];
 
     const renderScreen = () => {
         switch (currentScreen) {
-            case 'variables_and_constants':
+            case "variables_and_constants":
                 return <VariablesAndConstants setCurrentScreen={setCurrentScreen} />;
             default:
                 return (
@@ -49,7 +49,7 @@ export default function App() {
                                 style={[styles.block, { backgroundColor: colors.primary }]}
                                 onPress={() => setCurrentScreen(item.path)}
                             >
-                                <Text style={[styles.blockText, { color: COLORS.dark_text }]}>{item.id}</Text>
+                                <Text style={[styles.blockText, { color: COLORS.EDUCATION.dark_text }]}>{item.id}</Text>
                             </TouchableOpacity>
                         ))}
                     </ScrollView>
@@ -73,31 +73,33 @@ export default function App() {
             </SafeAreaView>
         </SafeAreaProvider>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     scrollViewContent: {
-        paddingTop: 10, // Высота TitleBar
-        paddingBottom: 70, // Высота TabBar
+        paddingTop: 10,
+        paddingBottom: 70,
     },
     block: {
         borderRadius: 10,
         padding: 20,
         marginBottom: 16,
         marginHorizontal: 13,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#000',
+        justifyContent: "center",
+        alignItems: "center",
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        elevation: 5, // для тени на Android
+        elevation: 5,
     },
     blockText: {
         fontSize: 18,
-        fontFamily: 'Rubik-Bold',
+        fontFamily: "Rubik-Bold",
     },
 });
+
+export default App;

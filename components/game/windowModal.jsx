@@ -1,77 +1,38 @@
 import React from "react";
 import { StyleSheet, View, Text, Modal } from "react-native";
-import { COLORS } from "../../constants/colors.js";
-import WrapperImageButton from "./wrapperImageButton.jsx";
-import { useWindowDimensions } from "react-native";
-import { Responsive } from "./tools.jsx";
+import { COLORS } from "../../constants";
+import ButtonCustom from "./buttonCustom";
+import { dmsGame, imgGame } from "../../config";
 
 const WindowModal = ({
   visible,
   title,
   description,
-  width = 340,
-  height = 140,
-  lookClose,
+  height,
   onClose,
-  lookStart,
   onStart,
   showStartButton = false
 }) => {
-  const windowWidth = useWindowDimensions().width;
-
-  const paramsDict = {
-    widthModal: width,
-    heightModal: height,
-    borderRadiusModal: 15,
-    topCloseButton: -16,
-    leftCloseButton: 324,
-    fontSizeTitle: 24,
-    lineHeightTitle: 35,
-    marginTopTitle: 8,
-    fontSizeDescription: 18,
-    marginBottomDescription: 5,
-    marginBottomStartButton: 16
-   };
-
-  const updatedParamsDict = Object.fromEntries(
-    Object.entries(paramsDict).map(([key, value]) => [key, Responsive(value, windowWidth)])
-  );
-  
   return (
     <Modal transparent visible={visible} animationType="fade">
       <View style={styles.overlay}>
-        <View style={[styles.modal,
-                      { width: updatedParamsDict.widthModal,
-                        height: updatedParamsDict.heightModal,
-                        borderRadius: updatedParamsDict.borderRadiusModal }]}>
-
-          <View style={[styles.closeButtonContainer,
-                        { top: updatedParamsDict.topCloseButton,
-                          left: updatedParamsDict.leftCloseButton }]}>
-            <WrapperImageButton
-              key={"b_close"}
-              item={lookClose}
+        <View style={[styles.modal, { height: height }]}>
+          <View style={styles.closeButtonContainer}>
+            <ButtonCustom
+              item={imgGame.buttons.b_close}
               action={onClose}
             />
           </View>
 
           <View style={styles.content}>
-            <Text style={[styles.title,
-                          { fontSize: updatedParamsDict.fontSizeTitle,
-                            lineHeight: updatedParamsDict.lineHeightTitle,
-                            marginTop: updatedParamsDict.marginTopTitle }]}>{title}</Text>
+            <Text style={styles.title}>{title}</Text>
 
-            <Text style={[styles.description,
-                          { fontSize: updatedParamsDict.fontSizeDescription,
-                            marginBottom: updatedParamsDict.marginBottomDescription }]}
-            >{description}</Text>
+            <Text style={styles.description}>{description}</Text>
             
             {showStartButton && (
-              <View style={[styles.startButtonContainer,
-                            { marginBottom: updatedParamsDict.marginBottomStartButton }]}>
-                <WrapperImageButton
-                  key={"b_start"}
-                  item={lookStart}
+              <View style={styles.startButtonContainer}>
+                <ButtonCustom
+                  item={imgGame.buttons.b_start}
                   action={onStart}
                 />
               </View>
@@ -86,14 +47,16 @@ const WindowModal = ({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.25)",
+    backgroundColor: COLORS.GAME.modal_level.back_background,
     justifyContent: "center",
     alignItems: "center"
   },
   modal: {
-    backgroundColor: COLORS.window_modal_game,
+    backgroundColor: COLORS.GAME.modal_level.background,
     alignItems: "center",
-    position: "relative"
+    position: "relative",
+    width: dmsGame.modal_level.width,
+    borderRadius: dmsGame.modal_level.borderRadius
   },
   content: {
     flex: 1,
@@ -103,19 +66,27 @@ const styles = StyleSheet.create({
   },
   closeButtonContainer: {
     position: "absolute",
-    zIndex: 1
+    zIndex: 1,
+    top: dmsGame.modal_level.topCloseButton,
+    left: dmsGame.modal_level.leftCloseButton
   },
   startButtonContainer: {
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: dmsGame.modal_level.marginBottomStartButton
   },
   title: {
     fontWeight: "bold",
-    color: COLORS.window_modal_game_text,
-    textAlign: "center"
+    color: COLORS.GAME.modal_level.text,
+    textAlign: "center",
+    fontSize: dmsGame.modal_level.fontSizeTitle,
+    lineHeight: dmsGame.modal_level.lineHeightTitle,
+    marginTop: dmsGame.modal_level.marginTopTitle
   },
   description: {
-    color: COLORS.window_modal_game_text,
-    textAlign: "center"
+    color: COLORS.GAME.modal_level.text,
+    textAlign: "center",
+    fontSize: dmsGame.modal_level.fontSizeDescription,
+    marginBottom: dmsGame.modal_level.marginBottomDescription
   }
 });
 

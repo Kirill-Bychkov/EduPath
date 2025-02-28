@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { icons } from "../constants/icons.js";
+import { IMAGES } from '../constants';
 
 export default function VariablesAndConstants({ setCurrentScreen }) {
   const [currentBlock, setCurrentBlock] = useState('theory'); // Состояние для текущего блока
 
   const icon = {
-    theory: icons.theory,
-    question: icons.question,
+    theory: IMAGES.EDUCATION.theory,
+    question: IMAGES.EDUCATION.question,
   }
 
   const renderBlock = () => {

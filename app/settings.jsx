@@ -1,18 +1,16 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React, { useState } from 'react'
-import { useTheme } from '../config/ThemeProvider'
-import { icons } from "../constants/icons.js";
-import { COLORS } from '../constants/colors.js';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { useTheme } from "../contexts";
+import { IMAGES } from "../constants";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 const Settings = () => {
 
   const icon = {
-    light_mode: icons.light_mode,
-    dark_mode: icons.dark_mode,
-    volume_on: icons.volume_on,
-    volume_off: icons.volume_off,
+    light_mode: IMAGES.EDUCATION.light_mode,
+    dark_mode: IMAGES.EDUCATION.dark_mode,
+    volume_on: IMAGES.EDUCATION.volume_on,
+    volume_off: IMAGES.EDUCATION.volume_off,
   }
 
   const { dark, colors, setScheme } = useTheme();
@@ -39,7 +37,7 @@ const Settings = () => {
               <TouchableOpacity onPress={ToggleTheme}>
                 <Image
                   source={icon[dark ? 'dark_mode' : 'light_mode']}
-                  style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
+                  style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
                 />
               </TouchableOpacity>
             </View>
@@ -51,7 +49,7 @@ const Settings = () => {
               <TouchableOpacity onPress={ToggleSound}>
                 <Image
                   source={icon[isSoundOn ? 'volume_on' : 'volume_off']}
-                  style={{ width: 50, height: 50, tintColor: dark ? COLORS.primary : COLORS.not_active }}
+                  style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
                 />
               </TouchableOpacity>
             </View>
@@ -60,7 +58,7 @@ const Settings = () => {
       </SafeAreaView>
     </SafeAreaProvider>
   )
-}
+};
 
 const styles = StyleSheet.create({
   ViewStyle: {
@@ -91,6 +89,6 @@ const styles = StyleSheet.create({
     marginRight: -42,
     marginLeft: 10,
   },
-})
+});
 
-export default Settings
+export default Settings;

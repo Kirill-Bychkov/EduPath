@@ -1,8 +1,8 @@
-import { lightColors, darkColors } from "./theme";
+import { lightColors, darkColors } from "../config";
 import { useColorScheme } from "react-native";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-export const ThemeContext = createContext({
+const ThemeContext = createContext({
     dark: false,
     colors: lightColors,
     setScheme: () => { }

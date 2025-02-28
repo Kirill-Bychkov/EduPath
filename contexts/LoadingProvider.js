@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
-import LoadingScreenGame from "../app/loadingScreenGame.jsx"
+import { createContext, useContext, useState, useCallback } from "react";
+import LoadingScreen from "../components/game/loadingScreen";
 
 const LoadingContext = createContext();
 
@@ -13,7 +13,7 @@ export const LoadingProvider = ({ children }) => {
     return (
         <LoadingContext.Provider value={{ showLoading, hideLoading }}>
             {children}
-            <LoadingScreenGame visible={loadingVisible} />
+            <LoadingScreen visible={loadingVisible} />
         </LoadingContext.Provider>
     );
 };
