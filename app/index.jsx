@@ -6,7 +6,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants";
 import { useNavigationState } from "@react-navigation/native";
 
-import VariablesAndConstants from "../lessons/Variables_and_constants.jsx";
+import VariablesAndConstants from "../components/lessons/variables_and_constants.jsx";
 
 const App = () => {
     const { dark, colors } = useTheme();
@@ -29,6 +29,12 @@ const App = () => {
 
     const DATA = [
         { id: "Переменные и константы", path: "variables_and_constants" },
+        { id: "Типы данных", path: "variables_and_constants" },
+        { id: "Арифметические операторы", path: "variables_and_constants" },
+        { id: "Операторы сравнения", path: "variables_and_constants" },
+        { id: "Логические операторы", path: "variables_and_constants" },
+        { id: "Тернарный оператор", path: "variables_and_constants" },
+        { id: "Условные операторы", path: "variables_and_constants" },
     ];
 
     const renderScreen = () => {
