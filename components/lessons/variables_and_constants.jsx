@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme } from "../../contexts";
+import SingleAnswerTest from './pattern/singleAnswerTest';
 
 
 export default function VariablesAndConstants() {
+
   const [currentBlock, setCurrentBlock] = useState('theory');
 
   const { dark, colors } = useTheme();
@@ -18,20 +20,20 @@ export default function VariablesAndConstants() {
             <Text style={[styles.text, { color: colors.text }]}>
               Переменные в JavaScript объявляются с помощью ключевых слов `let`, `const` или `var`.
               {"\n\n"}
-              <Text style={[styles.code, {backgroundColor: colors.background}]}>let x = 10;</Text>
+              <Text style={[styles.code, { backgroundColor: colors.background }]}>let x = 10;</Text>
               {"\n"}
-              <Text style={[styles.code, {backgroundColor: colors.background}]}>const y = 20;</Text>
+              <Text style={[styles.code, { backgroundColor: colors.background }]}>const y = 20;</Text>
               {"\n\n"}
               Переменная, объявленная с `let`, может быть изменена:
               {"\n\n"}
-              <Text style={[styles.code, {backgroundColor: colors.background}]}>
+              <Text style={[styles.code, { backgroundColor: colors.background }]}>
                 let a = 5;{"\n"}
                 a = 10; // Теперь a равно 10
               </Text>
               {"\n\n"}
               Константа, объявленная с `const`, не может быть изменена после объявления:
               {"\n\n"}
-              <Text style={[styles.code, {backgroundColor: colors.background}]}>
+              <Text style={[styles.code, { backgroundColor: colors.background }]}>
                 const b = 15;{"\n"}
                 b = 20; // Ошибка! Константу нельзя изменить
               </Text>
@@ -44,7 +46,7 @@ export default function VariablesAndConstants() {
             <Text style={[styles.text, { color: colors.text }]}>
               `let` и `const` имеют блочную область видимости (они доступны только в пределах блока `{ }`), а `var` - функциональную область видимости:
               {"\n\n"}
-              <Text style={[styles.code, {backgroundColor: colors.background}]}>
+              <Text style={[styles.code, { backgroundColor: colors.background }]}>
                 if (true) {"{"}{"\n"}
                 {"  "}let x = 10;{"\n"}
                 {"  "}var y = 20;{"\n"}
@@ -60,58 +62,33 @@ export default function VariablesAndConstants() {
               - Используйте `const`, если переменная не должна изменяться.{"\n"}
               - Используйте `let`, если значение переменной будет изменяться.{"\n"}
               - `var` лучше не использовать.
-              
+
             </Text>
           </ScrollView>
         );
       case 'test1':
         return (
-          <View style={styles.blockContainer}>
-            <Text style={[styles.title, { color: colors.text }]}>Тест: Выберите правильный ответ</Text>
-            <Text style={[styles.question, { color: colors.text }]}>
-              Какой из следующих вариантов объявляет константу?
-            </Text>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>1. let x = 10;</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>2. const y = 20;</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>3. var z = 30;</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.checkButton}
-            >
-              <Text style={styles.checkButtonText}>Проверить</Text>
-            </TouchableOpacity>
-          </View>
+          <SingleAnswerTest
+            question="Какой из следующих вариантов объявляет константу?"
+            options={[
+              "1. let x = 10;",
+              "2. const y = 20;",
+              "3. var z = 30;",
+            ]}
+            correctAnswer={2}
+          />
         );
       case 'test2':
         return (
-          <View style={styles.blockContainer}>
-            <Text style={[styles.title, { color: colors.text }]}>Тест: Вопрос с несколькими вариантами</Text>
-            <Text style={[styles.question, { color: colors.text }]}>
-              Какой из следующих вариантов объявляет переменную, которая может быть изменена?
-            </Text>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>1. const x = 10;</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>2. let y = 20;</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>3. var z = 30;</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.checkButton}
-
-            >
-              <Text style={styles.checkButtonText}>Проверить</Text>
-            </TouchableOpacity>
-          </View>
+          <SingleAnswerTest
+            question="Какая область видимости у переменных, объявленных с помощью let и const?"
+            options={[
+              "1. Глобальная",
+              "2. Функциональная",
+              "3. Блочная"
+            ]}
+            correctAnswer={3}
+          />
         );
       default:
         return null;
