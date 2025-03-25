@@ -7,6 +7,7 @@ import { COLORS } from "../constants";
 import { useNavigationState } from "@react-navigation/native";
 
 import VariablesAndConstants from "../components/lessons/variables_and_constants.jsx";
+import DataTypes from "../components/lessons/data_types.jsx"
 
 const App = () => {
     const { dark, colors } = useTheme();
@@ -29,7 +30,7 @@ const App = () => {
 
     const DATA = [
         { id: "Переменные и константы", path: "variables_and_constants" },
-        { id: "Типы данных", path: "variables_and_constants" },
+        { id: "Типы данных", path: "data_types" },
         { id: "Арифметические операторы", path: "variables_and_constants" },
         { id: "Операторы сравнения", path: "variables_and_constants" },
         { id: "Логические операторы", path: "variables_and_constants" },
@@ -41,6 +42,8 @@ const App = () => {
         switch (currentScreen) {
             case "variables_and_constants":
                 return <VariablesAndConstants setCurrentScreen={setCurrentScreen} />;
+            case "data_types":
+                return <DataTypes setCurrentScreen={setCurrentScreen} />;
             default:
                 return (
                     <ScrollView
