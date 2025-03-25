@@ -8,6 +8,11 @@ import { useNavigationState } from "@react-navigation/native";
 
 import VariablesAndConstants from "../components/lessons/variables_and_constants.jsx";
 import DataTypes from "../components/lessons/data_types.jsx"
+import ArithmeticOperators from "../components/lessons/arithmetic_operators.jsx"
+import ComparisonOperators from "../components/lessons/comparison_operators.jsx"
+import LogicalOperators from "../components/lessons/logical_operators.jsx"
+import TernaryOperator from "../components/lessons/ternary_operator.jsx"
+import ConditionalOperators from "../components/lessons/conditional_operators.jsx"
 
 const App = () => {
     const { dark, colors } = useTheme();
@@ -31,11 +36,11 @@ const App = () => {
     const DATA = [
         { id: "Переменные и константы", path: "variables_and_constants" },
         { id: "Типы данных", path: "data_types" },
-        { id: "Арифметические операторы", path: "variables_and_constants" },
-        { id: "Операторы сравнения", path: "variables_and_constants" },
-        { id: "Логические операторы", path: "variables_and_constants" },
-        { id: "Тернарный оператор", path: "variables_and_constants" },
-        { id: "Условные операторы", path: "variables_and_constants" },
+        { id: "Арифметические операторы", path: "arithmetic_operators" },
+        { id: "Операторы сравнения", path: "comparison_operators" },
+        { id: "Логические операторы", path: "logical_operators" },
+        { id: "Тернарный оператор", path: "ternary_operator" },
+        { id: "Условные операторы", path: "conditional_operators" },
     ];
 
     const renderScreen = () => {
@@ -44,6 +49,16 @@ const App = () => {
                 return <VariablesAndConstants setCurrentScreen={setCurrentScreen} />;
             case "data_types":
                 return <DataTypes setCurrentScreen={setCurrentScreen} />;
+            case "arithmetic_operators":
+                return <ArithmeticOperators setCurrentScreen={setCurrentScreen} />;
+            case "comparison_operators":
+                return <ComparisonOperators setCurrentScreen={setCurrentScreen} />;
+            case "logical_operators":
+                return <LogicalOperators setCurrentScreen={setCurrentScreen} />;
+            case "ternary_operator":
+                return <TernaryOperator setCurrentScreen={setCurrentScreen} />;
+            case "conditional_operators":
+                return <ConditionalOperators setCurrentScreen={setCurrentScreen} />;
             default:
                 return (
                     <ScrollView
