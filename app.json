@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "EduPyth_Learn_and_Have_Fun",
-    "scheme": ["edupyth-learn-and-have-fun"],
+    "name": "EduPath",
+    "scheme": [
+      "edupyth-learn-and-have-fun"
+    ],
     "slug": "EduPyth_Learn_and_Have_Fun",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.danil19.EduPyth_Learn_and_Have_Fun"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -33,6 +36,15 @@
       "expo-router",
       "expo-font"
     ],
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ad6d39c0-1634-4ede-89b1-f374acbb8210"
+      }
+    },
+    "owner": "danil19"
   }
 }
