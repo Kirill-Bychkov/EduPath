@@ -21,11 +21,14 @@ export default function TernaryOperator() {
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Синтаксис:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               условие ? выражение_если_true : выражение_если_false
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Простые примеры:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               // Присвоение значения переменной{"\n"}
               let age = 20;{"\n"}
               let status = age {">"}= 18 ? 'взрослый' : 'ребенок';{"\n"}
@@ -40,20 +43,24 @@ export default function TernaryOperator() {
               // Выполнение действий{"\n"}
               let isMorning = true;{"\n"}
               isMorning ? console.log('Доброе утро!') : console.log('Добрый день!');
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Вложенные тернарные операторы:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               let score = 85;{"\n"}
               let grade = score {">"}= 90 ? 'A' :{"\n"}
                 score {">"}= 80 ? 'B' :{"\n"}
                 score {">"}= 70 ? 'C' :{"\n"}
                 score {">"}= 60 ? 'D' : 'F';{"\n"}
-              // grade = 'B'
+              // grade = 'B'{"\n\n"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Использование в JSX:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               function Greeting(props) {"{"}{"\n"}
               {"  "}return ({"\n"}
               {"    "}{"<div>"}{"\n"}
@@ -65,6 +72,7 @@ export default function TernaryOperator() {
               {"    "}{"</div>"}{"\n"}
               {"  "});{"\n"}
               {"}"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Рекомендации:</Text>
