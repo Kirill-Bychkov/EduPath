@@ -6,6 +6,36 @@ const EDUCATION = {
             name: "Переменные и константы",
             path: "VariablesAndConstants"
       },
+      2: {
+            id: "Урок 2",
+            name: "Типы данных",
+            path: "DataTypes"
+      },
+      3: {
+            id: "Урок 3",
+            name: "Арифметические операторы",
+            path: "ArithmeticOperators"
+      },
+      4: {
+            id: "Урок 4",
+            name: "Операторы сравнения",
+            path: "ComparisonOperators"
+      },
+      5: {
+            id: "Урок 5",
+            name: "Логические операторы",
+            path: "LogicalOperators"
+      },
+      6: {
+            id: "Урок 6",
+            name: "Тернарный оператор",
+            path: "TernaryOperator"
+      },
+      7: {
+            id: "Урок 7",
+            name: "Условные операторы",
+            path: "ConditionalOperators"
+      },
 };
 
 const GAME = {

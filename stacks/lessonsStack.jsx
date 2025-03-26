@@ -21,5 +21,53 @@ export const LessonsStack = () => (
         parentNavigator: "LessonsStack"
       }}
     />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[2].path}
+      component={Lessons.DataTypes}
+      initialParams={{
+        alias: TEXTS.EDUCATION[2].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[3].path}
+      component={Lessons.ArithmeticOperators}
+      initialParams={{
+        alias: TEXTS.EDUCATION[3].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[4].path}
+      component={Lessons.ComparisonOperators}
+      initialParams={{
+        alias: TEXTS.EDUCATION[4].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[5].path}
+      component={Lessons.LogicalOperators}
+      initialParams={{
+        alias: TEXTS.EDUCATION[5].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[6].path}
+      component={Lessons.TernaryOperator}
+      initialParams={{
+        alias: TEXTS.EDUCATION[6].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[7].path}
+      component={Lessons.ConditionalOperators}
+      initialParams={{
+        alias: TEXTS.EDUCATION[7].id,
+        parentNavigator: "LessonsStack"
+      }}
+    />
   </Stack.Navigator>
 );

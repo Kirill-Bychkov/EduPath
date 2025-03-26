@@ -16,6 +16,18 @@ const Index = ({ route, navigation }) => {
     switch (currentRoute) {
       case "VariablesAndConstants":
         return <Lessons.VariablesAndConstants />;
+      case "DataTypes":
+          return <Lessons.DataTypes />;
+      case "ArithmeticOperators":
+          return <Lessons.ArithmeticOperators />;
+      case "ComparisonOperators":
+          return <Lessons.ComparisonOperators />;
+      case "LogicalOperators":
+          return <Lessons.LogicalOperators />;
+      case "TernaryOperator":
+          return <Lessons.TernaryOperator />;
+      case "ConditionalOperators":
+          return <Lessons.ConditionalOperators />;
       default:
         return (
           <ScrollView
