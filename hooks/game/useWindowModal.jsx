@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { IMAGES } from "../../constants";
+import { txtGame } from "../../config";
 
 export const useWindowModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState({ title: "", description: "" });
+  const [currentLevel, setCurrentLevel] = useState({ id: "", title: "", description: "" });
 
   const openWindowModal = (id) => {
-    setCurrentLevel(IMAGES.TEXT_LEVELS[id]);
+    setCurrentLevel(txtGame.window_modal[id]);
     setModalVisible(true);
   };
 

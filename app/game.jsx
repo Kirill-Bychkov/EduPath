@@ -5,15 +5,16 @@ import WindowModal from "../components/game/windowModal";
 import { useGame } from "../hooks/game/useGame";
 import { useGoWindow } from "../hooks/game/useGoWindow";
 import { useWindowModal } from "../hooks/game/useWindowModal";
-import { COLORS, HEIGHT_STATUS_BAR } from "../constants";
+import { useBackNavigation } from "../hooks/useBackNavigation";
+import { COLORS } from "../constants";
 import { WindowHeight } from "../utils/scaleTools";
-import { goWindowWithCloseModal } from "../utils/game/goWindowWithCloseModal";
 import { dmsGame, imgGame } from "../config";
 
-const Game = () => {
+const Game = ({ navigation }) => {
   const { scrollViewRef, handleScroll } = useGame();
 
-  const goWindow = useGoWindow();
+  const { goWindow, goBack } = useGoWindow(navigation);
+  useBackNavigation(() => goBack());
   
   const {
     modalVisible,
@@ -21,14 +22,13 @@ const Game = () => {
     openWindowModal,
     closeWindowModal
   } = useWindowModal();
-  const goWindowWithClose = goWindowWithCloseModal(goWindow, closeWindowModal);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ position: "relative" }}>
         <ButtonCustom
           item={imgGame.buttons.b_back_training}
-          action={() => goWindow("/")}
+          action={() => goBack()}
         />
       </View>
       
@@ -57,12 +57,15 @@ const Game = () => {
       
       <WindowModal
         visible={modalVisible}
-        height={dmsGame.modal_level.maxHeight}
+        height={dmsGame.window_modal.maxHeight}
         title={currentLevel.title}
         description={currentLevel.description}
         onClose={closeWindowModal}
         showStartButton={true}
-        onStart={() => goWindowWithClose("/levelGame")}
+        onStart={() => {
+          closeWindowModal();
+          goWindow("LevelGame", { id: currentLevel.id });
+        }}
       />
     </SafeAreaView>
   );
@@ -71,8 +74,7 @@ const Game = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.GAME.menu.background,
-    paddingTop: HEIGHT_STATUS_BAR
+    backgroundColor: COLORS.GAME.menu.background
   },
   scrollContent: {
     flex: 1

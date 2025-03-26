@@ -2,7 +2,7 @@ import { useState, useImperativeHandle } from "react";
 import { executeUserCode } from "../utils/interpreter/executeUserCode";
 import { Readline, Writeline } from "../libraries";
 
-export function useInterpreter(ref) {
+export const useInterpreter = (ref) => {
   const [userCode, setUserCode] = useState("");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState({ text: "", type: "default" });
@@ -44,4 +44,4 @@ export function useInterpreter(ref) {
     output,
     setOutput
   };
-}
+};

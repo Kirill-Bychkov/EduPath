@@ -8,7 +8,7 @@ export default function VariablesAndConstants() {
 
   const [currentBlock, setCurrentBlock] = useState('theory');
 
-  const { dark, colors } = useTheme();
+  const { colors } = useTheme();
 
   const renderBlock = () => {
     switch (currentBlock) {

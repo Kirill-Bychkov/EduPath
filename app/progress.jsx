@@ -15,8 +15,6 @@ const Progress = () => {
       <Text style={[styles.headersTextStyle, { color: colors.text }]}>Прогресс: 0%</Text>
       
       <View style={styles.achievementsContainer}>
-        <Text style={[styles.achievementText, { color: colors.text }]}>Достижения</Text>
-        
         <View style={styles.achievementItem}>
           <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
             <Image source={icon.achievement} style={styles.icon} />
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 40,
+    paddingTop: 25,
   },
   headersTextStyle: {
     fontFamily: 'Rubik-Bold',
@@ -63,11 +61,6 @@ const styles = StyleSheet.create({
   },
   achievementsContainer: {
     marginTop: 10,
-  },
-  achievementText: {
-    fontFamily: 'Rubik-Bold',
-    fontSize: 20,
-    marginBottom: 15,
   },
   achievementItem: {
     flexDirection: 'row',

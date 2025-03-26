@@ -1,57 +1,40 @@
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React from "react";
 import { IMAGES } from "../constants";
-import { useTheme, useLoading } from "../contexts";
-
+import { useTheme } from "../contexts";
+import { useGoWindow } from "../hooks/game/useGoWindow";
 
 const TabBar = ({ state, descriptors, navigation }) => {
     const { colors } = useTheme();
-    const { showLoading, hideLoading } = useLoading();
+    const { goWindow } = useGoWindow(navigation);
 
     const icon = {
-        index: IMAGES.EDUCATION.tasks,
-        game: IMAGES.EDUCATION.game,
-        progress: IMAGES.EDUCATION.progress,
-        settings: IMAGES.EDUCATION.settings,
+        Index: IMAGES.EDUCATION.index,
+        Game: IMAGES.EDUCATION.game,
+        Progress: IMAGES.EDUCATION.progress,
+        Settings: IMAGES.EDUCATION.settings,
     }
 
-    if (["game", "levelGame"].includes(state.routes[state.index].name)) {
+    if (state.routes[state.index].name === "Game") {
         return null;
     }
-
-    const ShowAndHideLoading = async (route) => {
-        showLoading();
-        await new Promise(resolve => setTimeout(resolve, 1750));
-        navigation.navigate(route.name, route.params);
-        await new Promise(resolve => setTimeout(resolve, 1750));
-        hideLoading();
-    };
 
     return (
         <View style={[styles.tabbar, { backgroundColor: colors.bar_background }]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
-                const label =
-                    options.tabBarLabel !== undefined
-                        ? options.tabBarLabel
-                        : options.title !== undefined
-                            ? options.title
-                            : route.name;
-
-                if (["_sitemap", "+not-found", "levelGame"].includes(route.name))
-                    return null
 
                 const isFocused = state.index === index;
 
-                const onPress = async () => {
+                const onPress = () => {
                     const event = navigation.emit({
                         type: "tabPress",
                         target: route.key,
                         canPreventDefault: true,
                     });
 
-                    if (route.name === "game") {
-                        await ShowAndHideLoading(route);
+                    if (route.name === "Game") {
+                        goWindow(route.name, route.params);
                     }
                     else {
                         if (!isFocused && !event.defaultPrevented) {
@@ -82,7 +65,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
                             source={icon[route.name]}
                             style={{ width: 36, height: 36, tintColor: isFocused ? colors.primary : colors.not_active }}
                         />
-
                     </TouchableOpacity>
                 );
             })}
@@ -99,10 +81,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "white",
         paddingVertical: 14,
         borderCurve: "continuous",
-        shadowColor: "black",
         shadowOffset: { width: 0, height: 10 },
         shadowRadius: 10,
         shadowOpacity: 0.1

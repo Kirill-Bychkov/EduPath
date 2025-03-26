@@ -1,19 +1,28 @@
 import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
-import ButtonCustom from "../components/game/buttonCustom";
-import Interpreter from "../components/interpreter";
-import { COLORS, HEIGHT_STATUS_BAR } from "../constants";
-import { useLevelGame } from "../hooks/game/useLevelGame";
-import { useGoWindow } from "../hooks/game/useGoWindow";
-import { lightColors, imgGame, dmsGame } from "../config";
+import ButtonCustom from "./buttonCustom";
+import Interpreter from "../interpreter";
+import BottomSheetLevel from "./bottomSheetLevel";
+import { COLORS } from "../../constants";
+import { useLevelGame } from "../../hooks/game/useLevelGame";
+import { useGoWindow } from "../../hooks/game/useGoWindow";
+import { useBackNavigation } from "../../hooks/useBackNavigation";
+import { lightColors, imgGame, dmsGame, txtGame } from "../../config";
 
-const LevelGame = () => {
+const LevelGame = ({ route, navigation }) => {
+  const { id } = route.params;
+  const text = txtGame.bottomsheet[id];
+
+  const { goBack } = useGoWindow(navigation);
+  useBackNavigation(() => goBack());
+
   const {
     scrollViewRef,
     handleScroll,
     interpreterRef,
-    runCode
+    runCode,
+    bottomSheetRef,
+    openBottomSheet
   } = useLevelGame();
-  const goWindow = useGoWindow();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,35 +35,38 @@ const LevelGame = () => {
       >
         <Interpreter
           ref={interpreterRef}
-          style={styles.interpreter}
+          props={styles.interpreter}
         />
 
         <View style={styles.buttonsContainer}>
           <View style={styles.leftButtons}>
             <View style={styles.buttonExit}>
               <ButtonCustom
-                key={"b_exit"}
                 item={imgGame.buttons.b_exit}
-                action={() => goWindow("/game")}
+                action={() => goBack()}
               />
             </View>
             <View style={styles.buttonTask}>
               <ButtonCustom
-                key={"b_task"}
                 item={imgGame.buttons.b_task}
-                action={() => console.log("task")}
+                action={openBottomSheet}
               />
             </View>
           </View>
+
           <View style={styles.rightButton}>
             <ButtonCustom
-              key={"b_run"}
               item={imgGame.buttons.b_run}
               action={runCode}
             />
           </View>
         </View>
       </ScrollView>
+
+      <BottomSheetLevel
+        ref={bottomSheetRef}
+        props={text}
+      />
     </SafeAreaView>
   );
 };
@@ -62,8 +74,7 @@ const LevelGame = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.GAME.menu.background,
-    paddingTop: HEIGHT_STATUS_BAR
+    backgroundColor: COLORS.GAME.menu.background
   },
   scrollContent: {
     flex: 1

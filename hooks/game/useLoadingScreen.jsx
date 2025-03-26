@@ -1,28 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { fadeIn, fadeOut } from "../../utils/game/loadingAnimations";
-import { setStatusBarBackgroundColor, setStatusBarStyle } from "expo-status-bar";
 
-export const useLoadingScreen = (visible, duration = 500) => {
+export const useLoadingScreen = (visible) => {
     const opacity = useRef(new Animated.Value(visible ? 1 : 0)).current;
     const [isRendering, setIsRendering] = useState(true);
     const [showGif, setShowGif] = useState(false);
 
     useEffect(() => {
         if (visible) {
-            setStatusBarBackgroundColor("black", true);
-            setStatusBarStyle("light", true);
             setIsRendering(true);
 
-            fadeIn(opacity, duration).start();
+            fadeIn(opacity).start();
 
-            const gifTimeout = setTimeout(() => setShowGif(true), 350);
+            const gifTimeout = setTimeout(() => setShowGif(true), 400);
             return () => clearTimeout(gifTimeout);
         } else {
-            fadeOut(opacity, duration).start(() => setIsRendering(false));
+            fadeOut(opacity).start(() => setIsRendering(false));
             setShowGif(false);
         }
-    }, [visible, duration, opacity]);
+    }, [visible, opacity]);
 
     return { opacity, isRendering, showGif };
 };

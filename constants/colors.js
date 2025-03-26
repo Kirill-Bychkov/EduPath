@@ -25,10 +25,13 @@ const GAME = {
     menu: {
         background: "#49A175"
     },
-    modal_level: {
+    window_modal: {
         back_background: "#00000040",
         background: "#EED755",
         text: "#000000"
+    },
+    bottomsheet: {
+        background: "#EFEFEF"
     }
 };
 
