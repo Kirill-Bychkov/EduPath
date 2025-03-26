@@ -3,6 +3,7 @@ import { useRef, useCallback } from "react";
 export const useLevelGame = () => {
   const scrollViewRef = useRef(null);
   const interpreterRef = useRef(null);
+  const bottomSheetRef = useRef(null);
 
   const handleScroll = useCallback((event) => {
     const scrollY = event.nativeEvent.contentOffset.y;
@@ -13,9 +14,20 @@ export const useLevelGame = () => {
 
   const runCode = () => {
     if (interpreterRef.current) {
-      interpreterRef.current.runUserCode();
+      interpreterRef.current?.runUserCode();
     }
   };
 
-  return { scrollViewRef, handleScroll, interpreterRef, runCode };
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.expand();
+  };
+
+  return {
+    scrollViewRef,
+    handleScroll,
+    interpreterRef,
+    runCode,
+    bottomSheetRef,
+    openBottomSheet
+  };
 };

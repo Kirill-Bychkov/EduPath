@@ -47,16 +47,16 @@ const WindowModal = ({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: COLORS.GAME.modal_level.back_background,
+    backgroundColor: COLORS.GAME.window_modal.back_background,
     justifyContent: "center",
     alignItems: "center"
   },
   modal: {
-    backgroundColor: COLORS.GAME.modal_level.background,
+    backgroundColor: COLORS.GAME.window_modal.background,
     alignItems: "center",
     position: "relative",
-    width: dmsGame.modal_level.width,
-    borderRadius: dmsGame.modal_level.borderRadius
+    width: dmsGame.window_modal.width,
+    borderRadius: dmsGame.window_modal.borderRadius
   },
   content: {
     flex: 1,
@@ -67,26 +67,26 @@ const styles = StyleSheet.create({
   closeButtonContainer: {
     position: "absolute",
     zIndex: 1,
-    top: dmsGame.modal_level.topCloseButton,
-    left: dmsGame.modal_level.leftCloseButton
+    top: dmsGame.window_modal.topCloseButton,
+    left: dmsGame.window_modal.leftCloseButton
   },
   startButtonContainer: {
     alignItems: "center",
-    marginBottom: dmsGame.modal_level.marginBottomStartButton
+    marginBottom: dmsGame.window_modal.marginBottomStartButton
   },
   title: {
     fontWeight: "bold",
-    color: COLORS.GAME.modal_level.text,
+    color: COLORS.GAME.window_modal.text,
     textAlign: "center",
-    fontSize: dmsGame.modal_level.fontSizeTitle,
-    lineHeight: dmsGame.modal_level.lineHeightTitle,
-    marginTop: dmsGame.modal_level.marginTopTitle
+    fontSize: dmsGame.window_modal.fontSizeTitle,
+    lineHeight: dmsGame.window_modal.lineHeightTitle,
+    marginTop: dmsGame.window_modal.marginTopTitle
   },
   description: {
-    color: COLORS.GAME.modal_level.text,
+    color: COLORS.GAME.window_modal.text,
     textAlign: "center",
-    fontSize: dmsGame.modal_level.fontSizeDescription,
-    marginBottom: dmsGame.modal_level.marginBottomDescription
+    fontSize: dmsGame.window_modal.fontSizeDescription,
+    marginBottom: dmsGame.window_modal.marginBottomDescription
   }
 });
 

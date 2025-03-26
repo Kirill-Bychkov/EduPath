@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { IMAGES } from '../constants';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
+import { IMAGES } from "../../constants";
 
-export default function VariablesAndConstants({ setCurrentScreen }) {
-  const [currentBlock, setCurrentBlock] = useState('theory'); // Состояние для текущего блока
+const VariablesAndConstants = () => {
+  const [currentBlock, setCurrentBlock] = useState("theory"); // Состояние для текущего блока
 
   const icon = {
     theory: IMAGES.EDUCATION.theory,
@@ -12,7 +12,7 @@ export default function VariablesAndConstants({ setCurrentScreen }) {
 
   const renderBlock = () => {
     switch (currentBlock) {
-      case 'theory':
+      case "theory":
         return (
           <ScrollView style={styles.blockContainer}>
             <Text style={styles.title}>Теория: Переменные и константы</Text>
@@ -26,7 +26,7 @@ export default function VariablesAndConstants({ setCurrentScreen }) {
             </Text>
           </ScrollView>
         );
-      case 'practice':
+      case "practice":
         return (
           <View style={styles.blockContainer}>
             <Text style={styles.title}>Практика: Выберите правильный ответ</Text>
@@ -44,7 +44,7 @@ export default function VariablesAndConstants({ setCurrentScreen }) {
             </TouchableOpacity>
           </View>
         );
-      case 'quiz':
+      case "quiz":
         return (
           <View style={styles.blockContainer}>
             <Text style={styles.title}>Тест: Вопрос с несколькими вариантами</Text>
@@ -71,21 +71,21 @@ export default function VariablesAndConstants({ setCurrentScreen }) {
     <View style={styles.container}>
 
       <View style={styles.titleBar}>
-        <TouchableOpacity onPress={() => setCurrentBlock('theory')}>
+        <TouchableOpacity onPress={() => setCurrentBlock("theory")}>
           <Image
             source={icon.theory}
             style={styles.icon}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setCurrentBlock('practice')}>
+        <TouchableOpacity onPress={() => setCurrentBlock("practice")}>
           <Image
             source={icon.question}
             style={styles.icon}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setCurrentBlock('quiz')}>
+        <TouchableOpacity onPress={() => setCurrentBlock("quiz")}>
           <Image
             source={icon.question}
             style={styles.icon}
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   titleBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginBottom: 12,
   },
   blockContainer: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   text: {
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   code: {
-    fontFamily: 'monospace',
-    backgroundColor: '#f0f0f0',
+    fontFamily: "monospace",
+    backgroundColor: "#f0f0f0",
     padding: 5,
     borderRadius: 5,
   },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   option: {
     padding: 15,
     marginVertical: 5,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: "#f8f8f8",
     borderRadius: 10,
   },
   optionText: {
@@ -148,12 +148,14 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#007BFF',
+    backgroundColor: "#007BFF",
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   backButtonText: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 16,
   },
 });
+
+export default VariablesAndConstants;

@@ -4,7 +4,7 @@ const EDUCATION = {
   theory: require('../assets/icons/theory.png'),
   question: require('../assets/icons/question.png'),
   back: require('../assets/icons/back.png'),
-  tasks: require("../assets/icons/tasks.png"),
+  index: require("../assets/icons/index.png"),
   game: require("../assets/icons/game.png"),
   progress: require("../assets/icons/progress.png"),
   settings: require("../assets/icons/settings.png"),
@@ -17,7 +17,7 @@ const EDUCATION = {
 
 const GAME = {
   level_buttons: {
-    level_1: {
+    1: {
       source: require("../assets/icons/game/level_1/level_1.png"),
       top: 1114,
       left: 133,
@@ -26,7 +26,7 @@ const GAME = {
       position: "absolute",
       zIndex: 1
     },
-    level_2: {
+    2: {
       source: require("../assets/icons/game/level_2/level_2.png"),
       top: 912.97,
       left: 72.2,
@@ -35,7 +35,7 @@ const GAME = {
       position: "absolute",
       zIndex: 1
     },
-    level_3: {
+    3: {
       source: require("../assets/icons/game/level_3/level_3.png"),
       top: 728,
       left: 258,
@@ -44,7 +44,7 @@ const GAME = {
       position: "absolute",
       zIndex: 1
     },
-    level_4: {
+    4: {
       source: require("../assets/icons/game/level_4/level_4.png"),
       top: 482,
       left: 101,
@@ -53,7 +53,7 @@ const GAME = {
       position: "absolute",
       zIndex: 1
     },
-    level_5: {
+    5: {
       source: require("../assets/icons/game/level_5/level_5.png"),
       top: 208,
       left: 191,
@@ -256,39 +256,5 @@ const GAME = {
   }
 };
 
-const TEXT_LEVELS = {
-  level_1: {
-    title: `Уровень 1
-Обход препятствий`,
-    description: `Использование циклов и условий
-для обхода камней.`
-  },
-  level_2: {
-    title: `Уровень 2
-Тайные клетки`,
-    description: `Работа с неопределённостью,
-циклы и условия.`
-  },
-  level_3: {
-    title: `Уровень 3
-Портал спасения`,
-    description: `Использование портала
-хотя бы один раз
-для сбора яблок.`
-  },
-  level_4: {
-    title: `Уровень 4
-Секретный сбор`,
-    description: `Применение декораторов для автоматического сбора яблок
-при проверке клетки.`
-  },
-  level_5: {
-    title: `Уровень 5
-Лабиринт решений`,
-    description: `Рекурсия и поиск пути
-через сложный лабиринт.`
-  }
-};
-
-const IMAGES = { EDUCATION, GAME, TEXT_LEVELS };
+const IMAGES = { EDUCATION, GAME };
 export default IMAGES;

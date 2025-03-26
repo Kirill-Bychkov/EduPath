@@ -1,18 +1,24 @@
-import { useRouter } from "expo-router";
 import { useLoading } from "../../contexts";
 
-export const useGoWindow = () => {
-  const router = useRouter();
+export const useGoWindow = (navigation) => {
   const { showLoading, hideLoading } = useLoading();
 
-  const goWindow = (path) => {
+  const executeWithLoading = (action) => {
     showLoading();
 
     setTimeout(() => {
-      router.push(path);
+      action();
       hideLoading();
     }, 3500);
   };
 
-  return goWindow;
+  const goWindow = (path, params = {}) => {
+    executeWithLoading(() => navigation.navigate(path, params));
+  };
+
+  const goBack = () => {
+    executeWithLoading(() => navigation.goBack());
+  };
+
+  return { goWindow, goBack };
 };

@@ -3,7 +3,7 @@ const GAME = {
         maxCoordY: 1344,
         heightBottomObj: 84
     },
-    modal_level: {
+    window_modal: {
         width: 340,
         minHeight: 140,
         maxHeight: 245,
@@ -22,6 +22,14 @@ const GAME = {
         paddingVerticalButtonsContainer: 15,
         paddingEndButtonExit: 5,
         paddingStartButtonTask: 5
+    },
+    bottomsheet: {
+        borderRadius: 20,
+        paddingScrollContent: 10,
+        fontSizeTitle: 24,
+        fontSizeMain: 18,
+        lineHeightTitle: 40,
+        marginText: 12
     }
 };
 

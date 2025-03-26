@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { useInterpreter } from "../hooks/useInterpreter";
 import { dmsInterpreter } from "../config";
 
-const Interpreter = ({ style }, ref) => {
+const Interpreter = ({ props }, ref) => {
   const { userCode, setUserCode, input, setInput, output, setOutput } = useInterpreter(ref);
 
   return (
@@ -13,7 +13,7 @@ const Interpreter = ({ style }, ref) => {
         <CodeEditor
           style={styles.codeEditor}
           language="javascript"
-          syntaxStyle={style.themeCodeEditor}
+          syntaxStyle={props.themeCodeEditor}
           showLineNumbers
           autoFocus={false}
           initialValue={`// Здесь пишите код\n`}
@@ -25,7 +25,7 @@ const Interpreter = ({ style }, ref) => {
       <View style={styles.container}>
         <View style={styles.ioContainer}>
           <View style={[styles.emojisContainer, {
-            backgroundColor: style.backgroundColorIoText
+            backgroundColor: props.backgroundColorIoText
           }]}>
             <Text style={styles.emoji}>✏️</Text>
           </View>
@@ -33,12 +33,12 @@ const Interpreter = ({ style }, ref) => {
           <TextInput
             style={[styles.ioText, {
               height: dmsInterpreter.styleStatic.minHeightIoText,
-              color: style.colorIoText.default,
-              borderColor: style.backgroundColorIoText,
-              backgroundColor: style.backgroundColorIoText
+              color: props.colorIoText.default,
+              borderColor: props.backgroundColorIoText,
+              backgroundColor: props.backgroundColorIoText
             }]}
             placeholder="Входные данные"
-            placeholderTextColor={style.colorPlaceholder}
+            placeholderTextColor={props.colorPlaceholder}
             multiline={false}
             value={input}
             onChangeText={setInput}
@@ -47,7 +47,7 @@ const Interpreter = ({ style }, ref) => {
 
         <View style={styles.ioContainer}>
           <View style={[styles.emojisContainer, {
-            backgroundColor: style.backgroundColorIoText
+            backgroundColor: props.backgroundColorIoText
           }]}>
             <Text style={styles.emoji}>🖨️</Text>
           </View>
@@ -56,15 +56,15 @@ const Interpreter = ({ style }, ref) => {
             style={[styles.ioText, {
               minHeight: dmsInterpreter.styleStatic.minHeightIoText,
               color: output.type === "error"
-                ? style.colorIoText.error
+                ? props.colorIoText.error
                 : output.type === "success"
-                  ? style.colorIoText.success
-                  : style.colorIoText.default,
-              borderColor: style.backgroundColorIoText,
-              backgroundColor: style.backgroundColorIoText
+                  ? props.colorIoText.success
+                  : props.colorIoText.default,
+              borderColor: props.backgroundColorIoText,
+              backgroundColor: props.backgroundColorIoText
             }]}
             placeholder="Результат выполнения кода"
-            placeholderTextColor={style.colorPlaceholder}
+            placeholderTextColor={props.colorPlaceholder}
             multiline
             readOnly
             value={output.text}

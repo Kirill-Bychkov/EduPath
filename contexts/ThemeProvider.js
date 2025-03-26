@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext({
     dark: false,
     colors: lightColors,
-    setScheme: () => { }
+    setScheme: () => {}
 });
 
 export const ThemeProvider = (props) => {
