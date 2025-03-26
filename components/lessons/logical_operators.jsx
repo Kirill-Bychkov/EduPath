@@ -21,6 +21,7 @@ export default function LogicalOperators() {
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Основные операторы:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               // Логическое И (AND) - возвращает true, если оба операнда true{"\n"}
               true && true   // → true{"\n"}
               true && false  // → false{"\n\n"}
@@ -32,10 +33,12 @@ export default function LogicalOperators() {
               // Логическое НЕ (NOT) - инвертирует значение{"\n"}
               !true          // → false{"\n"}
               !false         // → true
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Особенности работы:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               // Возвращают значение одного из операндов{"\n"}
               'text' && 42   // → 42 (последнее истинное значение){"\n"}
               0 || 'default' // → 'default' (первое истинное значение){"\n\n"}
@@ -43,10 +46,12 @@ export default function LogicalOperators() {
               // Приоритет операторов: ! {">"} && {">"} ||{"\n"}
               true || false && false // → true{"\n"}
               (true || false) && false // → false
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Практическое применение:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               // Проверка нескольких условий{"\n"}
               if (age {">"} 18 && age {"<"} 65) {"{"}{"\n"}
               {"  "}console.log('Доступ разрешен');{"\n"}
@@ -59,6 +64,7 @@ export default function LogicalOperators() {
               if (!isLoggedIn) {"{"}{"\n"}
               {"  "}console.log('Пожалуйста, войдите');{"\n"}
               {"}"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Рекомендации:</Text>

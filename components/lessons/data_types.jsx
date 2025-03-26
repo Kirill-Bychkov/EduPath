@@ -22,25 +22,25 @@ export default function DataTypes() {
                             {"\n\n"}
                             <Text style={[styles.subtitle, { color: colors.text }]}>1. Примитивные типы:</Text>
                             {"\n"}
-                            - <Text style={styles.code}>number</Text>: целые и дробные числа{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>number</Text>: целые и дробные числа{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>let age = 25;</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>string</Text>: строки{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>string</Text>: строки{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>let name = "Иван";</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>boolean</Text>: true/false{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>boolean</Text>: true/false{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>let isActive = true;</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>null</Text>: явное отсутствие значения{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>null</Text>: явное отсутствие значения{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>let data = null;</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>undefined</Text>: значение не определено{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>undefined</Text>: значение не определено{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>let value; // undefined</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>symbol</Text>: уникальные идентификаторы{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>symbol</Text>: уникальные идентификаторы{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>const id = Symbol("id");</Text>
                             {"\n\n"}
-                            - <Text style={styles.code}>bigint</Text>: для очень больших чисел{"\n"}
+                            - <Text style={[styles.code,{ backgroundColor: colors.background }]}>bigint</Text>: для очень больших чисел{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>const bigNum = 12345678901234567890n;</Text>
                             {"\n\n"}
                             <Text style={[styles.subtitle, { color: colors.text }]}>2. Объекты (непримитивный тип):</Text>
@@ -53,7 +53,7 @@ export default function DataTypes() {
                             </Text>
                             {"\n\n"}
                             <Text style={[styles.subtitle, { color: colors.text }]}>Проверка типов:</Text>
-                            Используйте оператор <Text style={styles.code}>typeof</Text>:{"\n"}
+                            Используйте оператор <Text style={[styles.code,{ backgroundColor: colors.background }]}>typeof</Text>:{"\n"}
                             <Text style={[styles.code, { backgroundColor: colors.background }]}>
                                 console.log(typeof 42); // "number"{"\n"}
                                 console.log(typeof "text"); // "string"{"\n"}

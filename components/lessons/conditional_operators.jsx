@@ -21,6 +21,7 @@ export default function ConditionalOperators() {
 
             <Text style={[styles.subtitle, { color: colors.text }]}>1. Оператор if-else:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               if (условие) {"{"}{"\n"}
               {"  "}// выполняется, если условие истинно{"\n"}
               {"}"} else {"{"}{"\n"}
@@ -33,10 +34,12 @@ export default function ConditionalOperators() {
               {"}"} else {"{"}{"\n"}
               {"  "}console.log('Доступ запрещен');{"\n"}
               {"}"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>2. else-if для множества условий:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               let score = 85;{"\n"}
               if (score {">"}= 90) {"{"}{"\n"}
               {"  "}grade = 'A';{"\n"}
@@ -47,10 +50,12 @@ export default function ConditionalOperators() {
               {"}"} else {"{"}{"\n"}
               {"  "}grade = 'D';{"\n"}
               {"}"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>3. Оператор switch-case:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               let day = 3;{"\n"}
               let dayName;{"\n\n"}
               
@@ -65,10 +70,12 @@ export default function ConditionalOperators() {
               {"  "}default:{"\n"}
               {"    "}dayName = 'Неизвестный день';{"\n"}
               {"}"}{"\n\n\n"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>4. Тернарный оператор:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
               // Простое условие в одну строку{"\n"}
               let status = (age {">"}= 18) ? 'взрослый' : 'ребенок';{"\n\n"}
               
@@ -79,6 +86,7 @@ export default function ConditionalOperators() {
               {"}"} else {"{"}{"\n"}
               {"  "}status = 'ребенок';{"\n"}
               {"}"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Рекомендации:</Text>

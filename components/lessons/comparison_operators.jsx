@@ -21,36 +21,44 @@ export default function ComparisonOperators() {
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Основные операторы:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              5 == 5    // Равно → true{"\n"}
-              5 != 3    // Не равно → true{"\n"}
-              5 {">"} 3     // Больше → true{"\n"}
-              5 {"<"} 3     // Меньше → false{"\n"}
-              5 {">="} 5    // Больше или равно → true{"\n"}
-              5 {"<="} 3    // Меньше или равно → false{"\n\n"}
+              <Text style={[{ color: colors.text }]}>
+                5 == 5    // Равно → true{"\n"}
+                5 != 3    // Не равно → true{"\n"}
+                5 {">"} 3     // Больше → true{"\n"}
+                5 {"<"} 3     // Меньше → false{"\n"}
+                5 {">="} 5    // Больше или равно → true{"\n"}
+                5 {"<="} 3    // Меньше или равно → false{"\n\n"}
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Строгое сравнение:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              '5' == 5   // true (нестрогое сравнение){"\n"}
-              '5' === 5  // false (строгое сравнение, разные типы){"\n"}
-              '5' !== 5  // true (строгое "не равно")
+              <Text style={[{ color: colors.text }]}>
+                '5' == 5   // true (нестрогое сравнение){"\n"}
+                '5' === 5  // false (строгое сравнение, разные типы){"\n"}
+                '5' !== 5  // true (строгое "не равно")
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Особые случаи:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              null == undefined  // true{"\n"}
-              null === undefined // false{"\n"}
-              NaN == NaN         // false (особенность NaN){"\n"}
-              isNaN(NaN)        // true (правильная проверка)
+              <Text style={[{ color: colors.text }]}>
+                null == undefined  // true{"\n"}
+                null === undefined // false{"\n"}
+                NaN == NaN         // false (особенность NaN){"\n"}
+                isNaN(NaN)        // true (правильная проверка)
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Сравнение объектов:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              let a = {"{"}value: 5{"}"};{"\n"}
-              let b = {"{"}value: 5{"}"};{"\n"}
-              a == b  // false (разные объекты){"\n"}
-              a === b // false{"\n"}
-              a.value === b.value // true (сравнение значений)
+              <Text style={[{ color: colors.text }]}>
+                let a = {"{"}value: 5{"}"};{"\n"}
+                let b = {"{"}value: 5{"}"};{"\n"}
+                a == b  // false (разные объекты){"\n"}
+                a === b // false{"\n"}
+                a.value === b.value // true (сравнение значений)
+              </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Рекомендации:</Text>
