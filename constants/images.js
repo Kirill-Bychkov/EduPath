@@ -250,8 +250,8 @@ const GAME = {
   animations: {
     anim_hedgehog: {
       source: require("../assets/animations/game/anim_hedgehog/anim_hedgehog.gif"),
-      width: 108,
-      height: 108
+      width: 112,
+      height: 112
     }
   }
 };

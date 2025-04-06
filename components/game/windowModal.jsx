@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, View, Text, Modal } from "react-native";
 import { COLORS } from "../../constants";
 import ButtonCustom from "./buttonCustom";

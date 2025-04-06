@@ -23,15 +23,15 @@ const GAME = {
         background: "#000000"
     },
     menu: {
-        background: "#49A175"
+        background: "#49a175"
     },
     window_modal: {
         back_background: "#00000040",
-        background: "#EED755",
+        background: "#eed755",
         text: "#000000"
     },
     bottomsheet: {
-        background: "#EFEFEF"
+        background: "#fafafa"
     }
 };
 

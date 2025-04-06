@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
-import { useTheme } from "../contexts";
+import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
+import { withDynamicBars } from "../hooks/withDynamicBars";
 
 const Progress = () => {
   const { colors } = useTheme();
@@ -95,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Progress;
+export default withDynamicBars(Progress);

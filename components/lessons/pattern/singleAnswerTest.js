@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useTheme } from "../../../contexts";
+import { useTheme } from "../../../contexts/ThemeProvider";
 
 const SingleAnswerTest = ({ question, options, correctAnswer }) => {
     const { dark, colors } = useTheme();

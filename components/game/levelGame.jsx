@@ -13,7 +13,7 @@ const LevelGame = ({ route, navigation }) => {
   const text = txtGame.bottomsheet[id];
 
   const { goBack } = useGoWindow(navigation);
-  useBackNavigation(() => goBack());
+  useBackNavigation(goBack);
 
   const {
     scrollViewRef,

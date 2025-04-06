@@ -49,7 +49,8 @@ const INTERPRETER = {
         widthEmojisContainer: 28,
         marginRightEmojisContainer: 4,
         minHeightIoText: 45,
-        paddingLeftIoText: 10
+        paddingLeftIoText: 10,
+        paddingVerticalIoText: 8
     },
     tablet: {
         fontSizeCodeEditor: 30,
@@ -60,7 +61,8 @@ const INTERPRETER = {
         widthEmojisContainer: 47,
         marginRightEmojisContainer: 7,
         minHeightIoText: 75,
-        paddingLeftIoText: 17
+        paddingLeftIoText: 17,
+        paddingVerticalIoText: 8
     }
 };
 

@@ -1,4 +1,4 @@
-import { useLoading } from "../../contexts";
+import { useLoading } from "../../contexts/LoadingProvider";
 
 export const useGoWindow = (navigation) => {
   const { showLoading, hideLoading } = useLoading();
@@ -9,7 +9,7 @@ export const useGoWindow = (navigation) => {
     setTimeout(() => {
       action();
       hideLoading();
-    }, 3500);
+    }, 3000);
   };
 
   const goWindow = (path, params = {}) => {
