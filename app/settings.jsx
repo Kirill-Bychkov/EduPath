@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import { useTheme } from "../contexts";
+import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { withDynamicBars } from "../hooks/withDynamicBars";
 
 const Settings = () => {
   const icon = {
@@ -80,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Settings;
+export default withDynamicBars(Settings);

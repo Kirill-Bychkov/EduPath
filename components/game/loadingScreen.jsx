@@ -1,9 +1,8 @@
-import React from "react";
 import { StyleSheet, Animated } from "react-native";
-import { useLoadingScreen } from "../../hooks/game/useLoadingScreen";
 import { Image } from "expo-image";
-import { COLORS } from "../../constants";
+import { useLoadingScreen } from "../../hooks/game/useLoadingScreen";
 import { imgGame } from "../../config"
+import { COLORS } from "../../constants";
 
 const LoadingScreen = ({ visible }) => {
     const { opacity, isRendering, showGif } = useLoadingScreen(visible);
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.GAME.animation.background,
+        backgroundColor: COLORS.GAME.animation.background
     },
     image: {
         width: imgGame.animations.anim_hedgehog.width,

@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   ioText: {
     flex: 1,
     paddingLeft: dmsInterpreter.styleStatic.paddingLeftIoText,
+    paddingVertical: dmsInterpreter.styleStatic.paddingVerticalIoText,
     borderRadius: dmsInterpreter.styleDynamic.borderRadius,
     fontSize: dmsInterpreter.styleStatic.fontSizeIoText
   },

@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React from "react";
 import { IMAGES } from "../constants";
-import { useTheme } from "../contexts";
+import { useTheme } from "../contexts/ThemeProvider";
 import { useGoWindow } from "../hooks/game/useGoWindow";
 
 const TabBar = ({ state, descriptors, navigation }) => {

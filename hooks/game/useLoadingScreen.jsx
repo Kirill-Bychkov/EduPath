@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { fadeIn, fadeOut } from "../../utils/game/loadingAnimations";
+import { setStatusBarStyle, setStatusBarBackgroundColor } from "expo-status-bar";
+import * as NavigationBar from "expo-navigation-bar";
+import { COLORS } from "../../constants";
 
 export const useLoadingScreen = (visible) => {
     const opacity = useRef(new Animated.Value(visible ? 1 : 0)).current;
@@ -13,7 +16,12 @@ export const useLoadingScreen = (visible) => {
 
             fadeIn(opacity).start();
 
-            const gifTimeout = setTimeout(() => setShowGif(true), 400);
+            setStatusBarStyle("light", true);
+            setStatusBarBackgroundColor(COLORS.GAME.animation.background, true);
+            NavigationBar.setBackgroundColorAsync(COLORS.GAME.animation.background);
+            NavigationBar.setButtonStyleAsync("light");
+
+            const gifTimeout = setTimeout(() => setShowGif(true), 300);
             return () => clearTimeout(gifTimeout);
         } else {
             fadeOut(opacity).start(() => setIsRendering(false));

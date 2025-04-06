@@ -14,7 +14,7 @@ const Game = ({ navigation }) => {
   const { scrollViewRef, handleScroll } = useGame();
 
   const { goWindow, goBack } = useGoWindow(navigation);
-  useBackNavigation(() => goBack());
+  useBackNavigation(goBack);
   
   const {
     modalVisible,

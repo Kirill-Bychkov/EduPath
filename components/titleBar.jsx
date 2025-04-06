@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { useTheme } from "../contexts";
+import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
 
 const TitleBar = ({ route, navigation }) => {

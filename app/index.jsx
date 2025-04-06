@@ -1,15 +1,12 @@
-import { StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar } from "react-native";
-import { useTheme } from "../contexts";
+import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
+import { useTheme } from "../contexts/ThemeProvider";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
+import { withDynamicBars } from "../hooks/withDynamicBars";
 
 const Index = ({ route, navigation }) => {
-  const { dark, colors } = useTheme();
-
-  const statusBarColor = colors.bar_background;
-  const statusBarTextColor = dark ? "light-content" : "dark-content";
-
+  const { colors } = useTheme();
   const currentRoute = route.name;
 
   const renderScreen = () => {
@@ -54,11 +51,6 @@ const Index = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor={statusBarColor}
-        barStyle={statusBarTextColor}
-        translucent={false}
-      />
       {renderScreen()}
     </SafeAreaView>
   );
@@ -91,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Index;
+export default withDynamicBars(Index);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { useTheme } from "../../contexts";
+import { useTheme } from "../../contexts/ThemeProvider";
 import SingleAnswerTest from './pattern/singleAnswerTest';
 import { styles } from '../../constants/lessonStyles';
 

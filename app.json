@@ -1,15 +1,17 @@
 {
   "expo": {
-    "name": "EduPyth_Learn_and_Have_Fun",
-    "scheme": ["edupyth-learn-and-have-fun"],
-    "slug": "EduPyth_Learn_and_Have_Fun",
+    "name": "EduPath",
+    "scheme": [
+      "edupath-learn-and-have-fun"
+    ],
+    "slug": "EduPath_Learn_and_Have_Fun",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "androidStatusBar": {
@@ -23,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.danil19.EduPath_Learn_and_Have_Fun"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -33,6 +36,15 @@
       "expo-router",
       "expo-font"
     ],
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "owner": "danil19",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9ecb9006-3533-4a5f-916f-3459a8e8cdfe"
+      }
+    }
   }
 }
