@@ -1,16 +1,31 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { txtGame } from "../../config";
+import { getRandomInt } from "../../utils/randomInt";
 
 export const useWindowModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState({ id: "", title: "", description: "" });
+  const [modalContent, setModalContent] = useState({});
 
-  const openWindowModal = (id) => {
-    setCurrentLevel(txtGame.window_modal[id]);
+  const openWindowModal = useCallback((externalKey, internalKey) => {
+    const contents = txtGame.window_modal[externalKey][internalKey];
+
+    setModalContent(() =>
+      Array.isArray(contents)
+        ? contents[getRandomInt(contents.length)]
+        : contents
+    );
     setModalVisible(true);
+  }, []);
+
+  const closeWindowModal = useCallback(() => {
+    setModalVisible(false);
+    setModalContent({});
+  }, []);
+
+  return {
+    modalVisible,
+    modalContent,
+    openWindowModal,
+    closeWindowModal
   };
-
-  const closeWindowModal = () => setModalVisible(false);
-
-  return { modalVisible, currentLevel, openWindowModal, closeWindowModal };
 };

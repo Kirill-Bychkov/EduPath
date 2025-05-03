@@ -19,7 +19,7 @@ const EDUCATION = {
 };
 
 const GAME = {
-    animation: {
+    loadingScreen: {
         background: "#000000"
     },
     menu: {
@@ -32,6 +32,9 @@ const GAME = {
     },
     bottomsheet: {
         background: "#fafafa"
+    },
+    food_backlight_screen: {
+        background: "#00000040"
     }
 };
 

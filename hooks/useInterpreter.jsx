@@ -26,7 +26,7 @@ export const useInterpreter = (ref) => {
       }
     
       if (!logCalled()) {
-        return { text: `The code was executed successfully, but nothing was output.`,
+        return { text: "The code was executed successfully, but nothing was output",
                   type: "success" };
       }
     

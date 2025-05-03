@@ -5,18 +5,16 @@ import { imgGame } from "../../config"
 import { COLORS } from "../../constants";
 
 const LoadingScreen = ({ visible }) => {
-    const { opacity, isRendering, showGif } = useLoadingScreen(visible);
+    const { opacity, isRender } = useLoadingScreen(visible);
 
-    if (!isRendering) return null;
+    if (!isRender) return null;
 
     return (
         <Animated.View style={[styles.animatedView, { opacity }]}>
-            {showGif && (
-                <Image
-                    source={imgGame.animations.anim_hedgehog.source}
-                    style={styles.image}
-                />
-            )}
+            <Image
+                source={imgGame.animations.anim_hedgehog.source}
+                style={styles.image}
+            />
         </Animated.View>
     );
 };
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.GAME.animation.background
+        backgroundColor: COLORS.GAME.loadingScreen.background
     },
     image: {
         width: imgGame.animations.anim_hedgehog.width,

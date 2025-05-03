@@ -9,7 +9,7 @@ export const useGoWindow = (navigation) => {
     setTimeout(() => {
       action();
       hideLoading();
-    }, 3000);
+    }, 2500);
   };
 
   const goWindow = (path, params = {}) => {

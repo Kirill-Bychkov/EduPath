@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StatusBar } from "react-native";
+import { Dimensions } from "react-native";
 
 export const BASE_LAYOUT = {
     width: 412,
@@ -11,8 +11,5 @@ export const CURRENT_LAYOUT = {
 };
 
 export const MIN_WIDTH_TABLET = 768;
-export const HEIGHT_STATUS_BAR = Platform.OS === "android"
-                                    ? StatusBar?.currentHeight || 20
-                                    : 0;
 
 export const P = "\u00A0\u00A0\u00A0";

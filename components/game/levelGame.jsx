@@ -1,12 +1,19 @@
 import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
 import ButtonCustom from "./buttonCustom";
+import ImageCustom from "./imageCustom";
 import Interpreter from "../interpreter";
 import BottomSheetLevel from "./bottomSheetLevel";
+import AnimatedImageCustom from "./animatedImageCustom";
+import WindowModal from "./windowModal";
+import FoodBacklightScreen from "./foodBacklightScreen";
 import { COLORS } from "../../constants";
 import { useLevelGame } from "../../hooks/game/useLevelGame";
 import { useGoWindow } from "../../hooks/game/useGoWindow";
+import { useWindowModal } from "../../hooks/game/useWindowModal";
+import { useBottomSheetLevel } from "../../hooks/game/useBottomSheetLevel";
 import { useBackNavigation } from "../../hooks/useBackNavigation";
-import { lightColors, imgGame, dmsGame, txtGame } from "../../config";
+import { lightColors, imgGame, dmsGame, dmsLevelGrids, txtGame } from "../../config";
+import { getRotateInterpolate } from "../../utils/game/rotateInterpolate";
 
 const LevelGame = ({ route, navigation }) => {
   const { id } = route.params;
@@ -16,13 +23,27 @@ const LevelGame = ({ route, navigation }) => {
   useBackNavigation(goBack);
 
   const {
-    scrollViewRef,
-    handleScroll,
-    interpreterRef,
-    runCode,
+    modalVisible,
+    modalContent,
+    openWindowModal,
+    closeWindowModal
+  } = useWindowModal();
+
+  const {
     bottomSheetRef,
     openBottomSheet
-  } = useLevelGame();
+  } = useBottomSheetLevel();
+  
+  const {
+    scrollViewRef,
+    interpreterRef,
+    handleScroll,
+    runCode,
+    getLevelAnimations,
+    grid,
+    foodBacklightVisible,
+    foodRef
+  } = useLevelGame(dmsLevelGrids[id], openWindowModal);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,6 +54,48 @@ const LevelGame = ({ route, navigation }) => {
         scrollEventThrottle={16}
         onScroll={handleScroll}
       >
+        <View style={styles.playingField}>
+          <ImageCustom
+            key={"playing_field"}
+            item={imgGame.level_images.playing_field}
+          />
+        </View>
+
+        <AnimatedImageCustom
+          key={"hedgehog"}
+          item={{
+            ...imgGame.level_images.hedgehog,
+            transform: [
+              { translateY: getLevelAnimations().hedgehog.top },
+              { translateX: getLevelAnimations().hedgehog.left },
+              { rotate: getRotateInterpolate(
+                getLevelAnimations().hedgehog.rotate
+              ) }
+            ],
+            opacity: getLevelAnimations().hedgehog.opacity,
+          }}
+        />
+
+        {grid.map((row, n) =>
+          row.map((cell, m) =>
+            cell.objs.map((obj, i) => {
+              if (obj === "empty" || obj === "hedgehog") return null;
+
+              const image = {
+                ...imgGame.level_images[obj],
+                transform: [
+                  { translateY: cell.top },
+                  { translateX: cell.left },
+                  { rotate: "0rad" }
+                ],
+                opacity: getLevelAnimations().other[`${obj}Opacities`][cell.id]
+              };
+
+              return <AnimatedImageCustom key={`${n}-${m}-${i}`} item={image} />;
+            })
+          )
+        )}
+
         <Interpreter
           ref={interpreterRef}
           props={styles.interpreter}
@@ -43,7 +106,7 @@ const LevelGame = ({ route, navigation }) => {
             <View style={styles.buttonExit}>
               <ButtonCustom
                 item={imgGame.buttons.b_exit}
-                action={() => goBack()}
+                action={goBack}
               />
             </View>
             <View style={styles.buttonTask}>
@@ -62,10 +125,26 @@ const LevelGame = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
+      
+      {!modalVisible ? (
+        <BottomSheetLevel
+          ref={bottomSheetRef}
+          props={text}
+        />
+      ) : (
+        <WindowModal
+          height={dmsGame.window_modal.minHeight}
+          title={modalContent.title}
+          description={modalContent.description}
+          onClose={closeWindowModal}
+        />
+      )}
 
-      <BottomSheetLevel
-        ref={bottomSheetRef}
-        props={text}
+      <FoodBacklightScreen
+        visible={foodBacklightVisible}
+        opacity={getLevelAnimations().other.foodBacklightScreenOpacity}
+        growRotate={getLevelAnimations().other.growRotate}
+        food={foodRef.current}
       />
     </SafeAreaView>
   );
@@ -78,6 +157,10 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flex: 1
+  },
+  playingField: {
+    paddingHorizontal: dmsGame.level.paddingHorizontal,
+    paddingVertical: dmsGame.level.paddingVertical
   },
   interpreter: {
     themeCodeEditor: lightColors.code_editor,
@@ -93,8 +176,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: dmsGame.level.paddingHorizontalButtonsContainer,
-    paddingVertical: dmsGame.level.paddingVerticalButtonsContainer
+    paddingHorizontal: dmsGame.level.paddingHorizontal,
+    paddingVertical: dmsGame.level.paddingVertical
   },
   leftButtons: {
     flexDirection: "row",

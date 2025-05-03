@@ -4,16 +4,15 @@ import ButtonCustom from "./buttonCustom";
 import { dmsGame, imgGame } from "../../config";
 
 const WindowModal = ({
-  visible,
   title,
   description,
   height,
   onClose,
-  onStart,
+  onStart = () => {},
   showStartButton = false
 }) => {
   return (
-    <Modal transparent visible={visible} animationType="fade">
+    <Modal transparent visible animationType="fade">
       <View style={styles.overlay}>
         <View style={[styles.modal, { height: height }]}>
           <View style={styles.closeButtonContainer}>
@@ -25,7 +24,6 @@ const WindowModal = ({
 
           <View style={styles.content}>
             <Text style={styles.title}>{title}</Text>
-
             <Text style={styles.description}>{description}</Text>
             
             {showStartButton && (
@@ -61,17 +59,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%"
+    width: "90%"
   },
   closeButtonContainer: {
     position: "absolute",
     zIndex: 1,
     top: dmsGame.window_modal.topCloseButton,
     left: dmsGame.window_modal.leftCloseButton
-  },
-  startButtonContainer: {
-    alignItems: "center",
-    marginBottom: dmsGame.window_modal.marginBottomStartButton
   },
   title: {
     fontWeight: "bold",
@@ -86,6 +80,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: dmsGame.window_modal.fontSizeDescription,
     marginBottom: dmsGame.window_modal.marginBottomDescription
+  },
+  startButtonContainer: {
+    marginBottom: dmsGame.window_modal.marginBottomStartButton
   }
 });
 

@@ -1,5 +1,3 @@
-import { HEIGHT_STATUS_BAR } from "./layout";
-
 const EDUCATION = {
   theory: require('../assets/icons/theory.png'),
   question: require('../assets/icons/question.png'),
@@ -240,12 +238,71 @@ const GAME = {
       left: 175,
       width: 63,
       height: 63,
+      transform: [{ rotate: "180deg" }],
       position: "absolute",
       zIndex: 2
     }
   },
-  playing_field_images: {
-
+  level_images: {
+    playing_field: {
+      source: require("../assets/icons/game/playing_field/playing_field.png"),
+      width: 400,
+      height: 400
+    },
+    apple: {
+      source: require("../assets/icons/game/apple/apple.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    mushroom: {
+      source: require("../assets/icons/game/mushroom/mushroom.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    portal: {
+      source: require("../assets/icons/game/portal/portal.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    stone: {
+      source: require("../assets/icons/game/stone/stone.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    question: {
+      source: require("../assets/icons/game/question/question.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    hedgehog: {
+      source: require("../assets/icons/game/hedgehog/hedgehog.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 2
+    },
+    rip: {
+      source: require("../assets/icons/game/rip/rip.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    glow: {
+      source: require("../assets/icons/game/glow/glow.png"),
+      width: 302,
+      height: 302
+    }
   },
   animations: {
     anim_hedgehog: {
