@@ -18,7 +18,8 @@ export const LessonsStack = () => (
       component={Lessons.VariablesAndConstants}
       initialParams={{
         alias: TEXTS.EDUCATION[1].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[1].help
       }}
     />
     <Stack.Screen
@@ -26,7 +27,8 @@ export const LessonsStack = () => (
       component={Lessons.DataTypes}
       initialParams={{
         alias: TEXTS.EDUCATION[2].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[2].help
       }}
     />
     <Stack.Screen
@@ -34,7 +36,8 @@ export const LessonsStack = () => (
       component={Lessons.ArithmeticOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[3].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[3].help
       }}
     />
     <Stack.Screen
@@ -42,7 +45,8 @@ export const LessonsStack = () => (
       component={Lessons.ComparisonOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[4].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[4].help
       }}
     />
     <Stack.Screen
@@ -50,7 +54,8 @@ export const LessonsStack = () => (
       component={Lessons.LogicalOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[5].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[5].help
       }}
     />
     <Stack.Screen
@@ -58,7 +63,8 @@ export const LessonsStack = () => (
       component={Lessons.TernaryOperator}
       initialParams={{
         alias: TEXTS.EDUCATION[6].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[6].help
       }}
     />
     <Stack.Screen
@@ -66,7 +72,8 @@ export const LessonsStack = () => (
       component={Lessons.ConditionalOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[7].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[7].help
       }}
     />
   </Stack.Navigator>
