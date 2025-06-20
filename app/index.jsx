@@ -3,7 +3,9 @@ import { useTheme } from "../contexts/ThemeProvider";
 import { COLORS, TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
 
-const Index = ({ route, navigation }) => {
+import { TestResultsProvider } from '../contexts/TestResultsContext';
+
+const IndexComponent = ({ route, navigation }) => {
   const { colors } = useTheme();
   const currentRoute = route.name;
 
@@ -57,6 +59,12 @@ const Index = ({ route, navigation }) => {
     </View>
   );
 };
+
+const Index = (props) => (
+  <TestResultsProvider>
+    <IndexComponent {...props} />
+  </TestResultsProvider>
+);
 
 const styles = StyleSheet.create({
   container: {

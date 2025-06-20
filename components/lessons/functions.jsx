@@ -82,7 +82,7 @@ console.log(sum(2));    // NaN (потому что b undefined, 2 + undefined -
                         </Text>
                         <Text style={[styles.code, { backgroundColor: colors.background }]}>
                             <Text style={[{ color: colors.text }]}>
-                            {`let x = 10;
+                                {`let x = 10;
 
 function example() {
   let x = 5; // локальная переменная
@@ -91,7 +91,7 @@ function example() {
 
 example();
 console.log(x); // 10 (внешняя переменная не изменилась)`}
-                        </Text>
+                            </Text>
                         </Text>
                         <Text style={[styles.subtitle, { color: colors.text }]}>{'\n'}6. Функции как значения и передача в другие функции:</Text>
                         <Text style={[styles.text, { color: colors.text }]}>
@@ -99,7 +99,7 @@ console.log(x); // 10 (внешняя переменная не изменила
                         </Text>
                         <Text style={[styles.code, { backgroundColor: colors.background }]}>
                             <Text style={[{ color: colors.text }]}>
-                            {`function callFunction(func) {
+                                {`function callFunction(func) {
   func();
 }
 
@@ -108,8 +108,8 @@ function sayHello() {
 }
 
 callFunction(sayHello); // Привет!`}
+                            </Text>
                         </Text>
-                                </Text>
                         <Text style={[styles.subtitle, { color: colors.text }]}>{'\n'}7. Рекомендации при работе с функциями:</Text>
                         <Text style={[styles.text, { color: colors.text }]}>
                             - Каждая функция должна выполнять одну логическую задачу.{'\n'}
@@ -125,6 +125,7 @@ callFunction(sayHello); // Привет!`}
             case 'test1':
                 return (
                     <SingleAnswerTest
+                        testId="functions1"
                         question="Как объявить функцию, принимающую параметр name?"
                         options={[
                             "1. function greet(name) {}",
@@ -138,6 +139,7 @@ callFunction(sayHello); // Привет!`}
             case 'test2':
                 return (
                     <SingleAnswerTest
+                        testId="functions2"
                         question="Что возвращает функция без оператора return?"
                         options={[
                             "1. null",
@@ -151,6 +153,7 @@ callFunction(sayHello); // Привет!`}
             case 'test3':
                 return (
                     <SingleAnswerTest
+                        testId="functions3"
                         question="Какой синтаксис используется для стрелочной функции?"
                         options={[
                             "1. function() => {}",

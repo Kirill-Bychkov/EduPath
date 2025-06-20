@@ -55,7 +55,7 @@ export default function ArithmeticOperators() {
                         <Text style={[styles.subtitle, { color: colors.text }]}>Особенности:</Text>
                         <Text style={[styles.text, { color: colors.text }]}>
                             - Оператор "+" может выполнять как сложение чисел, так и конкатенацию строк{"\n"}
-                            - Деление на ноль возвращает <Text style={[styles.code,{ backgroundColor: colors.background }]}>Infinity</Text>{"\n"}
+                            - Деление на ноль возвращает <Text style={[styles.code, { backgroundColor: colors.background }]}>Infinity</Text>{"\n"}
                             - Остаток от деления (%) сохраняет знак делимого
                         </Text>
                     </ScrollView>
@@ -63,6 +63,7 @@ export default function ArithmeticOperators() {
             case 'test1':
                 return (
                     <SingleAnswerTest
+                        testId="arithmetic_operators1"
                         question="Какой оператор вычисляет остаток от деления?"
                         options={[
                             "1. /",
@@ -75,6 +76,7 @@ export default function ArithmeticOperators() {
             case 'test2':
                 return (
                     <SingleAnswerTest
+                        testId="arithmetic_operators2"
                         question="Что вернет выражение 2 ** 3?"
                         options={[
                             "1. 8",

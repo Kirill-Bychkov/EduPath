@@ -104,6 +104,7 @@ export default function Loops() {
             case 'test1':
                 return (
                     <SingleAnswerTest
+                        testId="loops1"
                         question="Какой цикл гарантирует выполнение тела хотя бы один раз?"
                         options={[
                             "1. for",
@@ -117,6 +118,7 @@ export default function Loops() {
             case 'test2':
                 return (
                     <SingleAnswerTest
+                        testId="loops2"
                         question="Какой цикл подходит для перебора элементов массива?"
                         options={[
                             "1. for...in",
@@ -129,6 +131,7 @@ export default function Loops() {
             case 'test3':
                 return (
                     <SingleAnswerTest
+                        testId="loops3"
                         question="Сколько раз выполнится внутренняя часть вложенного цикла?"
                         codeBlock={`for (let i = 0; i < 5; i++) {\n  for (let j = 0; j < 5; j++) {\n    console.log(i, j);\n  }\n}`}
                         options={[

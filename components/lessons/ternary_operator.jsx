@@ -22,7 +22,7 @@ export default function TernaryOperator() {
             <Text style={[styles.subtitle, { color: colors.text }]}>Синтаксис:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              условие ? выражение_если_true : выражение_если_false
+                условие ? выражение_если_true : выражение_если_false
               </Text>
             </Text>
 
@@ -30,27 +30,27 @@ export default function TernaryOperator() {
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
               // Присвоение значения переменной{"\n"}
-              let age = 20;{"\n"}
-              let status = age {">"}= 18 ? 'взрослый' : 'ребенок';{"\n"}
+                let age = 20;{"\n"}
+                let status = age {">"}= 18 ? 'взрослый' : 'ребенок';{"\n"}
               // status = 'взрослый'{"\n\n"}
-              
+
               // Возврат значения в функции{"\n"}
-              function getFee(isMember) {"{"}{"\n"}
-              {"  "}return isMember ? '2.00$' : '10.00$';{"\n"}
-              {"}"}{"\n"}
-              getFee(true); // → '2.00$'{"\n\n"}
-              
+                function getFee(isMember) {"{"}{"\n"}
+                {"  "}return isMember ? '2.00$' : '10.00$';{"\n"}
+                {"}"}{"\n"}
+                getFee(true); // → '2.00$'{"\n\n"}
+
               // Выполнение действий{"\n"}
-              let isMorning = true;{"\n"}
-              isMorning ? console.log('Доброе утро!') : console.log('Добрый день!');
+                let isMorning = true;{"\n"}
+                isMorning ? console.log('Доброе утро!') : console.log('Добрый день!');
               </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>Вложенные тернарные операторы:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              let score = 85;{"\n"}
-              let grade = score {">"}= 90 ? 'A' :{"\n"}
+                let score = 85;{"\n"}
+                let grade = score {">"}= 90 ? 'A' :{"\n"}
                 score {">"}= 80 ? 'B' :{"\n"}
                 score {">"}= 70 ? 'C' :{"\n"}
                 score {">"}= 60 ? 'D' : 'F';{"\n"}
@@ -61,17 +61,17 @@ export default function TernaryOperator() {
             <Text style={[styles.subtitle, { color: colors.text }]}>Использование в JSX:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              function Greeting(props) {"{"}{"\n"}
-              {"  "}return ({"\n"}
-              {"    "}{"<div>"}{"\n"}
-              {"      "}{"{"}props.isLoggedIn ? ({"\n"}
-              {"        "}{"<WelcomeBack />"}{"\n"}
-              {"      "}) : ({"\n"}
-              {"        "}{"<LoginButton />"}{"\n"}
-              {"      "}){"}"}{"\n"}
-              {"    "}{"</div>"}{"\n"}
-              {"  "});{"\n"}
-              {"}"}
+                function Greeting(props) {"{"}{"\n"}
+                {"  "}return ({"\n"}
+                {"    "}{"<div>"}{"\n"}
+                {"      "}{"{"}props.isLoggedIn ? ({"\n"}
+                {"        "}{"<WelcomeBack />"}{"\n"}
+                {"      "}) : ({"\n"}
+                {"        "}{"<LoginButton />"}{"\n"}
+                {"      "}){"}"}{"\n"}
+                {"    "}{"</div>"}{"\n"}
+                {"  "});{"\n"}
+                {"}"}
               </Text>
             </Text>
 
@@ -87,6 +87,7 @@ export default function TernaryOperator() {
       case 'test1':
         return (
           <SingleAnswerTest
+            testId="ternary_operators1"
             question="Какой синтаксис у тернарного оператора?"
             options={[
               "1. условие : выражение1 ? выражение2",
@@ -99,6 +100,7 @@ export default function TernaryOperator() {
       case 'test2':
         return (
           <SingleAnswerTest
+            testId="ternary_operators2"
             question="Что вернет выражение: let x = false ? 'A' : 'B'?"
             options={[
               "1. 'A'",
