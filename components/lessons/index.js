@@ -5,4 +5,4 @@ export { default as ComparisonOperators } from "./comparison_operators";
 export { default as LogicalOperators } from "./logical_operators";
 export { default as TernaryOperator } from "./ternary_operator";
 export { default as ConditionalOperators } from "./conditional_operators";
-
+export { default as Loops } from "./loops";
