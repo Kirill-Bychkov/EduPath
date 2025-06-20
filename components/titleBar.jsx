@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity, Alert } from "react-native";
 import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
 
@@ -9,6 +9,7 @@ const TitleBar = ({ route, navigation }) => {
   const { 
     alias = "", 
     parentNavigator = null,
+    help = null,
     showButton = parentNavigator !== "RootTabs"
   } = route.params || {};
 
@@ -16,6 +17,14 @@ const TitleBar = ({ route, navigation }) => {
     help: IMAGES.EDUCATION.help,
     back: IMAGES.EDUCATION.back,
   }
+
+  const showHelp = () => {
+  if (help) {
+    Alert.alert("Подсказка", help, [{ text: "Ок" }]);
+  } else {
+    Alert.alert("Подсказка", "Подсказка недоступна для этой темы.");
+  }
+};
 
   const BackButton = () => (
     <TouchableOpacity
@@ -30,7 +39,10 @@ const TitleBar = ({ route, navigation }) => {
   );
 
   const HelpButton = () => (
-    <TouchableOpacity style={styles.iconContainer}>
+    <TouchableOpacity 
+    style={styles.iconContainer}
+    onPress={showHelp}
+    >
       <Image
         source={IMAGES.EDUCATION.help}
         style={[styles.icon, { tintColor: dark ? colors.primary : colors.not_active }]}
