@@ -6,8 +6,8 @@ import { IMAGES } from "../constants";
 const TitleBar = ({ route, navigation }) => {
   const { dark, colors } = useTheme();
 
-  const { 
-    alias = "", 
+  const {
+    alias = "",
     parentNavigator = null,
     help = null,
     showButton = parentNavigator !== "RootTabs"
@@ -19,12 +19,12 @@ const TitleBar = ({ route, navigation }) => {
   }
 
   const showHelp = () => {
-  if (help) {
-    Alert.alert("Подсказка", help, [{ text: "Ок" }]);
-  } else {
-    Alert.alert("Подсказка", "Подсказка недоступна для этой темы.");
-  }
-};
+    if (help) {
+      Alert.alert("Подсказка", help, [{ text: "Ок" }]);
+    } else {
+      Alert.alert("Подсказка", "Подсказка недоступна для этой темы.");
+    }
+  };
 
   const BackButton = () => (
     <TouchableOpacity
@@ -39,9 +39,9 @@ const TitleBar = ({ route, navigation }) => {
   );
 
   const HelpButton = () => (
-    <TouchableOpacity 
-    style={styles.iconContainer}
-    onPress={showHelp}
+    <TouchableOpacity
+      style={styles.iconContainer}
+      onPress={showHelp}
     >
       <Image
         source={IMAGES.EDUCATION.help}

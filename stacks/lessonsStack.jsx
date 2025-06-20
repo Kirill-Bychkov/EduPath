@@ -19,38 +19,7 @@ export const LessonsStack = () => (
       initialParams={{
         alias: TEXTS.EDUCATION[1].id,
         parentNavigator: "LessonsStack",
-        help: `🔍 Переменные и константы в JavaScript:
-
-- В JavaScript переменные можно объявить тремя способами: через let, const и устаревший var.
-
-✅ let — используется для переменных, значение которых может изменяться:
-let x = 5;
-x = 10; // допустимо
-
-✅ const — используется для констант, которые нельзя переназначить:
-const y = 20;
-y = 30; // ❌ ошибка
-
-❌ var — устаревший способ, имеет особенности с областью видимости и может вести к багам, рекомендуется избегать.
-
-📦 Область видимости:
-- let и const имеют блочную область видимости — доступны только внутри { }.
-- var имеет функциональную область видимости — доступна во всей функции, даже до её объявления.
-
-🧠 Рекомендации:
-- По умолчанию используйте const.
-- Применяйте let только если значение переменной должно изменяться.
-- Не используйте var, если нет острой необходимости.
-
-Пример:
-if (true) {
-  let a = 1;
-  var b = 2;
-}
-console.log(b); // 2 — доступна
-console.log(a); // ❌ ошибка — вне блока
-
-Понимание области видимости и правильный выбор ключевого слова помогает избежать логических ошибок и делает код более предсказуемым.`
+        help: TEXTS.EDUCATION[1].help
       }}
     />
     <Stack.Screen
@@ -58,7 +27,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.DataTypes}
       initialParams={{
         alias: TEXTS.EDUCATION[2].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[2].help
       }}
     />
     <Stack.Screen
@@ -66,7 +36,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.ArithmeticOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[3].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[3].help
       }}
     />
     <Stack.Screen
@@ -74,7 +45,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.ComparisonOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[4].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[4].help
       }}
     />
     <Stack.Screen
@@ -82,7 +54,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.LogicalOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[5].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[5].help
       }}
     />
     <Stack.Screen
@@ -90,7 +63,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.TernaryOperator}
       initialParams={{
         alias: TEXTS.EDUCATION[6].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[6].help
       }}
     />
     <Stack.Screen
@@ -98,7 +72,8 @@ console.log(a); // ❌ ошибка — вне блока
       component={Lessons.ConditionalOperators}
       initialParams={{
         alias: TEXTS.EDUCATION[7].id,
-        parentNavigator: "LessonsStack"
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[7].help
       }}
     />
   </Stack.Navigator>
