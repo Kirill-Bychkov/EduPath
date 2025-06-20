@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from "../../../contexts/ThemeProvider";
 
-const SingleAnswerTest = ({ question, options, correctAnswer }) => {
+const SingleAnswerTest = ({ question, options, correctAnswer, codeBlock = null }) => {
     const { dark, colors } = useTheme();
 
     const [selectedOption, setSelectedOption] = useState(null);
@@ -39,6 +39,13 @@ const SingleAnswerTest = ({ question, options, correctAnswer }) => {
     return (
         <View style={styles.blockContainer}>
             <Text style={[styles.question, { color: colors.text }]}>{question}</Text>
+
+            {codeBlock && (
+                <Text style={[styles.codeBlock, { color: colors.text }]}>
+                    {codeBlock}
+                </Text>
+            )}
+
             {options.map((option, index) => (
                 <TouchableOpacity
                     key={index}
@@ -59,7 +66,7 @@ const SingleAnswerTest = ({ question, options, correctAnswer }) => {
             >
                 <Text style={styles.checkButtonText}>Проверить</Text>
             </TouchableOpacity>
-            
+
             {isCorrect !== null && (
                 <Text style={isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect}>
                     {isCorrect ? 'Правильно!' : 'Неправильно! Попробуйте еще раз.'}
@@ -75,6 +82,18 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 2,
         paddingVertical: 16,
+    },
+    questionContainer: {
+        marginBottom: 20,
+    },
+    codeBlock: {
+        fontFamily: 'monospace',
+        backgroundColor: '#f0f0f0',
+        padding: 10,
+        borderRadius: 6,
+        marginBottom: 12,
+        fontSize: 14,
+        lineHeight: 20,
     },
     question: {
         fontSize: 18,

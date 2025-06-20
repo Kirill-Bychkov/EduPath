@@ -6,3 +6,4 @@ export { default as LogicalOperators } from "./logical_operators";
 export { default as TernaryOperator } from "./ternary_operator";
 export { default as ConditionalOperators } from "./conditional_operators";
 export { default as Loops } from "./loops";
+export { default as Functions} from "./functions";
