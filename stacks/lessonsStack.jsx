@@ -85,5 +85,14 @@ export const LessonsStack = () => (
         help: TEXTS.EDUCATION[8].help
       }}
     />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[9].path}
+      component={Lessons.Functions}
+      initialParams={{
+        alias: TEXTS.EDUCATION[9].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[9].help
+      }}
+    />
   </Stack.Navigator>
 );

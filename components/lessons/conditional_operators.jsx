@@ -69,7 +69,7 @@ export default function ConditionalOperators() {
               {"  "}// ... другие дни{"\n"}
               {"  "}default:{"\n"}
               {"    "}dayName = 'Неизвестный день';{"\n"}
-              {"}"}{"\n\n\n"}
+              {"}"}
               </Text>
             </Text>
 
@@ -136,11 +136,11 @@ export default function ConditionalOperators() {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => setCurrentBlock('test1')}>
-          <Text style={styles.titleBarButton}>Тест 1</Text>
+          <Text style={styles.titleBarButton}>Вопрос 1</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => setCurrentBlock('test2')}>
-          <Text style={styles.titleBarButton}>Тест 2</Text>
+          <Text style={styles.titleBarButton}>Вопрос 2</Text>
         </TouchableOpacity>
       </View>
       {renderBlock()}

@@ -100,11 +100,11 @@ export default function DataTypes() {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setCurrentBlock('test1')}>
-                    <Text style={styles.titleBarButton}>Тест 1</Text>
+                    <Text style={styles.titleBarButton}>Вопрос 1</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setCurrentBlock('test2')}>
-                    <Text style={styles.titleBarButton}>Тест 2</Text>
+                    <Text style={styles.titleBarButton}>Вопрос 2</Text>
                 </TouchableOpacity>
 
             </View>
