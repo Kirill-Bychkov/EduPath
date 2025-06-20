@@ -23,16 +23,16 @@ export default function LogicalOperators() {
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
               // Логическое И (AND) - возвращает true, если оба операнда true{"\n"}
-              true && true   // → true{"\n"}
-              true && false  // → false{"\n\n"}
-              
+                true && true   // → true{"\n"}
+                true && false  // → false{"\n\n"}
+
               // Логическое ИЛИ (OR) - возвращает true, если хотя бы один операнд true{"\n"}
-              true || false  // → true{"\n"}
-              false || false // → false{"\n\n"}
-              
+                true || false  // → true{"\n"}
+                false || false // → false{"\n\n"}
+
               // Логическое НЕ (NOT) - инвертирует значение{"\n"}
-              !true          // → false{"\n"}
-              !false         // → true
+                !true          // → false{"\n"}
+                !false         // → true
               </Text>
             </Text>
 
@@ -40,12 +40,12 @@ export default function LogicalOperators() {
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
               // Возвращают значение одного из операндов{"\n"}
-              'text' && 42   // → 42 (последнее истинное значение){"\n"}
-              0 || 'default' // → 'default' (первое истинное значение){"\n\n"}
-              
+                'text' && 42   // → 42 (последнее истинное значение){"\n"}
+                0 || 'default' // → 'default' (первое истинное значение){"\n\n"}
+
               // Приоритет операторов: ! {">"} && {">"} ||{"\n"}
-              true || false && false // → true{"\n"}
-              (true || false) && false // → false
+                true || false && false // → true{"\n"}
+                (true || false) && false // → false
               </Text>
             </Text>
 
@@ -53,17 +53,17 @@ export default function LogicalOperators() {
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
               // Проверка нескольких условий{"\n"}
-              if (age {">"} 18 && age {"<"} 65) {"{"}{"\n"}
-              {"  "}console.log('Доступ разрешен');{"\n"}
-              {"}"}{"\n\n"}
-              
+                if (age {">"} 18 && age {"<"} 65) {"{"}{"\n"}
+                {"  "}console.log('Доступ разрешен');{"\n"}
+                {"}"}{"\n\n"}
+
               // Установка значения по умолчанию{"\n"}
-              let name = username || 'Гость';{"\n\n"}
-              
+                let name = username || 'Гость';{"\n\n"}
+
               // Проверка на отрицание{"\n"}
-              if (!isLoggedIn) {"{"}{"\n"}
-              {"  "}console.log('Пожалуйста, войдите');{"\n"}
-              {"}"}
+                if (!isLoggedIn) {"{"}{"\n"}
+                {"  "}console.log('Пожалуйста, войдите');{"\n"}
+                {"}"}
               </Text>
             </Text>
 
@@ -79,6 +79,7 @@ export default function LogicalOperators() {
       case 'test1':
         return (
           <SingleAnswerTest
+            testId="logical_operators1"
             question="Какой оператор возвращает true, если оба операнда true?"
             options={[
               "1. ||",
@@ -91,6 +92,7 @@ export default function LogicalOperators() {
       case 'test2':
         return (
           <SingleAnswerTest
+            testId="logical_operators2"
             question="Что вернет выражение 0 || 'default'?"
             options={[
               "1. 0",

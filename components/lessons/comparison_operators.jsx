@@ -72,6 +72,7 @@ export default function ComparisonOperators() {
       case 'test1':
         return (
           <SingleAnswerTest
+          testId="comparison_operators1"
             question="Какой оператор выполняет строгое сравнение?"
             options={[
               "1. ==",
@@ -84,6 +85,7 @@ export default function ComparisonOperators() {
       case 'test2':
         return (
           <SingleAnswerTest
+          testId="comparison_operators2"
             question="Что вернет выражение null == undefined?"
             options={[
               "1. true",

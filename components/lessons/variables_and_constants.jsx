@@ -69,6 +69,7 @@ export default function VariablesAndConstants() {
       case 'test1':
         return (
           <SingleAnswerTest
+            testId="variables_and_constants1"
             question="Какой из следующих вариантов объявляет константу?"
             options={[
               "1. let x = 10;",
@@ -81,6 +82,7 @@ export default function VariablesAndConstants() {
       case 'test2':
         return (
           <SingleAnswerTest
+            testId="variables_and_constants2"
             question="Какая область видимости у переменных, объявленных с помощью let и const?"
             options={[
               "1. Глобальная",

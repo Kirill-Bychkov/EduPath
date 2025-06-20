@@ -22,54 +22,54 @@ export default function ConditionalOperators() {
             <Text style={[styles.subtitle, { color: colors.text }]}>1. Оператор if-else:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              if (условие) {"{"}{"\n"}
-              {"  "}// выполняется, если условие истинно{"\n"}
-              {"}"} else {"{"}{"\n"}
-              {"  "}// выполняется, если условие ложно{"\n"}
-              {"}"}{"\n\n"}
-              
-              let age = 18;{"\n"}
-              if (age {">"}= 18) {"{"}{"\n"}
-              {"  "}console.log('Доступ разрешен');{"\n"}
-              {"}"} else {"{"}{"\n"}
-              {"  "}console.log('Доступ запрещен');{"\n"}
-              {"}"}
+                if (условие) {"{"}{"\n"}
+                {"  "}// выполняется, если условие истинно{"\n"}
+                {"}"} else {"{"}{"\n"}
+                {"  "}// выполняется, если условие ложно{"\n"}
+                {"}"}{"\n\n"}
+
+                let age = 18;{"\n"}
+                if (age {">"}= 18) {"{"}{"\n"}
+                {"  "}console.log('Доступ разрешен');{"\n"}
+                {"}"} else {"{"}{"\n"}
+                {"  "}console.log('Доступ запрещен');{"\n"}
+                {"}"}
               </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>2. else-if для множества условий:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              let score = 85;{"\n"}
-              if (score {">"}= 90) {"{"}{"\n"}
-              {"  "}grade = 'A';{"\n"}
-              {"}"} else if (score {">"}= 80) {"{"}{"\n"}
-              {"  "}grade = 'B';{"\n"}
-              {"}"} else if (score {">"}= 70) {"{"}{"\n"}
-              {"  "}grade = 'C';{"\n"}
-              {"}"} else {"{"}{"\n"}
-              {"  "}grade = 'D';{"\n"}
-              {"}"}
+                let score = 85;{"\n"}
+                if (score {">"}= 90) {"{"}{"\n"}
+                {"  "}grade = 'A';{"\n"}
+                {"}"} else if (score {">"}= 80) {"{"}{"\n"}
+                {"  "}grade = 'B';{"\n"}
+                {"}"} else if (score {">"}= 70) {"{"}{"\n"}
+                {"  "}grade = 'C';{"\n"}
+                {"}"} else {"{"}{"\n"}
+                {"  "}grade = 'D';{"\n"}
+                {"}"}
               </Text>
             </Text>
 
             <Text style={[styles.subtitle, { color: colors.text }]}>3. Оператор switch-case:</Text>
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
-              let day = 3;{"\n"}
-              let dayName;{"\n\n"}
-              
-              switch (day) {"{"}{"\n"}
-              {"  "}case 1:{"\n"}
-              {"    "}dayName = 'Понедельник';{"\n"}
-              {"    "}break;{"\n"}
-              {"  "}case 2:{"\n"}
-              {"    "}dayName = 'Вторник';{"\n"}
-              {"    "}break;{"\n"}
-              {"  "}// ... другие дни{"\n"}
-              {"  "}default:{"\n"}
-              {"    "}dayName = 'Неизвестный день';{"\n"}
-              {"}"}
+                let day = 3;{"\n"}
+                let dayName;{"\n\n"}
+
+                switch (day) {"{"}{"\n"}
+                {"  "}case 1:{"\n"}
+                {"    "}dayName = 'Понедельник';{"\n"}
+                {"    "}break;{"\n"}
+                {"  "}case 2:{"\n"}
+                {"    "}dayName = 'Вторник';{"\n"}
+                {"    "}break;{"\n"}
+                {"  "}// ... другие дни{"\n"}
+                {"  "}default:{"\n"}
+                {"    "}dayName = 'Неизвестный день';{"\n"}
+                {"}"}
               </Text>
             </Text>
 
@@ -77,15 +77,15 @@ export default function ConditionalOperators() {
             <Text style={[styles.code, { backgroundColor: colors.background }]}>
               <Text style={[{ color: colors.text }]}>
               // Простое условие в одну строку{"\n"}
-              let status = (age {">"}= 18) ? 'взрослый' : 'ребенок';{"\n\n"}
-              
+                let status = (age {">"}= 18) ? 'взрослый' : 'ребенок';{"\n\n"}
+
               // Эквивалентно:{"\n"}
-              let status;{"\n"}
-              if (age {">"}= 18) {"{"}{"\n"}
-              {"  "}status = 'взрослый';{"\n"}
-              {"}"} else {"{"}{"\n"}
-              {"  "}status = 'ребенок';{"\n"}
-              {"}"}
+                let status;{"\n"}
+                if (age {">"}= 18) {"{"}{"\n"}
+                {"  "}status = 'взрослый';{"\n"}
+                {"}"} else {"{"}{"\n"}
+                {"  "}status = 'ребенок';{"\n"}
+                {"}"}
               </Text>
             </Text>
 
@@ -95,13 +95,14 @@ export default function ConditionalOperators() {
               - Switch-case хорошо подходит для множества сравнений одного значения{"\n"}
               - Тернарный оператор используйте для простых условий{"\n"}
               - Всегда добавляйте break в case-блоках{"\n"}
-              - Используйте фигурные скобки {} для блоков кода, даже если там одна строка
+              - Используйте фигурные скобки { } для блоков кода, даже если там одна строка
             </Text>
           </ScrollView>
         );
       case 'test1':
         return (
           <SingleAnswerTest
+            testId="conditional_operators1"
             question="Какой оператор пропускается в switch-case, что может привести к ошибкам?"
             options={[
               "1. default",
@@ -114,6 +115,7 @@ export default function ConditionalOperators() {
       case 'test2':
         return (
           <SingleAnswerTest
+            testId="conditional_operators2"
             question="Какой оператор лучше использовать для проверки диапазона значений?"
             options={[
               "1. Тернарный оператор",

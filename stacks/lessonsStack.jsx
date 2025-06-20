@@ -2,8 +2,10 @@ import Index from "../app/index"
 import { Stack, commonStackOptions } from "./config";
 import { TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
+import { TestResultsProvider } from "../contexts/TestResultsContext";
 
 export const LessonsStack = () => (
+  <TestResultsProvider>
   <Stack.Navigator screenOptions={commonStackOptions}>
     <Stack.Screen
       name="MenuIndex"
@@ -95,4 +97,5 @@ export const LessonsStack = () => (
       }}
     />
   </Stack.Navigator>
+  </TestResultsProvider>
 );
