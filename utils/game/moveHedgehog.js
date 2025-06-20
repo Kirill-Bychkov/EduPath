@@ -1,4 +1,5 @@
 import { Animated } from "react-native";
+import { normalizeAngle } from "../normalizeAngle"
 
 export const goTo = (fromTop, fromLeft, toTop, toLeft, duration = 500) => {
   return new Promise((resolve) => {
@@ -28,11 +29,14 @@ export const turnTo = (fromRotate, toAngle, duration = 300) => {
   });
 };
 
-export const createMove = (y, x, rotate) => async (
+export const move = (y, x, rotate) => async (
   newY,
   newX,
   angle
 ) => {
-  await turnTo(rotate, angle);
+  const currentAngle = rotate.__getValue();
+  const finalAngle = normalizeAngle(currentAngle, angle);
+
+  await turnTo(rotate, finalAngle);
   await goTo(y, x, newY, newX);
 };

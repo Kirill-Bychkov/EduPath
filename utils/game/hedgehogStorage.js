@@ -1,4 +1,4 @@
-export class HedgehogRuntime {
+export class HedgehogStorage {
     static #_current = null;
 
     static set current(instance) {

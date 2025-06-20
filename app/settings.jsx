@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { withDynamicBars } from "../hooks/withDynamicBars";
 
 const Settings = () => {
   const icon = {
@@ -26,38 +24,36 @@ const Settings = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={[styles.ViewStyle, { backgroundColor: colors.background }]}>
-        <View style={styles.BlockContainer}>
-          <Text style={[styles.RegularText, { color: colors.text }]}>Тема:</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={ToggleTheme}>
-              <Image
-                source={icon[dark ? "dark_mode" : "light_mode"]}
-                style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.BlockContainer}>
-          <Text style={[styles.RegularText, { color: colors.text }]}>Звук:</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={ToggleSound}>
-              <Image
-                source={icon[isSoundOn ? "volume_on" : "volume_off"]}
-                style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
-              />
-            </TouchableOpacity>
-          </View>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.BlockContainer}>
+        <Text style={[styles.RegularText, { color: colors.text }]}>Тема:</Text>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={ToggleTheme}>
+            <Image
+              source={icon[dark ? "dark_mode" : "light_mode"]}
+              style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+
+      <View style={styles.BlockContainer}>
+        <Text style={[styles.RegularText, { color: colors.text }]}>Звук:</Text>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={ToggleSound}>
+            <Image
+              source={icon[isSoundOn ? "volume_on" : "volume_off"]}
+              style={{ width: 50, height: 50, tintColor: dark ? colors.primary : colors.not_active }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   )
 };
 
 const styles = StyleSheet.create({
-  ViewStyle: {
+  container: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -81,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withDynamicBars(Settings);
+export default Settings;

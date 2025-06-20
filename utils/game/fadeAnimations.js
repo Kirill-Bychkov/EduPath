@@ -21,28 +21,6 @@ export const fadeOut = (value, duration = 500) => {
     });
 };
 
-export const createDeath = (
-    fadeInObject,
-    ...fadeOutObjects
-) => async () => {
-    await Promise.all([
-        ...fadeOutObjects.map(obj => fadeOut(obj, 200)),
-        fadeIn(fadeInObject, 200)
-    ]);
-};
-
-export const eatIt = (
-    foodBacklightScreenOpacity,
-    growRotate,
-    foodObject
-) => async () => {
-    await fadeIn(foodBacklightScreenOpacity);
-    growRotate.setValue(0);
-    await turnTo(growRotate, 2 * Math.PI, 2000);
-    await fadeOut(foodBacklightScreenOpacity);
-    await fadeOut(foodObject, 200);
-};
-
 export const teleport = (y, x, hedgehog) => async (
     newY,
     newX
@@ -50,4 +28,22 @@ export const teleport = (y, x, hedgehog) => async (
     await fadeOut(hedgehog, 200);
     await goTo(y, x, newY, newX, 0);
     await fadeIn(hedgehog, 200);
+};
+
+export const erect = (rip) => async () => {
+    await fadeIn(rip, 200);
+};
+
+export const remove = (obj) => async () => {
+    await fadeOut(obj, 200);
+};
+
+export const shine = (
+    foodBacklightScreenOpacity,
+    growRotate
+) => async () => {
+    growRotate.setValue(0);
+    await fadeIn(foodBacklightScreenOpacity);
+    await turnTo(growRotate, 2 * Math.PI, 2000);
+    await fadeOut(foodBacklightScreenOpacity);
 };

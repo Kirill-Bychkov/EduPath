@@ -5,18 +5,27 @@ import { useInterpreter } from "../hooks/useInterpreter";
 import { dmsInterpreter } from "../config";
 
 const Interpreter = ({ props }, ref) => {
-  const { userCode, setUserCode, input, setInput, output, setOutput } = useInterpreter(ref);
+  const {
+    editorKey,
+    userCode,
+    setUserCode,
+    input,
+    setInput,
+    output,
+    setOutput
+  } = useInterpreter(ref);
 
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <CodeEditor
+          key={editorKey}
           style={styles.codeEditor}
           language="javascript"
           syntaxStyle={props.themeCodeEditor}
           showLineNumbers
           autoFocus={false}
-          initialValue={`// Здесь пишите код\n`}
+          initialValue={userCode}
           value={userCode}
           onChange={setUserCode}
         />

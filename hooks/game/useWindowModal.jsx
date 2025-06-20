@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { txtGame } from "../../config";
-import { getRandomInt } from "../../utils/randomInt";
+import { randomInt } from "../../utils/randomInt";
 
 export const useWindowModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,7 +11,7 @@ export const useWindowModal = () => {
 
     setModalContent(() =>
       Array.isArray(contents)
-        ? contents[getRandomInt(contents.length)]
+        ? contents[randomInt(contents.length)]
         : contents
     );
     setModalVisible(true);

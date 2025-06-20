@@ -1,75 +1,74 @@
 import { useRef, useEffect, useCallback, useState } from "react";
-import { Hedgehog } from "../../libraries";
-import { HedgehogRuntime } from "../../utils/game/hedgehogRuntime";
+import { HedgehogBack } from "../../utils/game/hedgehogBack";
+import { HedgehogStorage } from "../../utils/game/hedgehogStorage";
 import { initializeLevel } from "../../utils/game/initializeLevel";
-import { createMove } from "../../utils/game/moveHedgehog";
-import { createDeath, eatIt, teleport } from "../../utils/game/fadeAnimations";
+import { move } from "../../utils/game/moveHedgehog";
+import { teleport, erect, remove, shine } from "../../utils/game/fadeAnimations";
 import { deepCopy } from "../../utils/deepCopy";
 
 export const useLevelGame = (initialGrid, openWindowModal) => {
   const scrollViewRef = useRef(null);
   const interpreterRef = useRef(null);
 
-  const levelAnimationsRef = useRef(initializeLevel(initialGrid));
-  const getLevelAnimations = useCallback(() => levelAnimationsRef.current, []);
+  const animationsRef = useRef(initializeLevel(initialGrid));
+  const animations = new Proxy({}, {
+    get(_, prop) {
+      return animationsRef.current[prop];
+    }
+  });
 
   const [grid, setGrid] = useState(deepCopy(initialGrid));
 
-  const [foodBacklightVisible, setFoodBacklightVisible] = useState(false);
   const foodRef = useRef("");
+  const [foodBacklightVisible, setFoodBacklightVisible] = useState(false);
 
   useEffect(() => {
-    Hedgehog.setConfig({
+    HedgehogBack.setConfig({
       grid,
       setGrid,
+      foodRef,
+      setFoodBacklightVisible,
 
-      onMove: async (top, left, angle) => {
-        await createMove(
-          getLevelAnimations().hedgehog.top,
-          getLevelAnimations().hedgehog.left,
-          getLevelAnimations().hedgehog.rotate
+      onMovement: async (top, left, angle) => {
+        await move(
+          animations.hedgehogTop,
+          animations.hedgehogLeft,
+          animations.hedgehogRotate
         )(top, left, angle);
       },
 
-      onPortal: async (top, left) => {
+      onTeleportation: async (top, left) => {
         await teleport(
-          getLevelAnimations().hedgehog.top,
-          getLevelAnimations().hedgehog.left,
-          getLevelAnimations().hedgehog.opacity
+          animations.hedgehogTop,
+          animations.hedgehogLeft,
+          animations.hedgehogOpacity
         )(top, left);
       },
 
-      onEat: async (nameOpacity, id, food) => {
-        foodRef.current = food;
-        setFoodBacklightVisible(true);
-
-        await eatIt(
-          getLevelAnimations().other.foodBacklightScreenOpacity,
-          getLevelAnimations().other.growRotate,
-          getLevelAnimations().other[`${nameOpacity}Opacities`][id]
+      onDeathHedgehog: async () => {
+        await remove(
+          animations.hedgehogOpacity
         )();
-
-        setFoodBacklightVisible(false);
-        foodRef.current = "";
       },
 
-      onStone: async (nameOpacity, id) => {
-        await createDeath(
-          getLevelAnimations().other.ripOpacities[id],
-          getLevelAnimations().hedgehog.opacity,
-          getLevelAnimations().other[`${nameOpacity}Opacities`][id]
+      onMonumentInstallation: async (reason) => {
+        await erect(
+          animations.ripOpacity
         )();
-
-        openWindowModal("message", "stone");
+        openWindowModal("message", reason);
       },
 
-      onBorder: async (id) => {
-        await createDeath(
-          getLevelAnimations().other.ripOpacities[id],
-          getLevelAnimations().hedgehog.opacity
+      onCleaningCell: async (obj, id) => {
+        await remove(
+          animations[`${obj}Opacities`][id]
         )();
-        
-        openWindowModal("message", "border");
+      },
+
+      onBacklight: async () => {
+        await shine(
+          animations.foodBacklightScreenOpacity,
+          animations.growRotate
+        )();
       }
     });
   }, []);
@@ -84,12 +83,21 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
   const runCode = useCallback(() => {
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
 
-    HedgehogRuntime.clear();
-
     setGrid(deepCopy(initialGrid));
-    levelAnimationsRef.current = initializeLevel(initialGrid);
+    animationsRef.current = initializeLevel(initialGrid);
+
+    HedgehogStorage.clear();
+    HedgehogBack.resetQueue();
     
     interpreterRef.current?.runUserCode();
+  }, []);
+
+  const clearCode = useCallback(() => {
+    interpreterRef.current?.clearUserCode();
+  }, []);
+
+  const copyCode = useCallback(() => {
+    interpreterRef.current?.copyUserCode();
   }, []);
 
   return {
@@ -97,9 +105,11 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
     interpreterRef,
     handleScroll,
     runCode,
-    getLevelAnimations,
+    clearCode,
+    copyCode,
+    animations,
     grid,
-    foodBacklightVisible,
-    foodRef
+    foodRef,
+    foodBacklightVisible
   };
 };

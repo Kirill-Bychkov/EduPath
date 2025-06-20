@@ -19,7 +19,12 @@ const EDUCATION = {
 };
 
 const GAME = {
-    loadingScreen: {
+    copy_toast: {
+        background: "#fafafa",
+        text: "#000000",
+        shadowColor: "#000000"
+    },
+    stat_nav_bar: {
         background: "#000000"
     },
     menu: {
@@ -29,6 +34,10 @@ const GAME = {
         back_background: "#00000040",
         background: "#eed755",
         text: "#000000"
+    },
+    level: {
+        backgroundColorButtonBar: "#3c886b",
+        backgroundColorDivider: "#fafafa"
     },
     bottomsheet: {
         background: "#fafafa"

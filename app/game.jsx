@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import ButtonCustom from "../components/game/buttonCustom";
 import ImageCustom from "../components/game/imageCustom";
 import WindowModal from "../components/game/windowModal";
@@ -24,7 +24,7 @@ const Game = ({ navigation }) => {
   } = useWindowModal();
   
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={{ position: "relative" }}>
         <ButtonCustom
           item={imgGame.buttons.b_back_training}
@@ -68,7 +68,7 @@ const Game = ({ navigation }) => {
           }}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

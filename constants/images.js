@@ -83,22 +83,37 @@ const GAME = {
     },
     b_exit: {
       source: require("../assets/icons/game/b_exit/b_exit.png"),
-      width: 104,
+      width: 50,
       height: 42
     },
     b_task: {
       source: require("../assets/icons/game/b_task/b_task.png"),
-      width: 104,
+      width: 70,
       height: 42
     },
     b_task_mark: {
       source: require("../assets/icons/game/b_task_mark/b_task_mark.png"),
-      width: 112,
-      height: 48
+      width: 70,
+      height: 42
+    },
+    b_clear: {
+      source: require("../assets/icons/game/b_clear/b_clear.png"),
+      width: 50,
+      height: 42
+    },
+    b_copy: {
+      source: require("../assets/icons/game/b_copy/b_copy.png"),
+      width: 50,
+      height: 42
     },
     b_run: {
       source: require("../assets/icons/game/b_run/b_run.png"),
-      width: 104,
+      width: 70,
+      height: 42
+    },
+    b_stop: {
+      source: require("../assets/icons/game/b_stop/b_stop.png"),
+      width: 70,
       height: 42
     }
   },
@@ -302,6 +317,11 @@ const GAME = {
       source: require("../assets/icons/game/glow/glow.png"),
       width: 302,
       height: 302
+    },
+    check_mark: {
+      source: require("../assets/icons/game/check_mark/check_mark.png"),
+      width: 20,
+      height: 20
     }
   },
   animations: {

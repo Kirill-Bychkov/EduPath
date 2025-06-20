@@ -1,9 +1,7 @@
-import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useTheme } from "../contexts/ThemeProvider";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
-import { withDynamicBars } from "../hooks/withDynamicBars";
 
 const Index = ({ route, navigation }) => {
   const { colors } = useTheme();
@@ -50,9 +48,9 @@ const Index = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {renderScreen()}
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -83,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withDynamicBars(Index);
+export default Index;

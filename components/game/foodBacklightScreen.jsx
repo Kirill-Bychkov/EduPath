@@ -3,7 +3,7 @@ import AnimatedImageCustom from "./animatedImageCustom";
 import ImageCustom from "./imageCustom";
 import { imgGame, dmsGame } from "../../config";
 import { COLORS } from "../../constants";
-import { getRotateInterpolate } from "../../utils/game/rotateInterpolate";
+import { rotateInterpolate } from "../../utils/rotateInterpolate";
 
 const FoodBacklightScreen = ({ visible, opacity, growRotate, food }) => {
   if (!visible) return null;
@@ -14,7 +14,7 @@ const FoodBacklightScreen = ({ visible, opacity, growRotate, food }) => {
             key={"glow"}
             item={{
                 ...imgGame.level_images.glow,
-                transform: [{ rotate: getRotateInterpolate(growRotate) }]
+                transform: [{ rotate: rotateInterpolate(growRotate) }]
             }}
         />
         

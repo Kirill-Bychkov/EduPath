@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.GAME.loadingScreen.background
+        backgroundColor: COLORS.GAME.stat_nav_bar.background
     },
     image: {
         width: imgGame.animations.anim_hedgehog.width,
