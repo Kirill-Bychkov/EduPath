@@ -5,25 +5,36 @@ import { useInterpreter } from "../hooks/useInterpreter";
 import { dmsInterpreter } from "../config";
 
 const Interpreter = ({ props }, ref) => {
-  const { userCode, setUserCode, input, setInput, output, setOutput } = useInterpreter(ref);
+  const {
+    editorKey,
+    userCode,
+    setUserCode,
+    input,
+    setInput,
+    output,
+    setOutput
+  } = useInterpreter(ref);
 
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <CodeEditor
+          key={editorKey}
           style={styles.codeEditor}
           language="javascript"
           syntaxStyle={props.themeCodeEditor}
           showLineNumbers
           autoFocus={false}
-          initialValue={`// Здесь пишите код\n`}
+          initialValue={userCode}
           value={userCode}
           onChange={setUserCode}
         />
       </View>
 
       <View style={styles.container}>
-        <View style={styles.ioContainer}>
+        <View style={[styles.ioContainer, {
+          marginVertical: dmsInterpreter.styleDynamic.margin
+        }]}>
           <View style={[styles.emojisContainer, {
             backgroundColor: props.backgroundColorIoText
           }]}>
@@ -86,15 +97,12 @@ const styles = StyleSheet.create({
     fontSize: dmsInterpreter.styleStatic.fontSizeCodeEditor,
     inputLineHeight: dmsInterpreter.styleStatic.inputLineHeightCodeEditor,
     highlighterLineHeight: dmsInterpreter.styleStatic.highlighterLineHeightCodeEditor,
-    width: dmsInterpreter.styleDynamic.width,
-    marginTop: dmsInterpreter.styleDynamic.marginTopCodeEditor,
-    marginBottom: dmsInterpreter.styleDynamic.marginBottom
+    width: dmsInterpreter.styleDynamic.width
   },
   ioContainer: {
     flexDirection: "row",
     alignItems: "flex-start",
-    width: dmsInterpreter.styleDynamic.width,
-    marginBottom: dmsInterpreter.styleDynamic.marginBottom
+    width: dmsInterpreter.styleDynamic.width
   },
   emojisContainer: {
     alignItems: "center",

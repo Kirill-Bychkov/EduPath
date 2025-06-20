@@ -3,6 +3,7 @@ import { ScaleObjectValues } from "../utils/scaleTools";
 
 export const imgGame = ScaleObjectValues(IMAGES.GAME);
 export const dmsGame = ScaleObjectValues(DIMENSIONS.GAME, true);
+export const dmsLevelGrids = ScaleObjectValues(DIMENSIONS.LEVEL_GRIDS);
 
 const isTablet = CURRENT_LAYOUT.width >= MIN_WIDTH_TABLET;
 const styleStatic = isTablet

@@ -8,11 +8,13 @@ const BottomSheetLevel = ({ props }, ref) => {
   const {
     title,
     subtitle_task,
-    subtitle_condition,
-    subtitle_ps,
+    subtitle_target,
+    subtitle_given,
+    subtitle_hint,
     description_task,
-    description_condition,
-    description_ps
+    description_target,
+    description_given,
+    description_hint
   } = props;
 
   const snapPoints = useMemo(() => ["90%"], []);
@@ -43,10 +45,12 @@ const BottomSheetLevel = ({ props }, ref) => {
           <Text style={styles.textTitle}>{title}</Text>
           <Text style={styles.textSubtitle}>{subtitle_task}</Text>
           <Text style={styles.textDescription}>{description_task}</Text>
-          <Text style={styles.textSubtitle}>{subtitle_condition}</Text>
-          <Text style={styles.textDescription}>{description_condition}</Text>
-          <Text style={styles.textSubtitle}>{subtitle_ps}</Text>
-          <Text style={styles.textDescription}>{description_ps}</Text>
+          <Text style={styles.textSubtitle}>{subtitle_target}</Text>
+          <Text style={styles.textDescription}>{description_target}</Text>
+          <Text style={styles.textSubtitle}>{subtitle_given}</Text>
+          <Text style={styles.textDescription}>{description_given}</Text>
+          <Text style={styles.textSubtitle}>{subtitle_hint}</Text>
+          <Text style={styles.textDescription}>{description_hint}</Text>
       </BottomSheetScrollView>
     </BottomSheet>
   );

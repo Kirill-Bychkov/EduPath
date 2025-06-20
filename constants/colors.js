@@ -19,7 +19,12 @@ const EDUCATION = {
 };
 
 const GAME = {
-    animation: {
+    copy_toast: {
+        background: "#fafafa",
+        text: "#000000",
+        shadowColor: "#000000"
+    },
+    stat_nav_bar: {
         background: "#000000"
     },
     menu: {
@@ -30,8 +35,15 @@ const GAME = {
         background: "#eed755",
         text: "#000000"
     },
+    level: {
+        backgroundColorButtonBar: "#3c886b",
+        backgroundColorDivider: "#fafafa"
+    },
     bottomsheet: {
         background: "#fafafa"
+    },
+    food_backlight_screen: {
+        background: "#00000040"
     }
 };
 

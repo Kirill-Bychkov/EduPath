@@ -1,5 +1,3 @@
-import { HEIGHT_STATUS_BAR } from "./layout";
-
 const EDUCATION = {
   theory: require('../assets/icons/theory.png'),
   question: require('../assets/icons/question.png'),
@@ -85,22 +83,37 @@ const GAME = {
     },
     b_exit: {
       source: require("../assets/icons/game/b_exit/b_exit.png"),
-      width: 104,
+      width: 50,
       height: 42
     },
     b_task: {
       source: require("../assets/icons/game/b_task/b_task.png"),
-      width: 104,
+      width: 70,
       height: 42
     },
     b_task_mark: {
       source: require("../assets/icons/game/b_task_mark/b_task_mark.png"),
-      width: 112,
-      height: 48
+      width: 70,
+      height: 42
+    },
+    b_clear: {
+      source: require("../assets/icons/game/b_clear/b_clear.png"),
+      width: 50,
+      height: 42
+    },
+    b_copy: {
+      source: require("../assets/icons/game/b_copy/b_copy.png"),
+      width: 50,
+      height: 42
     },
     b_run: {
       source: require("../assets/icons/game/b_run/b_run.png"),
-      width: 104,
+      width: 70,
+      height: 42
+    },
+    b_stop: {
+      source: require("../assets/icons/game/b_stop/b_stop.png"),
+      width: 70,
       height: 42
     }
   },
@@ -240,12 +253,76 @@ const GAME = {
       left: 175,
       width: 63,
       height: 63,
+      transform: [{ rotate: "180deg" }],
       position: "absolute",
       zIndex: 2
     }
   },
-  playing_field_images: {
-
+  level_images: {
+    playing_field: {
+      source: require("../assets/icons/game/playing_field/playing_field.png"),
+      width: 400,
+      height: 400
+    },
+    apple: {
+      source: require("../assets/icons/game/apple/apple.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    mushroom: {
+      source: require("../assets/icons/game/mushroom/mushroom.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    portal: {
+      source: require("../assets/icons/game/portal/portal.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    stone: {
+      source: require("../assets/icons/game/stone/stone.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    question: {
+      source: require("../assets/icons/game/question/question.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    hedgehog: {
+      source: require("../assets/icons/game/hedgehog/hedgehog.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 2
+    },
+    rip: {
+      source: require("../assets/icons/game/rip/rip.png"),
+      width: 40,
+      height: 40,
+      position: "absolute",
+      zIndex: 1
+    },
+    glow: {
+      source: require("../assets/icons/game/glow/glow.png"),
+      width: 302,
+      height: 302
+    },
+    check_mark: {
+      source: require("../assets/icons/game/check_mark/check_mark.png"),
+      width: 20,
+      height: 20
+    }
   },
   animations: {
     anim_hedgehog: {

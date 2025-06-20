@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "EduPath",
+    "name": "EduPath: учись и развлекайся",
     "scheme": [
       "edupath-learn-and-have-fun"
     ],
@@ -13,10 +13,6 @@
       "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
-    },
-    "androidStatusBar": {
-      "backgroundColor": "#ffffff",
-      "barStyle": "dark-content"
     },
     "ios": {
       "supportsTablet": true
@@ -45,6 +41,12 @@
       "eas": {
         "projectId": "9ecb9006-3533-4a5f-916f-3459a8e8cdfe"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9ecb9006-3533-4a5f-916f-3459a8e8cdfe"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import ButtonCustom from "../components/game/buttonCustom";
 import ImageCustom from "../components/game/imageCustom";
 import WindowModal from "../components/game/windowModal";
@@ -18,17 +18,17 @@ const Game = ({ navigation }) => {
   
   const {
     modalVisible,
-    currentLevel,
+    modalContent,
     openWindowModal,
     closeWindowModal
   } = useWindowModal();
-
+  
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={{ position: "relative" }}>
         <ButtonCustom
           item={imgGame.buttons.b_back_training}
-          action={() => goBack()}
+          action={goBack}
         />
       </View>
       
@@ -48,26 +48,27 @@ const Game = ({ navigation }) => {
             <ButtonCustom
               key={id}
               item={level}
-              action={() => openWindowModal(id)}
+              action={() => openWindowModal("start_level", id)}
               disableOpacity
             />
           ))}
         </View>
       </ScrollView>
       
-      <WindowModal
-        visible={modalVisible}
-        height={dmsGame.window_modal.maxHeight}
-        title={currentLevel.title}
-        description={currentLevel.description}
-        onClose={closeWindowModal}
-        showStartButton={true}
-        onStart={() => {
-          closeWindowModal();
-          goWindow("LevelGame", { id: currentLevel.id });
-        }}
-      />
-    </SafeAreaView>
+      {modalVisible && (
+        <WindowModal
+          height={dmsGame.window_modal.maxHeight}
+          title={modalContent.title}
+          description={modalContent.description}
+          onClose={closeWindowModal}
+          showStartButton={true}
+          onStart={() => {
+            closeWindowModal();
+            goWindow("LevelGame", { id: modalContent.id });
+          }}
+        />
+      )}
+    </View>
   );
 };
 
