@@ -1,47 +1,71 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native"; // импортируем ScrollView
 import { useTheme } from "../contexts/ThemeProvider";
-import { IMAGES } from "../constants";
+import { IMAGES, TEXTS } from "../constants";
+import { useTestResults } from "../contexts/TestResultsContext";
+
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 const Progress = () => {
   const { colors } = useTheme();
+  const { results } = useTestResults();
+
+  useFocusEffect(
+    useCallback(() => {
+      //console.log("Экран прогресса активен");
+    }, [results]) // results в зависимости
+  );
+
+  //console.log("Results:", results);
+  //console.log("Lesson IDs:", Object.values(TEXTS.EDUCATION).map(l => l.id));
+  //console.log("Results keys:", Object.keys(results));
 
   const icon = {
     achievement: IMAGES.EDUCATION.progress,
   };
 
+  const totalLessons = Object.keys(TEXTS.EDUCATION).length;
+
+  const completedLessons = Object.values(TEXTS.EDUCATION).filter(lesson => {
+    //console.log('Пересчёт completedLessons:', completedLessons);
+    //console.log('Results внутри Progress:', results);
+    if (!lesson.resultKeys) return false;
+    return lesson.resultKeys.every(key => results[key]?.isCorrect === true);
+  }).length;
+
+
+  const progressPercent = Math.round((completedLessons / totalLessons) * 100);
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.headersTextStyle, { color: colors.text }]}>Прогресс: 0%</Text>
-      
-      <View style={styles.achievementsContainer}>
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 1</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 2</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 3</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 4</Text>
-        </View>
-      </View>
+      <Text style={[styles.headersTextStyle, { color: colors.text }]}>
+        Прогресс: {progressPercent}%
+      </Text>
+
+      <ScrollView style={styles.scrollContainer}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
+        {Object.values(TEXTS.EDUCATION).map((lesson) => {
+          const isCompleted = lesson.resultKeys?.every(key => results[key]?.isCorrect === true);
+          return (
+            <View key={lesson.id} style={styles.achievementItem}>
+              <View
+                style={[
+                  styles.iconContainer,
+                  {
+                    backgroundColor: isCompleted ? "#4CAF50" : colors.primary,
+                  },
+                ]}
+              >
+                <Image source={icon.achievement} style={styles.icon} />
+              </View>
+              <Text style={[styles.achievementItemText, { color: colors.text }]}>
+                {lesson.name}
+              </Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -58,8 +82,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  achievementsContainer: {
-    marginTop: 10,
+  scrollContainer: {
+    flex: 1,
+    paddingTop: 5,
+    marginBottom: 20
   },
   achievementItem: {
     flexDirection: 'row',

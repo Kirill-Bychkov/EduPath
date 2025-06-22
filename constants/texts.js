@@ -5,6 +5,7 @@ const EDUCATION = {
             id: "Урок 1",
             name: "Переменные и константы",
             path: "VariablesAndConstants",
+            resultKeys: ["variables_and_constants1", "variables_and_constants2"],
             help: `🔍 Переменные и константы в JavaScript:
             
             - В JavaScript переменные можно объявить тремя способами: через let, const и устаревший var.
@@ -42,6 +43,7 @@ const EDUCATION = {
             id: "Урок 2",
             name: "Типы данных",
             path: "DataTypes",
+            resultKeys: ["data_types1", "data_types2"],
             help: `📚 Типы данных в JavaScript:
 
 В JavaScript существует 8 основных типов данных. Их можно разделить на **примитивные** и **непримитивные**.
@@ -95,6 +97,7 @@ console.log(typeof {});       // object
             id: "Урок 3",
             name: "Арифметические операторы",
             path: "ArithmeticOperators",
+            resultKeys: ["arithmetic_operators1", "arithmetic_operators2"],
             help: `🧮 Арифметические операторы в JavaScript:
 
 Базовые:
@@ -126,6 +129,7 @@ let y = 5 % 2; // результат 1`
             id: "Урок 4",
             name: "Операторы сравнения",
             path: "ComparisonOperators",
+            resultKeys: ["comparison_operators1", "comparison_operators2"],
             help: `🔍 Операторы сравнения в JavaScript:
 
 Сравнение возвращает true или false.
@@ -157,6 +161,7 @@ a.x === b.x → true
             id: "Урок 5",
             name: "Логические операторы",
             path: "LogicalOperators",
+            resultKeys: ["logical_operators1", "logical_operators2"],
             help: `🔗 Логические операторы в JavaScript:
 
 && (И) → true, если оба условия true  
@@ -184,6 +189,7 @@ true || false → true
             id: "Урок 6",
             name: "Тернарный оператор",
             path: "TernaryOperator",
+            resultKeys: ["ternary_operators1", "ternary_operators2"],
             help: `❓ Тернарный оператор — это короткая форма if-else.
 
 Синтаксис:
@@ -209,6 +215,7 @@ JSX:
             id: "Урок 7",
             name: "Условные операторы",
             path: "ConditionalOperators",
+            resultKeys: ["conditional_operators1", "conditional_operators2"],
             help: `🔀 Условные операторы:
 
 🟩 if / else:
@@ -238,6 +245,7 @@ age >= 18 ? 'взрослый' : 'ребенок'
             id: "Урок 8",
             name: "Циклы",
             path: "Loops",
+            resultKeys: ["loops1", "loops2", "loops3"],
             help: `🔄 Циклы в JavaScript — это конструкции для повторения действий.
 
 Основные виды циклов:
@@ -289,13 +297,14 @@ for (let i = 0; i < 3; i++) {
     console.log(i, j);
   }
 }
-
+y
 Этот код выведет пары индексов всех итераций вложенного цикла.`
       },
       9: {
             id: "Урок 9",
             name: "Функции",
             path: "Function",
+            resultKeys: ["functions1", "functions2", "functions3"],
             help: `⚙️ Функции в JavaScript — это блоки кода, которые выполняют определённое действие и могут быть вызваны по имени.
 
 Основные виды функций:

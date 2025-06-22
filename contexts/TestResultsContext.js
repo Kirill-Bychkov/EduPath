@@ -4,41 +4,66 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const TestResultsContext = createContext();
 
 export const TestResultsProvider = ({ children }) => {
-  const [results, setResults] = useState({});
+    const [results, setResults] = useState({});
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadResults = async () => {
-      try {
-        const saved = await AsyncStorage.getItem('testResults');
-        if (saved) {
-          setResults(JSON.parse(saved));
+    useEffect(() => {
+        const loadResults = async () => {
+            try {
+                const saved = await AsyncStorage.getItem('testResults');
+                if (saved) {
+                    setResults(JSON.parse(saved));
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки результатов тестов:', e);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadResults();
+    }, []);
+
+    // Автосохранение при изменении results
+    useEffect(() => {
+        const saveToStorage = async () => {
+            try {
+                await AsyncStorage.setItem('testResults', JSON.stringify(results));
+            } catch (e) {
+                console.error('Ошибка автоматического сохранения результатов:', e);
+            }
+        };
+
+        if (!loading) {
+            saveToStorage();
         }
-      } catch (e) {
-        console.error('Ошибка загрузки результатов тестов:', e);
-      }
+    }, [results, loading]);
+
+    // Сохранение одного результата
+    const saveResult = async (testId, selectedOption, isCorrect) => {
+        //console.log(`Сохраняем результат: ${testId} → ${isCorrect}`);
+        setResults(prev => ({
+            ...prev,
+            [testId]: { selectedOption, isCorrect }
+        }));
+        // AsyncStorage сохранится автоматически через useEffect
     };
 
-    loadResults();
-  }, []);
-
- const saveResult = async (testId, selectedOption, isCorrect) => {
-  try {
-    const updated = {
-      ...results,
-      [testId]: { selectedOption, isCorrect }
+    // Сброс прогресса
+    const resetResults = async () => {
+        try {
+            await AsyncStorage.removeItem('testResults');
+            setResults({});
+        } catch (e) {
+            console.error('Ошибка сброса результатов тестов:', e);
+        }
     };
-    setResults(updated);
-    await AsyncStorage.setItem('testResults', JSON.stringify(updated));
-  } catch (e) {
-    console.error('Ошибка сохранения результата теста:', e);
-  }
-};
 
-  return (
-    <TestResultsContext.Provider value={{ results, saveResult }}>
-      {children}
-    </TestResultsContext.Provider>
-  );
+    return (
+        <TestResultsContext.Provider value={{ results, saveResult, setResults, resetResults }}>
+            {children}
+        </TestResultsContext.Provider>
+    );
 };
 
 export const useTestResults = () => useContext(TestResultsContext);

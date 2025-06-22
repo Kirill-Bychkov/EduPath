@@ -81,7 +81,9 @@ const SingleAnswerTest = ({ question, options, correctAnswer, testId, codeBlock 
                 onPress={handleCheckAnswer}
                 disabled={selectedOption === null || isCorrect === true}
             >
-                <Text style={styles.checkButtonText}>Проверить</Text>
+                <Text style={styles.checkButtonText}>
+                    {isCorrect === false ? 'Еще раз' : 'Проверить'}
+                </Text>
             </TouchableOpacity>
 
             {isCorrect !== null && (
