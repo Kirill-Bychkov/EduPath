@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import { useState } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES } from "../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTestResults } from '../contexts/TestResultsContext';
 
 const Settings = () => {
   const icon = {
@@ -13,6 +15,8 @@ const Settings = () => {
 
   const { dark, colors, setScheme } = useTheme();
 
+  const { resetResults } = useTestResults();
+
   const ToggleTheme = () => {
     setScheme(dark ? "light" : "dark");
   }
@@ -22,6 +26,16 @@ const Settings = () => {
   const ToggleSound = () => {
     setIsSoundOn(!isSoundOn);
   }
+
+  const resetProgress = async () => {
+    try {
+      await resetResults();
+      Alert.alert("Прогресс сброшен", "\nВсе результаты тестов удалены.");
+    } catch (error) {
+      Alert.alert("Ошибка", "\nНе удалось очистить прогресс.");
+      console.error("Ошибка при очистке testResults:", error);
+    }
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -48,6 +62,11 @@ const Settings = () => {
           </TouchableOpacity>
         </View>
       </View>
+
+      <TouchableOpacity style={[styles.resetButton, { backgroundColor: colors.primary }]} onPress={resetProgress}>
+        <Text style={styles.resetText}>Сбросить прогресс</Text>
+      </TouchableOpacity>
+
     </View>
   )
 };
@@ -74,6 +93,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginRight: -58,
     marginLeft: 10,
+  },
+  resetButton: {
+    marginTop: 50,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    //backgroundColor: "#e74c3c",
+    borderRadius: 10,
+  },
+  resetText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
