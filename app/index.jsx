@@ -29,6 +29,10 @@ const IndexComponent = ({ route, navigation }) => {
         return <Lessons.Loops />;
       case "Functions":
         return <Lessons.Functions />;
+      case "Arrays":
+        return <Lessons.Arrays />;
+      case "Objects":
+        return <Lessons.Objects />;
       default:
         return (
           <ScrollView

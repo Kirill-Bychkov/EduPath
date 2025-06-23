@@ -41,12 +41,12 @@ export const TestResultsProvider = ({ children }) => {
 
     // Сохранение одного результата
     const saveResult = async (testId, selectedOption, isCorrect) => {
-        //console.log(`Сохраняем результат: ${testId} → ${isCorrect}`);
-        setResults(prev => ({
-            ...prev,
-            [testId]: { selectedOption, isCorrect }
-        }));
-        // AsyncStorage сохранится автоматически через useEffect
+        const updated = {
+            ...results,
+            [testId]: { selectedOption, isCorrect },
+        };
+        setResults(updated);
+        return updated;
     };
 
     // Сброс прогресса

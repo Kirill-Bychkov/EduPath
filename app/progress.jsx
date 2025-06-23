@@ -1,45 +1,60 @@
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native"; // импортируем ScrollView
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
 import { IMAGES, TEXTS } from "../constants";
 import { useTestResults } from "../contexts/TestResultsContext";
 
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
 
 const Progress = () => {
   const { colors } = useTheme();
   const { results } = useTestResults();
 
-  useFocusEffect(
-    useCallback(() => {
-      //console.log("Экран прогресса активен");
-    }, [results]) // results в зависимости
-  );
-
-  //console.log("Results:", results);
-  //console.log("Lesson IDs:", Object.values(TEXTS.EDUCATION).map(l => l.id));
-  //console.log("Results keys:", Object.keys(results));
-
   const icon = {
     achievement: IMAGES.EDUCATION.progress,
   };
 
-  const totalLessons = Object.keys(TEXTS.EDUCATION).length;
+  const [progressData, setProgressData] = useState({
+    completedLessons: 0,
+    totalLessons: 0,
+    progressPercent: 0,
+  });
 
-  const completedLessons = Object.values(TEXTS.EDUCATION).filter(lesson => {
-    //console.log('Пересчёт completedLessons:', completedLessons);
-    //console.log('Results внутри Progress:', results);
-    if (!lesson.resultKeys) return false;
-    return lesson.resultKeys.every(key => results[key]?.isCorrect === true);
-  }).length;
+  const calculateProgress = useCallback(() => {
+    const total = Object.keys(TEXTS.EDUCATION).length;
+    const completed = Object.values(TEXTS.EDUCATION).filter(lesson => {
+      if (!lesson.resultKeys) return false;
+      return lesson.resultKeys.every(key => results[key]?.isCorrect === true);
+    }).length;
+    const percent = Math.round((completed / total) * 100);
+
+    console.log("Обновление прогресса:", { completed, total, percent });
+
+    setProgressData({
+      completedLessons: completed,
+      totalLessons: total,
+      progressPercent: percent,
+    });
+  }, [results]);
+
+  useEffect(() => {
+    calculateProgress(); // Пересчёт при изменении results
+  }, [calculateProgress]);
+
+  useFocusEffect(
+    useCallback(() => {
+      calculateProgress(); // Пересчёт при возвращении на экран
+    }, [calculateProgress])
+  );
 
 
-  const progressPercent = Math.round((completedLessons / totalLessons) * 100);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
       <Text style={[styles.headersTextStyle, { color: colors.text }]}>
-        Прогресс: {progressPercent}%
+        Прогресс: {progressData.progressPercent}%
       </Text>
 
       <ScrollView style={styles.scrollContainer}
