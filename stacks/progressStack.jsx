@@ -8,6 +8,7 @@ export const ProgressStack = () => (
       <Stack.Screen
         name="MenuProgress"
         component={Progress}
+        options={{ unmountOnBlur: true }}
         initialParams={{
           alias: "Достижения",
           parentNavigator: "RootTabs"

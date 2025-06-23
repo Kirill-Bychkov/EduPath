@@ -7,3 +7,5 @@ export { default as TernaryOperator } from "./ternary_operator";
 export { default as ConditionalOperators } from "./conditional_operators";
 export { default as Loops } from "./loops";
 export { default as Functions} from "./functions";
+export { default as Arrays} from "./arrays";
+export { default as Objects} from "./objects";

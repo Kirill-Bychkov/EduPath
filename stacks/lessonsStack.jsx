@@ -96,6 +96,24 @@ export const LessonsStack = () => (
         help: TEXTS.EDUCATION[9].help
       }}
     />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[10].path}
+      component={Lessons.Arrays}
+      initialParams={{
+        alias: TEXTS.EDUCATION[10].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[10].help
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[11].path}
+      component={Lessons.Objects}
+      initialParams={{
+        alias: TEXTS.EDUCATION[11].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[11].help
+      }}
+    />
   </Stack.Navigator>
   </TestResultsProvider>
 );

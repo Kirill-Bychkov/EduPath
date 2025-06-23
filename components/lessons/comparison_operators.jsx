@@ -16,63 +16,94 @@ export default function ComparisonOperators() {
             <Text style={[styles.title, { color: colors.text }]}>Теория: Операторы сравнения в JavaScript</Text>
 
             <Text style={[styles.text, { color: colors.text }]}>
-              Операторы сравнения возвращают логическое значение (true/false) в зависимости от результата сравнения:
+              Операторы сравнения используются для сопоставления значений. Результатом всегда является логическое значение:{" "}
+              <Text style={{ fontWeight: "bold" }}>true</Text> (истина) или <Text style={{ fontWeight: "bold" }}>false</Text> (ложь).
             </Text>
 
-            <Text style={[styles.subtitle, { color: colors.text }]}>Основные операторы:</Text>
-            <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              <Text style={[{ color: colors.text }]}>
-                5 == 5    // Равно → true{"\n"}
-                5 != 3    // Не равно → true{"\n"}
-                5 {">"} 3     // Больше → true{"\n"}
-                5 {"<"} 3     // Меньше → false{"\n"}
-                5 {">="} 5    // Больше или равно → true{"\n"}
-                5 {"<="} 3    // Меньше или равно → false{"\n\n"}
-              </Text>
-            </Text>
-
-            <Text style={[styles.subtitle, { color: colors.text }]}>Строгое сравнение:</Text>
-            <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              <Text style={[{ color: colors.text }]}>
-                '5' == 5   // true (нестрогое сравнение){"\n"}
-                '5' === 5  // false (строгое сравнение, разные типы){"\n"}
-                '5' !== 5  // true (строгое "не равно")
-              </Text>
-            </Text>
-
-            <Text style={[styles.subtitle, { color: colors.text }]}>Особые случаи:</Text>
-            <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              <Text style={[{ color: colors.text }]}>
-                null == undefined  // true{"\n"}
-                null === undefined // false{"\n"}
-                NaN == NaN         // false (особенность NaN){"\n"}
-                isNaN(NaN)        // true (правильная проверка)
-              </Text>
-            </Text>
-
-            <Text style={[styles.subtitle, { color: colors.text }]}>Сравнение объектов:</Text>
-            <Text style={[styles.code, { backgroundColor: colors.background }]}>
-              <Text style={[{ color: colors.text }]}>
-                let a = {"{"}value: 5{"}"};{"\n"}
-                let b = {"{"}value: 5{"}"};{"\n"}
-                a == b  // false (разные объекты){"\n"}
-                a === b // false{"\n"}
-                a.value === b.value // true (сравнение значений)
-              </Text>
-            </Text>
-
-            <Text style={[styles.subtitle, { color: colors.text }]}>Рекомендации:</Text>
+            <Text style={[styles.subtitle, { color: colors.text }]}>1. Базовые операторы</Text>
             <Text style={[styles.text, { color: colors.text }]}>
-              - Всегда используйте строгое сравнение (=== и !==){"\n"}
-              - Для проверки NaN используйте isNaN() или Number.isNaN(){"\n"}
-              - При сравнении объектов сравнивайте конкретные свойства
+              Выполняют сравнение значений без учёта типов (нестрогое сравнение):
+            </Text>
+            <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
+                {`5 == 5     // true — равно
+5 != 3     // true — не равно
+5 > 3      // true — больше
+5 < 3      // false — меньше
+5 >= 5     // true — больше или равно
+5 <= 3     // false — меньше или равно`}
+              </Text>
+            </Text>
+
+            <Text style={[styles.subtitle, { color: colors.text }]}>2. Строгое сравнение</Text>
+            <Text style={[styles.text, { color: colors.text }]}>
+              Строгое сравнение (=== и !==) сравнивает как значения, так и типы:
+            </Text>
+            <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
+                {`'5' == 5     // true — JS приводит типы
+'5' === 5    // false — типы разные
+'5' !== 5    // true — типы разные`}
+              </Text>
+            </Text>
+
+            <Text style={[styles.subtitle, { color: colors.text }]}>3. Неочевидные случаи</Text>
+            <Text style={[styles.text, { color: colors.text }]}>
+              Некоторые значения в JavaScript ведут себя нестандартно при сравнении:
+            </Text>
+            <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
+                {`null == undefined   // true — оба "пустые"
+null === undefined  // false — типы разные
+
+NaN == NaN          // false — NaN никогда не равен сам себе
+isNaN(NaN)          // true — проверка на NaN
+
+0 == false          // true — тип приводится
+0 === false         // false — разные типы`}
+              </Text>
+            </Text>
+            <Text style={[styles.subtitle, { color: colors.text }]}>4. Сравнение объектов</Text>
+            <Text style={[styles.text, { color: colors.text }]}>
+              При сравнении объектов сравниваются не значения, а ссылки:
+            </Text>
+            <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
+                {`let a = { value: 5 };
+let b = { value: 5 };
+
+a == b        // false — разные объекты
+a === b       // false
+a.value === b.value // true — сравнение конкретных значений`}
+              </Text>
+            </Text>
+            <Text style={[styles.subtitle, { color: colors.text }]}>5. Поведение при преобразовании типов</Text>
+            <Text style={[styles.text, { color: colors.text }]}>
+              При использовании <Text style={{ fontWeight: 'bold' }}>==</Text> JavaScript автоматически преобразует типы:
+            </Text>
+            <Text style={[styles.code, { backgroundColor: colors.background }]}>
+              <Text style={[{ color: colors.text }]}>
+                {`false == 0       // true
+'' == 0           // true
+null == 0         // false
+undefined == 0    // false`}
+              </Text>
+            </Text>
+
+            <Text style={[styles.subtitle, { color: colors.text }]}>6. Рекомендации</Text>
+            <Text style={[styles.text, { color: colors.text }]}>
+              — Всегда предпочитайте строгое сравнение <Text style={{ fontWeight: 'bold' }}>===</Text> и <Text style={{ fontWeight: 'bold' }}>!==</Text> для надёжности.{"\n"}
+              — Используйте <Text style={[styles.code, { backgroundColor: colors.background }]}>Number.isNaN()</Text> для безопасной проверки NaN.{"\n"}
+              — При сравнении объектов сравнивайте их свойства, а не сами объекты.{"\n"}
+              — Не полагайтесь на нестрогое сравнение с null, false или 0 — это может привести к неожиданным результатам.
             </Text>
           </ScrollView>
+
         );
       case 'test1':
         return (
           <SingleAnswerTest
-          testId="comparison_operators1"
+            testId="comparison_operators1"
             question="Какой оператор выполняет строгое сравнение?"
             options={[
               "1. ==",
@@ -85,7 +116,7 @@ export default function ComparisonOperators() {
       case 'test2':
         return (
           <SingleAnswerTest
-          testId="comparison_operators2"
+            testId="comparison_operators2"
             question="Что вернет выражение null == undefined?"
             options={[
               "1. true",
