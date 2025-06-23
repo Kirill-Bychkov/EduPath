@@ -1,5 +1,6 @@
+import { useKeyboard } from "@react-native-community/hooks";
 import { StyleSheet, ScrollView, View } from "react-native";
-import ButtonCustom from "./buttonCustom";
+import ImageButton from "./imageButton";
 import ImageCustom from "./imageCustom";
 import Interpreter from "../interpreter";
 import BottomSheetLevel from "./bottomSheetLevel";
@@ -14,10 +15,20 @@ import { useBottomSheetLevel } from "../../hooks/game/useBottomSheetLevel";
 import { useBackNavigation } from "../../hooks/useBackNavigation";
 import { lightColors, imgGame, dmsGame, dmsLevelGrids, txtGame } from "../../config";
 import { rotateInterpolate } from "../../utils/rotateInterpolate";
+import Toast from "react-native-toast-message";
 
 const LevelGame = ({ route, navigation }) => {
-  const { id } = route.params;
-  const text = txtGame.bottomsheet[id];
+  const
+    { id } = route.params,
+    text = txtGame.bottomsheet[id];
+  
+  const renderWindowReasons = {
+    incident_field: "incident_field",
+    clear_code: "clear_code",
+    level_passed: "level_passed"
+  };
+
+  const keyboard = useKeyboard();
 
   const { goBack } = useGoWindow(navigation);
   useBackNavigation(goBack);
@@ -33,7 +44,7 @@ const LevelGame = ({ route, navigation }) => {
     bottomSheetRef,
     openBottomSheet
   } = useBottomSheetLevel();
-  
+
   const {
     scrollViewRef,
     interpreterRef,
@@ -45,7 +56,50 @@ const LevelGame = ({ route, navigation }) => {
     grid,
     foodRef,
     foodBacklightVisible
-  } = useLevelGame(dmsLevelGrids[id], openWindowModal);
+  } = useLevelGame(dmsLevelGrids[id], openWindowModal, renderWindowReasons);
+
+  const renderWindowModal = () => {
+    switch (modalContent.type) {
+      case renderWindowReasons.incident_field:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            showCancelButton={false}
+            onOk={closeWindowModal}
+            textOk={"Ок"}
+          />
+        );
+      case renderWindowReasons.clear_code:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            onCancel={closeWindowModal}
+            textCancel={"Нет"}
+            onOk={() => {
+              closeWindowModal();
+              clearCode();
+            }}
+            textOk={"Да"}
+          />
+        );
+      case renderWindowReasons.level_passed:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            onCancel={closeWindowModal}
+            textCancel={"Нет"}
+            onOk={() => {
+              closeWindowModal();
+              goWindow("LevelGame", { id: modalContent.id });
+            }}
+            textOk={"Да"}
+          />
+        );
+    };
+  };
 
   return (
     <View style={styles.container}>
@@ -56,7 +110,11 @@ const LevelGame = ({ route, navigation }) => {
         scrollEventThrottle={16}
         onScroll={handleScroll}
       >
-        <View style={styles.viewContent}>
+        <View style={{
+          marginBottom: keyboard.keyboardShown
+            ? keyboard.keyboardHeight + dmsGame.level.minMarginBottom
+            : dmsGame.level.maxMarginBottom
+        }}>
           <View style={styles.playingField}>
             <ImageCustom
               key={"playing_field"}
@@ -108,12 +166,12 @@ const LevelGame = ({ route, navigation }) => {
       <View style={styles.buttonBar}>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonGroup}>
-            <ButtonCustom
+            <ImageButton
               item={imgGame.buttons.b_exit}
               action={goBack}
             />
             <View style={styles.spacer} />
-            <ButtonCustom
+            <ImageButton
               item={imgGame.buttons.b_task}
               action={openBottomSheet}
             />
@@ -122,21 +180,29 @@ const LevelGame = ({ route, navigation }) => {
           <View style={styles.divider} />
 
           <View style={styles.buttonGroup}>
-            <ButtonCustom
+            <ImageButton
               item={imgGame.buttons.b_clear}
-              action={clearCode}
+              action={() => openWindowModal(renderWindowReasons.clear_code)}
             />
             <View style={styles.spacer} />
-            <ButtonCustom
+            <ImageButton
               item={imgGame.buttons.b_copy}
-              action={copyCode}
+              action={() => {
+                copyCode();
+                Toast.show({
+                  type: "copy",
+                  text1: "Код скопирован в буфер обмена",
+                  position: "top",
+                  visibilityTime: 2000
+                });
+              }}
             />
           </View>
 
           <View style={styles.divider} />
 
           <View>
-            <ButtonCustom
+            <ImageButton
               item={imgGame.buttons.b_run}
               action={runCode}
             />
@@ -144,19 +210,15 @@ const LevelGame = ({ route, navigation }) => {
         </View>
       </View>
       
-      {!modalVisible ? (
-        <BottomSheetLevel
-          ref={bottomSheetRef}
-          props={text}
-        />
-      ) : (
-        <WindowModal
-          height={dmsGame.window_modal.minHeight}
-          title={modalContent.title}
-          description={modalContent.description}
-          onClose={closeWindowModal}
-        />
-      )}
+      {!modalVisible
+        ? (
+          <BottomSheetLevel
+            ref={bottomSheetRef}
+            props={text}
+          />
+        )
+        : renderWindowModal()
+      }
 
       <FoodBacklightScreen
         visible={foodBacklightVisible}
@@ -175,9 +237,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flex: 1
-  },
-  viewContent: {
-    paddingBottom: dmsGame.level.paddingBottomViewContent
   },
   playingField: {
     paddingHorizontal: dmsGame.level.paddingHorizontal,

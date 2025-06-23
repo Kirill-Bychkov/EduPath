@@ -6,7 +6,11 @@ import { move } from "../../utils/game/moveHedgehog";
 import { teleport, erect, remove, shine } from "../../utils/game/fadeAnimations";
 import { deepCopy } from "../../utils/deepCopy";
 
-export const useLevelGame = (initialGrid, openWindowModal) => {
+export const useLevelGame = (
+  initialGrid,
+  openWindowModal,
+  renderWindowReasons
+) => {
   const scrollViewRef = useRef(null);
   const interpreterRef = useRef(null);
 
@@ -16,7 +20,7 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
       return animationsRef.current[prop];
     }
   });
-
+  
   const [grid, setGrid] = useState(deepCopy(initialGrid));
 
   const foodRef = useRef("");
@@ -55,7 +59,7 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
         await erect(
           animations.ripOpacity
         )();
-        openWindowModal("message", reason);
+        openWindowModal(renderWindowReasons.incident_field, reason);
       },
 
       onCleaningCell: async (obj, id) => {

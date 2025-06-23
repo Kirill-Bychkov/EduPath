@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import ButtonCustom from "../components/game/buttonCustom";
+import ImageButton from "../components/game/imageButton";
 import ImageCustom from "../components/game/imageCustom";
 import WindowModal from "../components/game/windowModal";
 import { useGame } from "../hooks/game/useGame";
@@ -8,9 +8,14 @@ import { useWindowModal } from "../hooks/game/useWindowModal";
 import { useBackNavigation } from "../hooks/useBackNavigation";
 import { COLORS } from "../constants";
 import { WindowHeight } from "../utils/scaleTools";
-import { dmsGame, imgGame } from "../config";
+import { imgGame } from "../config";
 
 const Game = ({ navigation }) => {
+  const renderWindowReasons = {
+    start_level: "start_level",
+    game_over: "game_over"
+  };
+  
   const { scrollViewRef, handleScroll } = useGame();
 
   const { goWindow, goBack } = useGoWindow(navigation);
@@ -22,11 +27,40 @@ const Game = ({ navigation }) => {
     openWindowModal,
     closeWindowModal
   } = useWindowModal();
+
+  const renderWindowModal = () => {
+    switch (modalContent.type) {
+      case renderWindowReasons.start_level:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            onCancel={closeWindowModal}
+            textCancel={"Отмена"}
+            onOk={() => {
+              closeWindowModal();
+              goWindow("LevelGame", { id: modalContent.id });
+            }}
+            textOk={"Запустить"}
+          />
+        );
+      case renderWindowReasons.game_over:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            showCancelButton={false}
+            onOk={closeWindowModal}
+            textOk={"Спасибо!"}
+          />
+        );
+    };
+  };
   
   return (
     <View style={styles.container}>
       <View style={{ position: "relative" }}>
-        <ButtonCustom
+        <ImageButton
           item={imgGame.buttons.b_back_training}
           action={goBack}
         />
@@ -45,29 +79,17 @@ const Game = ({ navigation }) => {
           ))}
             
           {Object.entries(imgGame.level_buttons).map(([id, level]) => (
-            <ButtonCustom
+            <ImageButton
               key={id}
               item={level}
-              action={() => openWindowModal("start_level", id)}
+              action={() => openWindowModal(renderWindowReasons.start_level, id)}
               disableOpacity
             />
           ))}
         </View>
       </ScrollView>
-      
-      {modalVisible && (
-        <WindowModal
-          height={dmsGame.window_modal.maxHeight}
-          title={modalContent.title}
-          description={modalContent.description}
-          onClose={closeWindowModal}
-          showStartButton={true}
-          onStart={() => {
-            closeWindowModal();
-            goWindow("LevelGame", { id: modalContent.id });
-          }}
-        />
-      )}
+
+      {modalVisible && renderWindowModal()}
     </View>
   );
 };

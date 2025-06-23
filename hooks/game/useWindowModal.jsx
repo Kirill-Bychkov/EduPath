@@ -6,14 +6,20 @@ export const useWindowModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState({});
 
-  const openWindowModal = useCallback((externalKey, internalKey) => {
-    const contents = txtGame.window_modal[externalKey][internalKey];
+  const openWindowModal = useCallback((reason, value) => {
+    const rawData = txtGame.window_modal[reason];
 
-    setModalContent(() =>
-      Array.isArray(contents)
-        ? contents[randomInt(contents.length)]
-        : contents
-    );
+    const rawContent = value !== undefined && rawData?.[value]
+      ? rawData[value]
+      : rawData;
+
+    const selected = Array.isArray(rawContent)
+      ? rawContent[randomInt(rawContent.length)]
+      : rawContent;
+    
+    const content = { type: reason, ...selected };
+
+    setModalContent(content);
     setModalVisible(true);
   }, []);
 
