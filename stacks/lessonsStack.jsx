@@ -2,8 +2,10 @@ import Index from "../app/index"
 import { Stack, commonStackOptions } from "./config";
 import { TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
+import { TestResultsProvider } from "../contexts/TestResultsContext";
 
 export const LessonsStack = () => (
+  <TestResultsProvider>
   <Stack.Navigator screenOptions={commonStackOptions}>
     <Stack.Screen
       name="MenuIndex"
@@ -76,5 +78,42 @@ export const LessonsStack = () => (
         help: TEXTS.EDUCATION[7].help
       }}
     />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[8].path}
+      component={Lessons.Loops}
+      initialParams={{
+        alias: TEXTS.EDUCATION[8].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[8].help
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[9].path}
+      component={Lessons.Functions}
+      initialParams={{
+        alias: TEXTS.EDUCATION[9].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[9].help
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[10].path}
+      component={Lessons.Arrays}
+      initialParams={{
+        alias: TEXTS.EDUCATION[10].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[10].help
+      }}
+    />
+    <Stack.Screen
+      name={TEXTS.EDUCATION[11].path}
+      component={Lessons.Objects}
+      initialParams={{
+        alias: TEXTS.EDUCATION[11].id,
+        parentNavigator: "LessonsStack",
+        help: TEXTS.EDUCATION[11].help
+      }}
+    />
   </Stack.Navigator>
+  </TestResultsProvider>
 );

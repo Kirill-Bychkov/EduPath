@@ -1,47 +1,86 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { useTheme } from "../contexts/ThemeProvider";
-import { IMAGES } from "../constants";
+import { IMAGES, TEXTS } from "../constants";
+import { useTestResults } from "../contexts/TestResultsContext";
+
+import { useFocusEffect } from '@react-navigation/native';
 
 const Progress = () => {
   const { colors } = useTheme();
+  const { results } = useTestResults();
 
   const icon = {
     achievement: IMAGES.EDUCATION.progress,
   };
 
+  const [progressData, setProgressData] = useState({
+    completedLessons: 0,
+    totalLessons: 0,
+    progressPercent: 0,
+  });
+
+  const calculateProgress = useCallback(() => {
+    const total = Object.keys(TEXTS.EDUCATION).length;
+    const completed = Object.values(TEXTS.EDUCATION).filter(lesson => {
+      if (!lesson.resultKeys) return false;
+      return lesson.resultKeys.every(key => results[key]?.isCorrect === true);
+    }).length;
+    const percent = Math.round((completed / total) * 100);
+
+    console.log("Обновление прогресса:", { completed, total, percent });
+
+    setProgressData({
+      completedLessons: completed,
+      totalLessons: total,
+      progressPercent: percent,
+    });
+  }, [results]);
+
+  useEffect(() => {
+    calculateProgress(); // Пересчёт при изменении results
+  }, [calculateProgress]);
+
+  useFocusEffect(
+    useCallback(() => {
+      calculateProgress(); // Пересчёт при возвращении на экран
+    }, [calculateProgress])
+  );
+
+
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.headersTextStyle, { color: colors.text }]}>Прогресс: 0%</Text>
-      
-      <View style={styles.achievementsContainer}>
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 1</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 2</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 3</Text>
-        </View>
-        
-        <View style={styles.achievementItem}>
-          <View style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
-            <Image source={icon.achievement} style={styles.icon} />
-          </View>
-          <Text style={[styles.achievementItemText, { color: colors.text }]}>Закончить раздел 4</Text>
-        </View>
-      </View>
+    <View
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
+      <Text style={[styles.headersTextStyle, { color: colors.text }]}>
+        Прогресс: {progressData.progressPercent}%
+      </Text>
+
+      <ScrollView style={styles.scrollContainer}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
+        {Object.values(TEXTS.EDUCATION).map((lesson) => {
+          const isCompleted = lesson.resultKeys?.every(key => results[key]?.isCorrect === true);
+          return (
+            <View key={lesson.id} style={styles.achievementItem}>
+              <View
+                style={[
+                  styles.iconContainer,
+                  {
+                    backgroundColor: isCompleted ? "#4CAF50" : colors.primary,
+                  },
+                ]}
+              >
+                <Image source={icon.achievement} style={styles.icon} />
+              </View>
+              <Text style={[styles.achievementItemText, { color: colors.text }]}>
+                {lesson.name}
+              </Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -58,8 +97,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  achievementsContainer: {
-    marginTop: 10,
+  scrollContainer: {
+    flex: 1,
+    paddingTop: 5,
+    marginBottom: 20
   },
   achievementItem: {
     flexDirection: 'row',

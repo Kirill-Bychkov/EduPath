@@ -12,6 +12,7 @@ import { GameStack } from "../stacks/gameStack";
 import { ProgressStack } from "../stacks/progressStack";
 import { SettingsStack } from "../stacks/settingsStack";
 import { useRootLayout } from "../hooks/useRootLayout";
+import { TestResultsProvider } from "../contexts/TestResultsContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,20 +28,22 @@ const RootLayout = () => {
       <LoadingProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
-            <BarView>
-              <Tab.Navigator
-                screenOptions={{ headerShown: false }}
-                tabBar={(props) => <TabBar {...props} />}
-              >
-                <Tab.Screen name="Index" component={LessonsStack} />
-                <Tab.Screen name="Game" component={GameStack} />
-                <Tab.Screen name="Progress" component={ProgressStack} />
-                <Tab.Screen name="Settings" component={SettingsStack} />
-              </Tab.Navigator>
-              <Toast
-                config={{ copy: (props) => <CopyToast {...props} /> }}
-              />
-            </BarView>
+            <TestResultsProvider>
+              <BarView>
+                <Tab.Navigator
+                  screenOptions={{ headerShown: false }}
+                  tabBar={(props) => <TabBar {...props} />}
+                >
+                  <Tab.Screen name="Index" component={LessonsStack} />
+                  <Tab.Screen name="Game" component={GameStack} />
+                  <Tab.Screen name="Progress" component={ProgressStack} />
+                  <Tab.Screen name="Settings" component={SettingsStack} />
+                </Tab.Navigator>
+                <Toast
+                  config={{ copy: (props) => <CopyToast {...props} /> }}
+                />
+              </BarView>
+            </TestResultsProvider>
           </SafeAreaProvider>
         </GestureHandlerRootView>
       </LoadingProvider>

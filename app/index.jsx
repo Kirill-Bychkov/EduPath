@@ -3,7 +3,9 @@ import { useTheme } from "../contexts/ThemeProvider";
 import { COLORS, TEXTS } from "../constants";
 import * as Lessons from "../components/lessons";
 
-const Index = ({ route, navigation }) => {
+import { TestResultsProvider } from '../contexts/TestResultsContext';
+
+const IndexComponent = ({ route, navigation }) => {
   const { colors } = useTheme();
   const currentRoute = route.name;
 
@@ -12,17 +14,25 @@ const Index = ({ route, navigation }) => {
       case "VariablesAndConstants":
         return <Lessons.VariablesAndConstants />;
       case "DataTypes":
-          return <Lessons.DataTypes />;
+        return <Lessons.DataTypes />;
       case "ArithmeticOperators":
-          return <Lessons.ArithmeticOperators />;
+        return <Lessons.ArithmeticOperators />;
       case "ComparisonOperators":
-          return <Lessons.ComparisonOperators />;
+        return <Lessons.ComparisonOperators />;
       case "LogicalOperators":
-          return <Lessons.LogicalOperators />;
+        return <Lessons.LogicalOperators />;
       case "TernaryOperator":
-          return <Lessons.TernaryOperator />;
+        return <Lessons.TernaryOperator />;
       case "ConditionalOperators":
-          return <Lessons.ConditionalOperators />;
+        return <Lessons.ConditionalOperators />;
+      case "Loops":
+        return <Lessons.Loops />;
+      case "Functions":
+        return <Lessons.Functions />;
+      case "Arrays":
+        return <Lessons.Arrays />;
+      case "Objects":
+        return <Lessons.Objects />;
       default:
         return (
           <ScrollView
@@ -53,6 +63,12 @@ const Index = ({ route, navigation }) => {
     </View>
   );
 };
+
+const Index = (props) => (
+  <TestResultsProvider>
+    <IndexComponent {...props} />
+  </TestResultsProvider>
+);
 
 const styles = StyleSheet.create({
   container: {

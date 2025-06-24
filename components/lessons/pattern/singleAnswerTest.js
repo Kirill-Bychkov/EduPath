@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from "../../../contexts/ThemeProvider";
+import { useTestResults } from "../../../contexts/TestResultsContext";
 
-const SingleAnswerTest = ({ question, options, correctAnswer }) => {
+const SingleAnswerTest = ({ question, options, correctAnswer, testId, codeBlock = null }) => {
     const { dark, colors } = useTheme();
+
+    const { results, saveResult } = useTestResults(); // <-- доступ к сохранению
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
@@ -15,13 +18,23 @@ const SingleAnswerTest = ({ question, options, correctAnswer }) => {
 
     // Сбрасываем состояние при изменении вопроса/вариантов
     useEffect(() => {
-        setSelectedOption(null);
-        setIsCorrect(null);
-    }, [question, options, correctAnswer]);
+        if (testId && results[testId]) {
+            const { selectedOption, isCorrect } = results[testId];
+            setSelectedOption(selectedOption);
+            setIsCorrect(isCorrect);
+        } else {
+            setSelectedOption(null);
+            setIsCorrect(null);
+        }
+    }, [question, options, correctAnswer, results, testId]);
 
     const handleCheckAnswer = () => {
         if (selectedOption !== null) {
-            setIsCorrect(selectedOption === correctAnswer);
+            const correct = selectedOption === correctAnswer;
+            setIsCorrect(correct);
+            if (testId) {
+                saveResult(testId, selectedOption, correct);
+            }
         }
     };
 
@@ -39,11 +52,22 @@ const SingleAnswerTest = ({ question, options, correctAnswer }) => {
     return (
         <View style={styles.blockContainer}>
             <Text style={[styles.question, { color: colors.text }]}>{question}</Text>
+
+            {codeBlock && (
+                <Text style={[styles.codeBlock, { color: colors.text }]}>
+                    {codeBlock}
+                </Text>
+            )}
+
             {options.map((option, index) => (
                 <TouchableOpacity
                     key={index}
                     style={getOptionStyle(index)}
-                    onPress={() => handleOptionPress(index + 1)}
+                    onPress={() => {
+                        if (isCorrect !== true) {  // Блокируем выбор, если ответ уже правильный
+                            handleOptionPress(index + 1);
+                        }
+                    }}
                 >
                     <Text style={styles.optionText}>{option}</Text>
                 </TouchableOpacity>
@@ -52,14 +76,16 @@ const SingleAnswerTest = ({ question, options, correctAnswer }) => {
             <TouchableOpacity
                 style={[
                     styles.checkButton,
-                    selectedOption === null && styles.disabledButton
+                    (selectedOption === null || isCorrect === true) && styles.disabledButton
                 ]}
                 onPress={handleCheckAnswer}
-                disabled={selectedOption === null}
+                disabled={selectedOption === null || isCorrect === true}
             >
-                <Text style={styles.checkButtonText}>Проверить</Text>
+                <Text style={styles.checkButtonText}>
+                    {isCorrect === false ? 'Еще раз' : 'Проверить'}
+                </Text>
             </TouchableOpacity>
-            
+
             {isCorrect !== null && (
                 <Text style={isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect}>
                     {isCorrect ? 'Правильно!' : 'Неправильно! Попробуйте еще раз.'}
@@ -75,6 +101,18 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 2,
         paddingVertical: 16,
+    },
+    questionContainer: {
+        marginBottom: 20,
+    },
+    codeBlock: {
+        fontFamily: 'monospace',
+        backgroundColor: '#f0f0f0',
+        padding: 10,
+        borderRadius: 6,
+        marginBottom: 12,
+        fontSize: 14,
+        lineHeight: 20,
     },
     question: {
         fontSize: 18,
