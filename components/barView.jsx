@@ -13,7 +13,7 @@ const BarView = ({ children }) => {
         { dark, colors } = useTheme();
         
     const
-        navState = useNavigationState((state) => state),
+        navState = useNavigationState((state) => state || { routes: [], index: 0 }),
         currentRoute = activeRouteName(navState),
         isGameScreen = currentRoute.includes("Game");
     

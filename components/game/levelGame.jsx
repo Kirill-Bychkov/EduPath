@@ -20,17 +20,22 @@ import Toast from "react-native-toast-message";
 const LevelGame = ({ route, navigation }) => {
   const
     { id } = route.params,
-    text = txtGame.bottomsheet[id];
+    taskText = txtGame.bottomsheet[id],
+    taskConditions = txtGame.level_conditions[id],
+    initialGrid = dmsLevelGrids[id];
   
   const renderWindowReasons = {
     incident_field: "incident_field",
     clear_code: "clear_code",
-    level_passed: "level_passed"
+    task_failed: "task_failed",
+    items_left: "items_left",
+    level_passed: "level_passed",
+    game_over: "game_over"
   };
 
   const keyboard = useKeyboard();
 
-  const { goBack } = useGoWindow(navigation);
+  const { goBack, goNextLevel } = useGoWindow(navigation);
   useBackNavigation(goBack);
 
   const {
@@ -55,12 +60,21 @@ const LevelGame = ({ route, navigation }) => {
     animations,
     grid,
     foodRef,
-    foodBacklightVisible
-  } = useLevelGame(dmsLevelGrids[id], openWindowModal, renderWindowReasons);
+    foodBacklightVisible,
+    isLevelPassed
+  } = useLevelGame(
+    id,
+    taskConditions,
+    initialGrid,
+    openWindowModal,
+    renderWindowReasons
+  );
 
   const renderWindowModal = () => {
     switch (modalContent.type) {
       case renderWindowReasons.incident_field:
+      case renderWindowReasons.task_failed:
+      case renderWindowReasons.items_left:
         return (
           <WindowModal
             title={modalContent.title}
@@ -93,9 +107,19 @@ const LevelGame = ({ route, navigation }) => {
             textCancel={"Нет"}
             onOk={() => {
               closeWindowModal();
-              goWindow("LevelGame", { id: modalContent.id });
+              goNextLevel("LevelGame", { id: id + 1 });
             }}
             textOk={"Да"}
+          />
+        );
+      case renderWindowReasons.game_over:
+        return (
+          <WindowModal
+            title={modalContent.title}
+            description={modalContent.description}
+            showCancelButton={false}
+            onOk={closeWindowModal}
+            textOk={"Спасибо!"}
           />
         );
     };
@@ -140,7 +164,7 @@ const LevelGame = ({ route, navigation }) => {
               cell.obj !== "border" &&
               cell.obj !== "empty" &&
               cell.obj !== "hedgehog")
-            .map((cell, index) => {
+            .map((cell) => {
               const image = {
                 ...imgGame.level_images[cell.obj],
                 transform: [
@@ -153,7 +177,7 @@ const LevelGame = ({ route, navigation }) => {
                   : 1
               };
 
-              return <AnimatedImageCustom key={index} item={image} />;
+              return <AnimatedImageCustom key={cell.id} item={image} />;
             })}
           
           <Interpreter
@@ -172,7 +196,9 @@ const LevelGame = ({ route, navigation }) => {
             />
             <View style={styles.spacer} />
             <ImageButton
-              item={imgGame.buttons.b_task}
+              item={isLevelPassed
+                ? imgGame.buttons.b_task_mark
+                : imgGame.buttons.b_task}
               action={openBottomSheet}
             />
           </View>
@@ -214,7 +240,7 @@ const LevelGame = ({ route, navigation }) => {
         ? (
           <BottomSheetLevel
             ref={bottomSheetRef}
-            props={text}
+            props={taskText}
           />
         )
         : renderWindowModal()

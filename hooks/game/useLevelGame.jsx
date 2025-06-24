@@ -7,6 +7,8 @@ import { teleport, erect, remove, shine } from "../../utils/game/fadeAnimations"
 import { deepCopy } from "../../utils/deepCopy";
 
 export const useLevelGame = (
+  levelNumber,
+  taskConditions,
   initialGrid,
   openWindowModal,
   renderWindowReasons
@@ -25,6 +27,8 @@ export const useLevelGame = (
 
   const foodRef = useRef("");
   const [foodBacklightVisible, setFoodBacklightVisible] = useState(false);
+
+  const isLevelPassedRef = useRef(false);
 
   useEffect(() => {
     HedgehogBack.setConfig({
@@ -85,6 +89,11 @@ export const useLevelGame = (
   }, []);
 
   const runCode = useCallback(() => {
+    if (!interpreterRef.current?.checkCodeInGame(taskConditions)) {
+      openWindowModal(renderWindowReasons.task_failed);
+      return;
+    }
+
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
 
     setGrid(deepCopy(initialGrid));
@@ -92,8 +101,30 @@ export const useLevelGame = (
 
     HedgehogStorage.clear();
     HedgehogBack.resetQueue();
+    isLevelPassedRef.current = false;
     
     interpreterRef.current?.runUserCode();
+
+    HedgehogBack.getQueue().then(() => {
+      const hasVisibleFood = grid.flat().some(cell => {
+        if (cell.obj === "apple" || cell.obj === "mushroom") {
+          const opacity = animations[`${cell.obj}Opacities`]?.[cell.id];
+          return opacity?.__getValue?.() === 1;
+        }
+        return false;
+      });
+
+      if (hasVisibleFood) {
+        return openWindowModal(renderWindowReasons.items_left);
+      }
+
+      isLevelPassedRef.current = true;
+      const reason = levelNumber < Object.keys(taskConditions).length
+        ? renderWindowReasons.level_passed
+        : renderWindowReasons.game_over;
+      
+      openWindowModal(reason);
+    });
   }, []);
 
   const clearCode = useCallback(() => {
@@ -114,6 +145,7 @@ export const useLevelGame = (
     animations,
     grid,
     foodRef,
-    foodBacklightVisible
+    foodBacklightVisible,
+    isLevelPassed: isLevelPassedRef.current
   };
 };

@@ -20,5 +20,9 @@ export const useGoWindow = (navigation) => {
     executeWithLoading(() => navigation.goBack());
   };
 
-  return { goWindow, goBack };
+  const goNextLevel = (path, params = {}) => {
+    executeWithLoading(() => navigation.replace(path, params));
+  };
+
+  return { goWindow, goBack, goNextLevel };
 };

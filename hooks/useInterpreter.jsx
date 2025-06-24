@@ -45,10 +45,31 @@ export const useInterpreter = (ref) => {
     await Clipboard.setStringAsync(userCode);
   };
 
+  const checkCodeInGame = (taskConditions) => {
+    const trimmedCode = userCode.trim();
+    if (!trimmedCode) return false;
+
+    for (const [key, regexString] of Object.entries(taskConditions)) {
+      if (!regexString) continue;
+
+      try {
+        const regex = new RegExp(regexString);
+        if (!regex.test(trimmedCode)) {
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   useImperativeHandle(ref, () => ({
     runUserCode,
     clearUserCode,
-    copyUserCode
+    copyUserCode,
+    checkCodeInGame
   }));
 
   return {

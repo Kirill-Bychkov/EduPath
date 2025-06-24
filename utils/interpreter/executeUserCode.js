@@ -1,6 +1,6 @@
 import { checkCodeErrors } from "./checkCodeErrors";
 import { safeExecuteCode } from "./safeExecuteCode";
-import { transformClassToFunction } from "./transformClassToFunction";
+import { transformAndInjectControl } from "./transformCodeAST";
 
 export function executeUserCode(userCode, getInput, wrappedConsole) {
   const result = checkCodeErrors(userCode);
@@ -9,7 +9,7 @@ export function executeUserCode(userCode, getInput, wrappedConsole) {
   }
 
   const ast = result.output;
-  const transformedCode = transformClassToFunction(ast);
-
+  const transformedCode = transformAndInjectControl(ast);
+  
   return safeExecuteCode(transformedCode, getInput, wrappedConsole);
 };

@@ -12,8 +12,7 @@ import { imgGame } from "../config";
 
 const Game = ({ navigation }) => {
   const renderWindowReasons = {
-    start_level: "start_level",
-    game_over: "game_over"
+    start_level: "start_level"
   };
   
   const { scrollViewRef, handleScroll } = useGame();
@@ -42,16 +41,6 @@ const Game = ({ navigation }) => {
               goWindow("LevelGame", { id: modalContent.id });
             }}
             textOk={"Запустить"}
-          />
-        );
-      case renderWindowReasons.game_over:
-        return (
-          <WindowModal
-            title={modalContent.title}
-            description={modalContent.description}
-            showCancelButton={false}
-            onOk={closeWindowModal}
-            textOk={"Спасибо!"}
           />
         );
     };
