@@ -477,7 +477,7 @@ const GAME = {
 через сложный лабиринт.`
                   }
             },
-            message: {
+            incident_field: {
                   border: [
                         {
                               title: "🛑 Стоп!",
@@ -524,6 +524,35 @@ const GAME = {
 на внеплановую диагностику.`
                         }
                   ]
+            },
+            clear_code: {
+                  title: "Очистить редактор?",
+                  description: `Данное действие приведёт
+к удалению всего вашего кода.`
+            },
+            task_failed: {
+                  title: "Условия не выполнены",
+                  description: `Прочитайте задание уровня ещё раз
+и попробуйте снова.`
+            },
+            items_left: {
+                  title: "Что-то забыто",
+                  description: `На поле остались элементы,
+которые нужно собрать.
+Проверьте внимательно
+и завершите уровень.`
+            },
+            level_passed: {
+                  title: "Уровень пройден!",
+                  description: `Вы успешно выполнили задание.
+Так держать!
+Хотите перейти к следующему уровню?`
+            },
+            game_over: {
+                  title: "Поздравляем!",
+                  description: `Вы успешно завершили
+все уровни.
+Отличная работа!`
             }
       },
       bottomsheet: {
@@ -629,6 +658,28 @@ ${P}• up();
 ${P}• down().
 ${P}Например, данный код сместить ёжика вправо на одну клетку: hedgehog.right().`,
                   description_ps: `${P}Не забудьте вызвать функцию.`
+            }
+      },
+      level_conditions: {
+            1: {
+                  loops: "\\b(for|while)\\b",
+                  conditions: "\\b(if|else if|else)\\b"
+            },
+            2: {
+                  loops: "\\b(for|while)\\b",
+                  conditions: "\\b(if|else if|else)\\b"
+            },
+            3: {
+                  loops: "\\b(for|while)\\b",
+                  conditions: "\\b(if|else if|else)\\b"
+            },
+            4: {
+                  loops: "\\b(for|while)\\b",
+                  conditions: "\\b(if|else if|else)\\b"
+            },
+            5: {
+                  loops: "\\b(for|while)\\b",
+                  conditions: "\\b(if|else if|else)\\b"
             }
       }
 };

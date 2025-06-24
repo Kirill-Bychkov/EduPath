@@ -6,7 +6,13 @@ import { move } from "../../utils/game/moveHedgehog";
 import { teleport, erect, remove, shine } from "../../utils/game/fadeAnimations";
 import { deepCopy } from "../../utils/deepCopy";
 
-export const useLevelGame = (initialGrid, openWindowModal) => {
+export const useLevelGame = (
+  levelNumber,
+  taskConditions,
+  initialGrid,
+  openWindowModal,
+  renderWindowReasons
+) => {
   const scrollViewRef = useRef(null);
   const interpreterRef = useRef(null);
 
@@ -16,11 +22,13 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
       return animationsRef.current[prop];
     }
   });
-
+  
   const [grid, setGrid] = useState(deepCopy(initialGrid));
 
   const foodRef = useRef("");
   const [foodBacklightVisible, setFoodBacklightVisible] = useState(false);
+
+  const isLevelPassedRef = useRef(false);
 
   useEffect(() => {
     HedgehogBack.setConfig({
@@ -55,7 +63,7 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
         await erect(
           animations.ripOpacity
         )();
-        openWindowModal("message", reason);
+        openWindowModal(renderWindowReasons.incident_field, reason);
       },
 
       onCleaningCell: async (obj, id) => {
@@ -81,6 +89,11 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
   }, []);
 
   const runCode = useCallback(() => {
+    if (!interpreterRef.current?.checkCodeInGame(taskConditions)) {
+      openWindowModal(renderWindowReasons.task_failed);
+      return;
+    }
+
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
 
     setGrid(deepCopy(initialGrid));
@@ -88,8 +101,30 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
 
     HedgehogStorage.clear();
     HedgehogBack.resetQueue();
+    isLevelPassedRef.current = false;
     
     interpreterRef.current?.runUserCode();
+
+    HedgehogBack.getQueue().then(() => {
+      const hasVisibleFood = grid.flat().some(cell => {
+        if (cell.obj === "apple" || cell.obj === "mushroom") {
+          const opacity = animations[`${cell.obj}Opacities`]?.[cell.id];
+          return opacity?.__getValue?.() === 1;
+        }
+        return false;
+      });
+
+      if (hasVisibleFood) {
+        return openWindowModal(renderWindowReasons.items_left);
+      }
+
+      isLevelPassedRef.current = true;
+      const reason = levelNumber < Object.keys(taskConditions).length
+        ? renderWindowReasons.level_passed
+        : renderWindowReasons.game_over;
+      
+      openWindowModal(reason);
+    });
   }, []);
 
   const clearCode = useCallback(() => {
@@ -110,6 +145,7 @@ export const useLevelGame = (initialGrid, openWindowModal) => {
     animations,
     grid,
     foodRef,
-    foodBacklightVisible
+    foodBacklightVisible,
+    isLevelPassed: isLevelPassedRef.current
   };
 };

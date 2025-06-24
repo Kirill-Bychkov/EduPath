@@ -71,16 +71,6 @@ const GAME = {
       position: "absolute",
       zIndex: 1
     },
-    b_close: {
-      source: require("../assets/icons/game/b_close/b_close.png"),
-      width: 32,
-      height: 32
-    },
-    b_start: {
-      source: require("../assets/icons/game/b_start/b_start.png"),
-      width: 80,
-      height: 42
-    },
     b_exit: {
       source: require("../assets/icons/game/b_exit/b_exit.png"),
       width: 50,

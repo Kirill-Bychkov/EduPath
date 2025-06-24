@@ -1,5 +1,4 @@
 import { useState, useImperativeHandle } from "react";
-import Toast from "react-native-toast-message";
 import { executeUserCode } from "../utils/interpreter/executeUserCode";
 import { Readline, Writeline } from "../libraries";
 import * as Clipboard from "expo-clipboard";
@@ -44,19 +43,33 @@ export const useInterpreter = (ref) => {
 
   const copyUserCode = async () => {
     await Clipboard.setStringAsync(userCode);
+  };
 
-    Toast.show({
-      type: "copy",
-      text1: "Код скопирован в буфер обмена",
-      position: "top",
-      visibilityTime: 2000
-    });
+  const checkCodeInGame = (taskConditions) => {
+    const trimmedCode = userCode.trim();
+    if (!trimmedCode) return false;
+
+    for (const [key, regexString] of Object.entries(taskConditions)) {
+      if (!regexString) continue;
+
+      try {
+        const regex = new RegExp(regexString);
+        if (!regex.test(trimmedCode)) {
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }
+
+    return true;
   };
 
   useImperativeHandle(ref, () => ({
     runUserCode,
     clearUserCode,
-    copyUserCode
+    copyUserCode,
+    checkCodeInGame
   }));
 
   return {

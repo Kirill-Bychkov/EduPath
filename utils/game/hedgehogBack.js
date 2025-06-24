@@ -13,7 +13,9 @@ export class HedgehogBack {
     onCleaningCell: null,
     onBacklight: null
   };
+
   static #_queue = null;
+  static #_interrupted = false;
 
   static setConfig(config) {
     this.#_config = { ...this.#_config, ...config };
@@ -21,6 +23,20 @@ export class HedgehogBack {
 
   static resetQueue() {
     this.#_queue = Promise.resolve();
+    this.#_interrupted = false;
+  }
+
+  static interruptQueue(reason) {
+    this.#_interrupted = true;
+    this.#_queue = Promise.reject(new Error(reason));
+  }
+
+  static isInterrupted() {
+    return this.#_interrupted;
+  }
+
+  static getQueue() {
+    return this.#_queue;
   }
 
   static getGrid() {
@@ -46,6 +62,8 @@ export class HedgehogBack {
     fromObj, from,
     toObj, to
   ) => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { setGrid } = this.#_config;
     await setGrid(current => produce(current, draft => {
       draft[from.y][from.x].obj = fromObj.obj;
@@ -56,23 +74,31 @@ export class HedgehogBack {
   };
 
   static movement = (to, angle) => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { grid, onMovement } = this.#_config;
     const cell = grid[to.y][to.x];
     await onMovement(cell.top, cell.left, angle);
   };
 
   static teleportation = (to) => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { grid, onTeleportation } = this.#_config;
     const cell = grid[to.y][to.x];
     await onTeleportation(cell.top, cell.left);
   };
 
   static deathHedgehog = () => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { onDeathHedgehog } = this.#_config;
     await onDeathHedgehog();
   };
 
   static monumentInstallation = (reason) => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { onMonumentInstallation } = this.#_config;
     await onMonumentInstallation(reason);
 
@@ -87,18 +113,24 @@ export class HedgehogBack {
   };
 
   static cleaningCell = (to) => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { grid, onCleaningCell } = this.#_config;
     const cell = grid[to.y][to.x];
     await onCleaningCell(cell.obj, cell.id);
   };
 
   static renderingFoodBacklight = (check, food = "") => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { foodRef, setFoodBacklightVisible } = this.#_config;
     foodRef.current = food;
     await setFoodBacklightVisible(check);
   };
 
   static backlight = () => async () => {
+    if (this.isInterrupted()) throw new Error("Execution limit exceeded");
+
     const { onBacklight } = this.#_config;
     await onBacklight();
   };

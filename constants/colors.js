@@ -33,11 +33,15 @@ const GAME = {
     window_modal: {
         back_background: "#00000040",
         background: "#eed755",
-        text: "#000000"
+        text: "#000000",
+        textButton: "#fafafa",
+        backCancel: "#da1202",
+        backOk: "#36b649"
     },
     level: {
         backgroundColorButtonBar: "#3c886b",
-        backgroundColorDivider: "#fafafa"
+        backgroundColorDivider: "#fafafa",
+        shadowColor: "#000000"
     },
     bottomsheet: {
         background: "#fafafa"
